@@ -15,9 +15,9 @@ namespace WizardTesting
         // TODO: Create method of defining AIPlayers that is flexible and replicable. Likely requires this class to become an inheritor class.
         public AIPlayer(int id) : base(id)
         {
-            SpawnPoints.Add(new SpawnPoint("Sprites/SpawnPoint", new Vector2(1300, 100), id));
+            SpawnPoints.Add(new Portal(new Vector2(1300, 100), id));
 
-            SpawnPoints.Add(new SpawnPoint("Sprites/SpawnPoint", new Vector2(1300, 800), id));
+            SpawnPoints.Add(new Portal(new Vector2(1300, 800), id));
             SpawnPoints[SpawnPoints.Count - 1].SpawnTimer.AddToTimer(500);
         }
 

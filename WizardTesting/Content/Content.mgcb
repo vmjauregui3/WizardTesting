@@ -116,6 +116,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/Modrons/MonodroneSpriteSheet.png
 
+#begin Sprites/Mobs/RedPentagon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/RedPentagon.png
+
 #begin Sprites/Mobs/ScaleScout.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -176,7 +188,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/SolidBar.png
 
-#begin Sprites/SpawnPoint.png
+#begin Sprites/SpawnPoints/Portal.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -186,7 +198,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/SpawnPoint.png
+/build:Sprites/SpawnPoints/Portal.png
+
+#begin Sprites/SpawnPoints/SquareSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/SquareSummon.png
+
+#begin Sprites/SpawnPoints/TriangleSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/TriangleSummon.png
 
 #begin TileSheets/GroundTiles.png
 /importer:TextureImporter

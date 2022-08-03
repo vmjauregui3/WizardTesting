@@ -43,6 +43,12 @@ namespace WizardTesting
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
             {
                 SpawnPoints[i].Update(gameTime);
+
+                if (SpawnPoints[i].IsDead)
+                {
+                    SpawnPoints.RemoveAt(i);
+                    i--;
+                }
             }
 
             for (int i = Creatures.Count - 1; i >= 0; i--)

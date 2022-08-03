@@ -10,8 +10,9 @@ namespace WizardTesting
 {
     public class Portal : SpawnPoint
     {
-        public Portal(Vector2 position, int ownerId) : base("Sprites/SpawnPoint", position, ownerId)
+        public Portal(Vector2 position, int ownerId) : base("Sprites/SpawnPoints/Portal", position, ownerId)
         {
+
         }
 
         public override void Update(GameTime gameTime)
@@ -21,7 +22,23 @@ namespace WizardTesting
 
         public override void SpawnMob()
         {
-            GameCommands.PassCreature(new Triangle("Sprites/Mobs/Triangle", new Vector2(Sprite.Position.X, Sprite.Position.Y), new Vector2(1, 1), 0, OwnerId));
+            int num = WizardTesting.rand.Next(1, 10 + 1);
+
+            Mob tempMob = null;
+
+            if(num <= 8)
+            {
+                tempMob = new Square(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
+            }
+            else if(num <= 9)
+            {
+                tempMob = new RedPentagon(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
+            }
+
+            if(tempMob != null)
+            {
+                GameCommands.PassCreature(tempMob);
+            }
         }
     }
 }

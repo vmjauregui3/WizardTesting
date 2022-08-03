@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-
+using System;
 
 namespace WizardTesting
 {
@@ -30,6 +30,8 @@ namespace WizardTesting
         }
 
         private World world;
+
+        public static Random rand = new Random();
 
         public static ContentManager WContent;
 

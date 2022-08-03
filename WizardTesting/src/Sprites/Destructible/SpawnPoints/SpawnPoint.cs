@@ -40,7 +40,7 @@ namespace WizardTesting
 
         public virtual void SpawnMob()
         {
-            GameCommands.PassCreature(new Triangle("Sprites/Mobs/Triangle", new Vector2(Sprite.Position.X, Sprite.Position.Y), new Vector2(1,1), 0, OwnerId));
+            GameCommands.PassCreature(new Triangle(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId));
         }
     }
 }

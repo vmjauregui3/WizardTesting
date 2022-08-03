@@ -9,7 +9,7 @@ namespace WizardTesting
 {
     public class Triangle : Mob
     {
-        public Triangle(string path, Vector2 position, Vector2 frameCount, int switchFrame, int ownerId) : base(path, position, 1f, frameCount, switchFrame, ownerId)
+        public Triangle(Vector2 position, int ownerId) : base("Sprites/Mobs/Triangle", position, 1f, new Vector2(1, 1), 0, ownerId)
         {
 
         }
