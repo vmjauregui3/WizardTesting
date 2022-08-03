@@ -9,6 +9,7 @@ namespace WizardTesting
 {
     public abstract class Creature : Destructible
     {
+        // Creature is an abstract grouping of destructibles that have some form of intelligence commanding them.
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;

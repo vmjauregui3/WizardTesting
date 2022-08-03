@@ -9,6 +9,7 @@ namespace WizardTesting
 {
     public class FireBolt : Projectile
     {
+        // FireBolts are defualt projectiles currently used for testing.
         public FireBolt(string path, Vector2 position, Creature owner, Vector2 target) : base(path, position, owner, target)
         {
             Sprite.Scale = 3f;
@@ -16,6 +17,7 @@ namespace WizardTesting
             Timer = new MTimer(10000);
         }
 
+        // Updates the Projectile.
         public override void Update(GameTime gameTime, List<Creature> creatures)
         {
             base.Update(gameTime, creatures);

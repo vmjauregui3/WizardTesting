@@ -10,7 +10,6 @@ namespace WizardTesting
 {
     public class SpawnPoint : Destructible
     {
-
         public MTimer SpawnTimer;
 
         public SpawnPoint(string path, Vector2 position, int ownerId) : base(ownerId)
