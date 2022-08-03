@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+	<Axis>Y</Axis>
+	<Item>
+		<LinkType>Menu</LinkType>
+		<LinkID>src/Load/TitleMenu.xml</LinkID>
+		<Image>
+			<Text>Back</Text>
+		</Image>
+	</Item>
+
+	<Item>
+		<Image>
+			<Text>Create Character</Text>
+		</Image>
+	</Item>
+
+	<Item>
+		<Image>
+			<Text>Do Something Else</Text>
+		</Image>
+	</Item>
+
+	<Item>
+		<Image>
+			<Text>Final Thing</Text>
+		</Image>
+	</Item>
+</Menu>

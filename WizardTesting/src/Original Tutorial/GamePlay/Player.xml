@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Player>
+	<Image>
+		<Path>Sprites/BaseWizard</Path>
+		<Effects>SpriteSheetEffect</Effects>
+		<Position>
+			<X>100</X>
+			<Y>300</Y>
+		</Position>
+	</Image>
+	<MoveSpeed>250</MoveSpeed>
+</Player>

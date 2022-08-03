@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SplashScreen>
+	<Image>
+		<Path>Screens/WTSplashTransparent</Path>
+		<Effects></Effects>
+		<IsActive>true</IsActive>
+		<Position>
+			<X>300</X>
+			<Y>200</Y>
+		</Position>
+	</Image>
+</SplashScreen>
