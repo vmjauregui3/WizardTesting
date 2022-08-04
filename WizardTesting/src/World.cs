@@ -33,6 +33,9 @@ namespace WizardTesting
         // Lists all projectiles in gameworld.
         public List<Projectile> Projectiles = new List<Projectile>();
 
+        // Lists all the destructibles in the gameworld.
+        public List<Destructible> AllDestructibles = new List<Destructible>();
+
         // Adds a Creature to the world under designated Player's control.
         public virtual void AddCreature(object mob)
         {
@@ -102,6 +105,11 @@ namespace WizardTesting
             MCursor.Instance.Update();
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
+
+            AllDestructibles.Clear();
+            AllDestructibles.AddRange(User.GetAllDestructibles());
+            AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
+
             User.Update(gameTime, AIPlayer, this);
             AIPlayer.Update(gameTime, User, this);
 
@@ -111,7 +119,7 @@ namespace WizardTesting
             // Loops through all projectiles backward and removes them if they need to be destroyed.
             for (int i = Projectiles.Count - 1; i >= 0; i--)
             {
-                Projectiles[i].Update(gameTime, AIPlayer.Creatures.ToList<Creature>());
+                Projectiles[i].Update(gameTime, AllDestructibles);
 
                 if (Projectiles[i].Done)
                 {

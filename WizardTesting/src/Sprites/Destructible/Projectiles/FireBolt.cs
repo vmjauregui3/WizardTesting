@@ -18,9 +18,9 @@ namespace WizardTesting
         }
 
         // Updates the Projectile.
-        public override void Update(GameTime gameTime, List<Creature> creatures)
+        public override void Update(GameTime gameTime, List<Destructible> destructibles)
         {
-            base.Update(gameTime, creatures);
+            base.Update(gameTime, destructibles);
         }
     }
 }

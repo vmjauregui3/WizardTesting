@@ -16,6 +16,8 @@ namespace WizardTesting
         {
             // The Wizard is the user's representation in the game world.
             Wizard = new Wizard(new Vector2(100, 300), id);
+
+            Buildings.Add(new Tower(new Vector2(0, 0), id));
         }
 
         // Updates their Player.

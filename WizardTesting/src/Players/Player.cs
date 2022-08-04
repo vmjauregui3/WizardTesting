@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
@@ -18,6 +19,7 @@ namespace WizardTesting
         // Lists all Creatures and SpawnPoints under control of Player.
         public List<Creature> Creatures = new List<Creature>();
         public List<SpawnPoint> SpawnPoints = new List<SpawnPoint>();
+        public List<Building> Buildings = new List<Building>();
 
         // Player id is used to organize Creatures under Player control.
         private int id;
@@ -35,9 +37,15 @@ namespace WizardTesting
         // Updates all objects under player control.
         public virtual void Update(GameTime gameTime, Player enemy, World world)
         {
-            if(Wizard != null)
+            for (int i = Buildings.Count - 1; i >= 0; i--)
             {
-                Wizard.Update(gameTime);
+                Buildings[i].Update(gameTime, enemy);
+
+                if (Buildings[i].IsDead)
+                {
+                    Buildings.RemoveAt(i);
+                    i--;
+                }
             }
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
@@ -62,6 +70,11 @@ namespace WizardTesting
                     i--;
                 }
             }
+
+            if (Wizard != null)
+            {
+                Wizard.Update(gameTime);
+            }
         }
         
         // Adds a Creature to Player control.
@@ -76,6 +89,18 @@ namespace WizardTesting
             SpawnPoints.Add((SpawnPoint)info);
         }
 
+        // Creates a List of all Destructibles the Player controls.
+        public virtual List<Destructible> GetAllDestructibles()
+        {
+            List<Destructible> tempObjects = new List<Destructible>();
+            tempObjects.AddRange(Creatures.ToList<Destructible>());
+            tempObjects.AddRange(SpawnPoints.ToList<Destructible>());
+            tempObjects.AddRange(Buildings.ToList<Destructible>());
+
+            return tempObjects;
+        }
+
+
         // Records the Score of the Player. Used for testing primarily by AIPlayer.
         public virtual void ChangeScore(World world, int score)
         {
@@ -85,9 +110,9 @@ namespace WizardTesting
         // Draws all objects under Player control.
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Wizard != null)
+            for (int i = Buildings.Count - 1; i >= 0; i--)
             {
-                Wizard.Draw(spriteBatch);
+                Buildings[i].Draw(spriteBatch);
             }
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
@@ -98,6 +123,11 @@ namespace WizardTesting
             for (int i = Creatures.Count - 1; i >= 0; i--)
             {
                 Creatures[i].Draw(spriteBatch);
+            }
+
+            if (Wizard != null)
+            {
+                Wizard.Draw(spriteBatch);
             }
         }
     }

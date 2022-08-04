@@ -54,7 +54,7 @@ namespace WizardTesting
 
         // Updates the Projectile's Sprite and Timer.
         // Default Projectile moves linearly toward target at a constant speed and is destroyed upon impact or after life duration.
-        public virtual void Update(GameTime gameTime, List<Creature> creatures)
+        public virtual void Update(GameTime gameTime, List<Destructible> destructibles)
         {
             Sprite.Position += Direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -64,7 +64,7 @@ namespace WizardTesting
                 done = true;
             }
 
-            if (HitSomething(creatures))
+            if (HitSomething(destructibles))
             {
                 done = true;
             }
@@ -78,13 +78,13 @@ namespace WizardTesting
 
         // Checks whether the Projectile hit a creature.
         // TODO: Modify projectile to check whether it hits SpawnPoints.
-        public virtual bool HitSomething(List<Creature> creatures)
+        public virtual bool HitSomething(List<Destructible> destructibles)
         {
-            for (int i = creatures.Count - 1; i >= 0; i--)
+            for (int i = destructibles.Count - 1; i >= 0; i--)
             {
-                if (Pathing.GetDistance(Sprite.Position, creatures[i].Sprite.Position) < creatures[i].HitDistance)
+                if (Owner.OwnerId != destructibles[i].OwnerId && Pathing.GetDistance(Sprite.Position, destructibles[i].Sprite.Position) < destructibles[i].HitDistance)
                 {
-                    creatures[i].GetHit(1);
+                    destructibles[i].GetHit(1);
                     return true;
                 }
             }
