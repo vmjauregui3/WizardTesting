@@ -50,7 +50,7 @@ namespace WizardTesting
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
             {
-                SpawnPoints[i].Update(gameTime);
+                SpawnPoints[i].Update(gameTime, enemy);
 
                 if (SpawnPoints[i].IsDead)
                 {
@@ -73,7 +73,7 @@ namespace WizardTesting
 
             if (Wizard != null)
             {
-                Wizard.Update(gameTime);
+                Wizard.Update(gameTime, enemy);
             }
         }
         

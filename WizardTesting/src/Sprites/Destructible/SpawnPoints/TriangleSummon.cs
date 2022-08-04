@@ -18,9 +18,9 @@ namespace WizardTesting
             maxSpawns = 3;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Player enemy)
         {
-            base.Update(gameTime);
+            base.Update(gameTime, enemy);
         }
 
         public override void SpawnMob()

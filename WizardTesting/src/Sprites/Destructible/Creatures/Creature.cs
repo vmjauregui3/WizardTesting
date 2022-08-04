@@ -28,13 +28,39 @@ namespace WizardTesting
         {
             get { return manaRegen; }
         }
+        protected MTimer manaTimer;
 
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;
             mana = 100.0f;
             manaMax = mana;
-            manaRegen = 5;
+            manaRegen = 0.5f;
+            manaTimer = new MTimer(100);
+        }
+
+        public override void Update(GameTime gameTime, Player enemy)
+        {
+            manaTimer.UpdateTimer(gameTime);
+            if (manaTimer.Test())
+            {
+                if (mana == manaMax)
+                {
+
+                }
+                else if (mana + manaRegen <= manaMax)
+                {
+                    mana += manaRegen;
+                    manaTimer.ResetToZero();
+                }
+                else if(mana + manaRegen > manaMax)
+                {
+                    mana = manaMax;
+                    manaTimer.ResetToZero();
+                }
+            }
+
+            base.Update(gameTime, enemy);
         }
     }
 }

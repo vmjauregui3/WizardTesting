@@ -23,7 +23,7 @@ namespace WizardTesting
             healthMax = health;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Player enemy)
         {
             SpawnTimer.UpdateTimer(gameTime);
             if(SpawnTimer.Test())
@@ -31,6 +31,8 @@ namespace WizardTesting
                 SpawnMob();
                 SpawnTimer.ResetToZero();
             }
+
+            base.Update(gameTime, enemy);
         }
 
         public virtual void GetHit()

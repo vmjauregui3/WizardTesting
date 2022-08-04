@@ -113,7 +113,7 @@ namespace WizardTesting
             User.Update(gameTime, AIPlayer, this);
             AIPlayer.Update(gameTime, User, this);
 
-            User.Wizard.Update(gameTime);
+            User.Wizard.Update(gameTime, AIPlayer);
             MCursor.Instance.UpdateOld();
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.

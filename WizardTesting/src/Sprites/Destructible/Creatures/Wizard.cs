@@ -22,7 +22,7 @@ namespace WizardTesting
         }
 
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Player enemy)
         {
             mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
@@ -52,13 +52,14 @@ namespace WizardTesting
             if (Velocity.X == 0 && Velocity.Y == 0)
             { Sprite.IsActive = false; }
 
-            if (MCursor.Instance.LeftClick())
+            if (MCursor.Instance.LeftClick() && mana >= 5)
             {
                 GameCommands.PassProjectile(new FireBolt("Sprites/Projectiles/FireBolt", new Vector2(Sprite.Position.X + Sprite.SourceRect.Width/2, Sprite.Position.Y), this, mousePosition));
+                mana -= 5;
             }
 
             Sprite.Position += Velocity;
-            Sprite.Update(gameTime);
+            base.Update(gameTime, enemy);
         }
     }
 }
