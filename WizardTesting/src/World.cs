@@ -127,7 +127,7 @@ namespace WizardTesting
                 }
             }
 
-            UI.Update(this);
+            UI.Update(User.Wizard);
         }
 
         // Draws all relevant components used for gameplay by the user and all objects in the game environment.

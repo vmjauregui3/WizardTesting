@@ -19,7 +19,7 @@ namespace WizardTesting
             SpawnTimer = new MTimer(2500);
             isDead = false;
             hitDistance = 25.0f;
-            health = 10;
+            health = 100;
             healthMax = health;
         }
 

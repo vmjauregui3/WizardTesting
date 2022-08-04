@@ -17,7 +17,7 @@ namespace WizardTesting
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
 
-            health = 10f;
+            health = 100f;
             healthMax = health;
         }
 

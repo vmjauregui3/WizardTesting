@@ -63,7 +63,7 @@ namespace WizardTesting
             isDead = false;
             hitDistance = 35.0f;
             MoveSpeed = 0.0f;
-            health = 1f;
+            health = 10f;
             healthMax = health;
         }
 

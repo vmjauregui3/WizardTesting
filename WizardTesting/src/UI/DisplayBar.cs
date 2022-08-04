@@ -27,10 +27,10 @@ namespace WizardTesting
             barBack.Tint = Color.Black;
         }
 
-        public virtual void Update(float currentVal, float maxVal, Vector2 screenOrigin)
+        public virtual void Update(float currentVal, float maxVal, Vector2 screenOrigin, float offset)
         {
             bar.Dimensions = new Vector2((currentVal/maxVal)*(barBack.Dimensions.X-border*2), bar.Dimensions.Y);
-            barBack.Position = new Vector2(screenOrigin.X+10, screenOrigin.Y + (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - barBack.Dimensions.Y - 10);
+            barBack.Position = new Vector2(screenOrigin.X+10, screenOrigin.Y + (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - barBack.Dimensions.Y - 10 - offset);
             bar.Position = new Vector2(border, border) + barBack.Position;
         }
 
