@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,12 +13,12 @@ namespace WizardTesting
 
         // Constructor uses id to create objects under AIPlayer control. Currently, this class is static and unflexible in the game.
         // TODO: Create method of defining AIPlayers that is flexible and replicable. Likely requires this class to become an inheritor class.
-        public AIPlayer(int id) : base(id)
+        public AIPlayer(int id, XElement data) : base(id, data)
         {
-            SpawnPoints.Add(new Portal(new Vector2(1300, 100), id));
+            //SpawnPoints.Add(new Portal(new Vector2(1300, 100), id));
 
-            SpawnPoints.Add(new Portal(new Vector2(1300, 800), id));
-            SpawnPoints[SpawnPoints.Count - 1].SpawnTimer.AddToTimer(500);
+            //SpawnPoints.Add(new Portal(new Vector2(1300, 800), id));
+            //SpawnPoints[SpawnPoints.Count - 1].SpawnTimer.AddToTimer(500);
         }
 
         // Updates their Player.

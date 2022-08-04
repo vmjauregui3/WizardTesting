@@ -35,6 +35,8 @@ namespace WizardTesting
 
         public static ContentManager WContent;
 
+        public static System.Globalization.CultureInfo Culture = new System.Globalization.CultureInfo("en-US");
+
         public WizardTesting()
         {
             graphics = new GraphicsDeviceManager(this);

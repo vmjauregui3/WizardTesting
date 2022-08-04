@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -29,9 +29,32 @@ namespace WizardTesting
         }
 
         // Constructor requires and id to create for organizing behaviour.
-        public Player(int id)
+        public Player(int id, XElement data)
         {
             this.id = id;
+
+            LoadData(data);
+        }
+
+        public virtual void LoadData(XElement data)
+        {
+            List<XElement> spawnList = (from t in data.Descendants("SpawnPoint") select t).ToList<XElement>();
+            for (int i = 0; i < spawnList.Count; i++)
+            {
+                SpawnPoints.Add(new Portal(new Vector2(Convert.ToInt32(spawnList[i].Element("Position").Element("x").Value,WizardTesting.Culture), Convert.ToInt32(spawnList[i].Element("Position").Element("y").Value, WizardTesting.Culture)), id));
+                SpawnPoints[SpawnPoints.Count - 1].SpawnTimer.AddToTimer(Convert.ToInt32(spawnList[i].Element("timerOffset").Value));
+            }
+
+            List<XElement> buildingList = (from t in data.Descendants("Building") select t).ToList<XElement>();
+            for (int i = 0; i < buildingList.Count; i++)
+            {
+                Buildings.Add(new Tower(new Vector2(Convert.ToInt32(buildingList[i].Element("Position").Element("x").Value, WizardTesting.Culture), Convert.ToInt32(buildingList[i].Element("Position").Element("y").Value, WizardTesting.Culture)), id));
+            }
+
+            if (data.Element("Wizard") != null)
+            {
+                Wizard = new Wizard(new Vector2(Convert.ToInt32(data.Element("Wizard").Element("Position").Element("x").Value, WizardTesting.Culture), Convert.ToInt32(data.Element("Wizard").Element("Position").Element("y").Value, WizardTesting.Culture)), id);
+            }
         }
 
         // Updates all objects under player control.

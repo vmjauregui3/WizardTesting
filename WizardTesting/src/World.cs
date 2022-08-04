@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -79,10 +80,9 @@ namespace WizardTesting
             GameCommands.PassSpawnPoint = AddSpawnPoint;
 
             // Creates the User with id 0
-            User = new User(0);
             // Currently, creates the singular AIPlayer with id 1
             // TODO: Modify AIPlayer so that multiple can be created.
-            AIPlayer = new AIPlayer(1);
+            LoadData(1);
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
@@ -95,6 +95,25 @@ namespace WizardTesting
 
             // Creates the UI Overlay.
             UI = new UI();
+        }
+
+        public virtual void LoadData(int worldNum)
+        {
+            XDocument xml = XDocument.Load("XML\\Worlds\\World"+worldNum+".xml");
+
+            XElement tempElement = null;
+            if (xml.Element("Root").Element("User") != null)
+            {
+                tempElement = xml.Element("Root").Element("User");
+            }
+            User = new User(0, tempElement);
+
+            tempElement = null;
+            if (xml.Element("Root").Element("AIPlayer") != null)
+            {
+                tempElement = xml.Element("Root").Element("AIPlayer");
+            }
+            AIPlayer = new AIPlayer(1, tempElement);
         }
 
         // Updates all relevant components used for gameplay by the user and all objects in the game environment.
