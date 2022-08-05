@@ -41,22 +41,21 @@ namespace WizardTesting
 
         public override void Update(GameTime gameTime, Player enemy)
         {
-            manaTimer.UpdateTimer(gameTime);
-            if (manaTimer.Test())
+            if (mana != manaMax)
             {
-                if (mana == manaMax)
+                manaTimer.UpdateTimer(gameTime);
+                if (manaTimer.Test())
                 {
-
-                }
-                else if (mana + manaRegen <= manaMax)
-                {
-                    mana += manaRegen;
-                    manaTimer.ResetToZero();
-                }
-                else if(mana + manaRegen > manaMax)
-                {
-                    mana = manaMax;
-                    manaTimer.ResetToZero();
+                    if (mana + manaRegen <= manaMax)
+                    {
+                        mana += manaRegen;
+                        manaTimer.ResetToZero();
+                    }
+                    else if (mana + manaRegen > manaMax)
+                    {
+                        mana = manaMax;
+                        manaTimer.ResetToZero();
+                    }
                 }
             }
 
