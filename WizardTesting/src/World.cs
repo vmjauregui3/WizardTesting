@@ -161,9 +161,9 @@ namespace WizardTesting
                 Projectiles[i].Draw(spriteBatch);
             }
 
-            Cursor.Draw(spriteBatch);
-
             UI.Draw(this, spriteBatch);
+
+            Cursor.Draw(spriteBatch);
         }
         
     }

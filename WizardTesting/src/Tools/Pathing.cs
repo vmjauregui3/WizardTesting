@@ -39,6 +39,13 @@ namespace WizardTesting
             return direction;
         }
 
+        public static Vector2 OrbitToward(Vector2 pos, Vector2 target, float orbitDis, float orbitAngle)
+        {
+            Vector2 targetDestination = new Vector2( (float)(target.X + orbitDis * Math.Cos(orbitAngle)), (float)(target.Y + orbitDis * Math.Sin(orbitAngle)));
+            Vector2 direction = DirectionToward(pos, targetDestination);
+            return direction;
+        }
+
         public static float RotateTowards(Vector2 pos, Vector2 target)
         {
             float h, sineTheta, angle;
