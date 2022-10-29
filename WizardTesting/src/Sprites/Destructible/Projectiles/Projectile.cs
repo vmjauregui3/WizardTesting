@@ -13,7 +13,7 @@ namespace WizardTesting
         // Projectiles are objects that trasmit the agency of Creatures between Player's authority.
 
         // Projectiles contain a sprite that represents them visiually and contains their game location.
-        public Sprite Sprite;
+        public AnimatedSprite Sprite;
 
         // All game objects have a direction and speed.
         public Vector2 Direction;
@@ -37,7 +37,7 @@ namespace WizardTesting
         // TODO: Modify projectiles to allow them moving targets.
         public Projectile(string path, Vector2 position, Creature owner, Vector2 target)
         {
-            Sprite = new Sprite(path, new Vector2(position.X, position.Y));
+            Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
             // Rotates Sprite toward target.
             Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
 

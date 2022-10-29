@@ -92,18 +92,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Buildings/Tower.png
 
-#begin Sprites/Buildings/Tower.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Buildings/Tower.png
-
 #begin Sprites/Cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -199,6 +187,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/FireBolt.png
+
+#begin Sprites/Projectiles/LightBeam.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/LightBeam.png
 
 #begin Sprites/SolidBar.png
 /importer:TextureImporter

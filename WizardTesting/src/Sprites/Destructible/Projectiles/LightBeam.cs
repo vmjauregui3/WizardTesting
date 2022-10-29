@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class FireBolt : Projectile
+    public class LightBeam : Projectile
     {
         // FireBolts are defualt projectiles currently used for testing.
-        public FireBolt(Vector2 position, Creature owner, Vector2 target) : base("Sprites/Projectiles/FireBolt", position, owner, target)
+        public LightBeam(Vector2 position, Creature owner, Vector2 target) : base("Sprites/Projectiles/LightBeam", position, owner, target)
         {
             Sprite.Scale = 3f;
             Speed = 600f;
