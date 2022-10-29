@@ -31,6 +31,8 @@ namespace WizardTesting
 
         private World world;
 
+        public bool paused = false;
+
         public static Random rand = new Random();
 
         public static ContentManager WContent;
@@ -82,12 +84,25 @@ namespace WizardTesting
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            InputManager.Instance.Update(gameTime);
+            MCursor.Instance.Update();
+
+            if ( InputManager.Instance.KeyPressed(Keys.Escape) )
+            { 
+                paused = !paused;
+                IsMouseVisible = !IsMouseVisible;
+            } // Exit();
+
+            if (InputManager.Instance.KeyPressed(Keys.Delete))
             { Exit(); }
 
             // TODO: Add your update logic here
 
-            world.Update(gameTime);
+            if (!paused)
+            {
+                world.Update(gameTime);
+            }
+            MCursor.Instance.UpdateOld();
 
             //camera.Follow(world.wizard.Sprite);
 

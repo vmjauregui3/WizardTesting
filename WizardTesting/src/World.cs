@@ -120,8 +120,6 @@ namespace WizardTesting
         public void Update(GameTime gameTime)
         {
             Camera.Instance.FollowSprite(User.Wizard.Sprite);
-            InputManager.Instance.Update(gameTime);
-            MCursor.Instance.Update();
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
 
@@ -133,7 +131,6 @@ namespace WizardTesting
             AIPlayer.Update(gameTime, User, this);
 
             User.Wizard.Update(gameTime, AIPlayer);
-            MCursor.Instance.UpdateOld();
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.
             for (int i = Projectiles.Count - 1; i >= 0; i--)
