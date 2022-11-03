@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public abstract class Projectile
+    public class Projectile
     {
         // Projectiles are objects that trasmit the agency of Creatures between Player's authority.
 
@@ -18,6 +18,7 @@ namespace WizardTesting
         // All game objects have a direction and speed.
         public Vector2 Direction;
         public float Speed;
+        public float Damage;
 
         // Variable that determines when the projectile gets destroyed.
         protected bool done;
@@ -35,18 +36,20 @@ namespace WizardTesting
 
         // Constructor requires components for the Sprite, the owner information, and the target information (which is currently static).
         // TODO: Modify projectiles to allow them moving targets.
-        public Projectile(string path, Vector2 position, Creature owner, Vector2 target)
+        public Projectile(string path, float spriteScale, Vector2 position, Creature owner, Vector2 target, int duration, float speed, float damage)
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
+            Sprite.Scale = spriteScale;
             // Rotates Sprite toward target.
             Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
 
             done = false;
             Owner = owner;
 
-            Speed = 100.0f;
+            Speed = speed;
+            Damage = damage;
 
-            Timer = new MTimer(1000);
+            Timer = new MTimer(duration);
 
             Direction = target - position;
             Direction.Normalize();
@@ -84,7 +87,7 @@ namespace WizardTesting
             {
                 if (Owner.OwnerId != destructibles[i].OwnerId && Pathing.GetDistance(Sprite.Position, destructibles[i].Sprite.Position) < destructibles[i].HitDistance)
                 {
-                    destructibles[i].GetHit(10);
+                    destructibles[i].UpdateHealth(Damage);
                     return true;
                 }
             }

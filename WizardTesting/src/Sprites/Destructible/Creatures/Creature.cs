@@ -61,5 +61,26 @@ namespace WizardTesting
 
             base.Update(gameTime, enemy);
         }
+
+        // UpdateHealth damages the object and checks its life status afterward.
+        // TODO: Complicate the damage calculation using updated stats variables.
+        public virtual void UpdateMana(float manaCost)
+        {
+            mana -= manaCost;
+            if (mana > manaMax)
+            {
+                mana = manaMax;
+            }
+        }
+
+        public bool HasMana(float manaCost)
+        {
+            bool hasMana = true;
+            if (manaCost > mana)
+            {
+                hasMana = false;
+            }
+            return hasMana;
+        }
     }
 }

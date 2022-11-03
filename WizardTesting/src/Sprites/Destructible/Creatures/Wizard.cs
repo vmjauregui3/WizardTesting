@@ -12,6 +12,8 @@ namespace WizardTesting
         public float Scale;
         private bool isMobile;
         private MTimer castingTimer;
+        private InstantSpell fireBolt;
+        private InstantSpell lightBeam;
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
@@ -19,11 +21,16 @@ namespace WizardTesting
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
 
+            MoveSpeed = 200f;
+
             isMobile = true;
             castingTimer = new MTimer(5000);
 
             health = 100f;
             healthMax = health;
+
+            fireBolt = new InstantSpell("Sprites/Projectiles/FireBolt", 3f, 10000, 600f, 10f, 5f, 100, 10);
+            lightBeam = new InstantSpell("Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f, 1f, 100, 10);
         }
 
         public void ControlMovement(GameTime gameTime)
@@ -61,17 +68,21 @@ namespace WizardTesting
             Sprite.IsActive = true;
             ControlMovement(gameTime);
 
-            if (MCursor.Instance.LeftClick() && mana >= 5)
+            if (MCursor.Instance.LeftClick() && HasMana(fireBolt.ManaCost))
             {
-                GameCommands.PassProjectile(new FireBolt(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition));
-                mana -= 5;
+                fireBolt.CreateProjectile(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition);
+                //GameCommands.PassProjectile(new FireBolt(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition));
             }
 
-            if (InputManager.Instance.KeyDown(Keys.Space) && mana >= 1)
+            if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
             {
                 isMobile = false;
-                GameCommands.PassProjectile(new LightBeam(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition));
-                mana -= 1;
+                lightBeam.CreateProjectile(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition);
+            }
+
+            if (InputManager.Instance.KeyPressed(Keys.H))
+            {
+                UpdateHealth(-10);
             }
 
             if (!isMobile)

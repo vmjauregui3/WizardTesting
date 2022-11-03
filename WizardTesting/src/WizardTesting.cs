@@ -93,9 +93,12 @@ namespace WizardTesting
                 IsMouseVisible = !IsMouseVisible;
             } // Exit();
 
-            if (InputManager.Instance.KeyPressed(Keys.Delete))
-            { Exit(); }
-
+            if (paused)
+            {
+                if (InputManager.Instance.KeyPressed(Keys.Delete))
+                { Exit(); }
+            }
+            
             // TODO: Add your update logic here
 
             if (!paused)

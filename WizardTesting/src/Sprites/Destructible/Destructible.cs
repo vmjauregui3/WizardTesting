@@ -33,7 +33,7 @@ namespace WizardTesting
         {
             get { return healthMax; }
         }
-
+        
         // Objests current render collisions with their distance from other objects.
         // TODO: Improve collision detection
         protected float hitDistance;
@@ -67,11 +67,20 @@ namespace WizardTesting
             healthMax = health;
         }
 
-        // GetHit damages the object and checks its life status afterward.
+        // UpdateHealth damages the object and checks its life status afterward.
         // TODO: Complicate the damage calculation using updated stats variables.
-        public virtual void GetHit(float damage)
+        public virtual void UpdateHealth(float damage)
         {
             health -= damage;
+            if (health > healthMax)
+            {
+                health = healthMax;
+            }
+            CheckIfDead();
+        }
+
+        public void CheckIfDead()
+        {
             if (health <= 0)
             {
                 isDead = true;

@@ -43,7 +43,7 @@ namespace WizardTesting
 
             if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance)
             {
-                wizard.GetHit(10);
+                wizard.UpdateHealth(10);
                 isDead = true;
             }
         }

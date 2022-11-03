@@ -130,8 +130,6 @@ namespace WizardTesting
             User.Update(gameTime, AIPlayer, this);
             AIPlayer.Update(gameTime, User, this);
 
-            User.Wizard.Update(gameTime, AIPlayer);
-
             // Loops through all projectiles backward and removes them if they need to be destroyed.
             for (int i = Projectiles.Count - 1; i >= 0; i--)
             {
