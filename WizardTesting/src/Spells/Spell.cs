@@ -28,17 +28,25 @@ namespace WizardTesting
             get { return isActive;  }
         }
 
+        protected Creature owner;
+
         protected MTimer cooldownTimer;
         protected MTimer castingTimer;
 
-        public Spell(float manaCost, int cooldown, int castTime)
+        public Spell(Creature owner, float manaCost, int cooldown, int castTime)
         {
             level = 0;
             isActive = false;
             damage = 0f;
+            this.owner = owner;
             this.manaCost = manaCost;
             cooldownTimer = new MTimer(cooldown);
             castingTimer = new MTimer(castTime);
+        }
+
+        public void CastSpell()
+        {
+            owner.UpdateMana(manaCost);
         }
 
         public virtual void Update(GameTime gameTime)

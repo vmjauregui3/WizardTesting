@@ -176,6 +176,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/Triangle.png
 
+#begin Sprites/Projectiles/AcidOrb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/AcidOrb.png
+
+#begin Sprites/Projectiles/EarthShard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/EarthShard.png
+
 #begin Sprites/Projectiles/FireBolt.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -188,6 +212,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/FireBolt.png
 
+#begin Sprites/Projectiles/IceSpike.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/IceSpike.png
+
 #begin Sprites/Projectiles/LightBeam.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -199,6 +235,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/LightBeam.png
+
+#begin Sprites/Projectiles/WindSlash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/WindSlash.png
 
 #begin Sprites/SolidBar.png
 /importer:TextureImporter

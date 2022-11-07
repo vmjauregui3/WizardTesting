@@ -12,8 +12,12 @@ namespace WizardTesting
         public float Scale;
         private bool isMobile;
         private MTimer castingTimer;
-        private InstantSpell fireBolt;
-        private InstantSpell lightBeam;
+        private InstantProjectileSpell primarySpell;
+        private FireBolt fireBolt;
+        private EarthShard earthShard;
+        private IceSpike iceSpike;
+        private WindSlash windSlash;
+        private InstantProjectileSpell lightBeam;
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
@@ -29,8 +33,12 @@ namespace WizardTesting
             health = 100f;
             healthMax = health;
 
-            fireBolt = new InstantSpell("Sprites/Projectiles/FireBolt", 3f, 10000, 600f, 10f, 5f, 100, 10);
-            lightBeam = new InstantSpell("Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f, 1f, 100, 10);
+            fireBolt = new FireBolt(this);
+            primarySpell = fireBolt;
+            earthShard = new EarthShard(this);
+            iceSpike = new IceSpike(this);
+            windSlash = new WindSlash(this);
+            lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
         }
 
         public void ControlMovement(GameTime gameTime)
@@ -68,16 +76,32 @@ namespace WizardTesting
             Sprite.IsActive = true;
             ControlMovement(gameTime);
 
+            if (InputManager.Instance.KeyPressed(Keys.D1))
+            {
+                primarySpell = fireBolt;
+            } 
+            else if (InputManager.Instance.KeyPressed(Keys.D2))
+            {
+                primarySpell = earthShard;
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.D3))
+            {
+                primarySpell = iceSpike;
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.D4))
+            {
+                primarySpell = windSlash;
+            }
+
             if (MCursor.Instance.LeftClick() && HasMana(fireBolt.ManaCost))
             {
-                fireBolt.CreateProjectile(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition);
-                //GameCommands.PassProjectile(new FireBolt(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition));
+                primarySpell.CastSpell(mousePosition);
             }
 
             if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
             {
                 isMobile = false;
-                lightBeam.CreateProjectile(new Vector2(Sprite.Position.X, Sprite.Position.Y), this, mousePosition);
+                lightBeam.CastSpell(mousePosition);
             }
 
             if (InputManager.Instance.KeyPressed(Keys.H))
