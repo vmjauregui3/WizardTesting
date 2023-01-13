@@ -15,8 +15,8 @@ namespace WizardTesting
         {
             MoveSpeed = 80.0f;
 
-            health = 30;
-            healthMax = health;
+            healthMax = 30;
+            health = healthMax;
 
             SpawnTimer = new MTimer(4000);
         }

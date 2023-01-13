@@ -14,6 +14,10 @@ namespace WizardTesting
         }
 
         protected int level;
+        public int Level
+        {
+            get { return level; }
+        }
         protected float manaCost;
         public float ManaCost
         {
@@ -44,7 +48,12 @@ namespace WizardTesting
             castingTimer = new MTimer(castTime);
         }
 
-        public void CastSpell()
+        public virtual void CastSpell()
+        {
+            owner.UpdateMana(manaCost);
+        }
+
+        public virtual void CastSpell(Vector2 target)
         {
             owner.UpdateMana(manaCost);
         }

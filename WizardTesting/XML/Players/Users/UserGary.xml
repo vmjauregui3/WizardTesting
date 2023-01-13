@@ -1,9 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
   <Wizard>
+    <healthMax>100</healthMax>
+    <manaMax>100</manaMax>
+    <manaRegenMax>0.5</manaRegenMax>
+    <Scale>1.5</Scale>
+    <MoveSpeed>200</MoveSpeed>
     <Position>
-      <x>562</x>
-      <y>472</y>
+      <x>619</x>
+      <y>419</y>
     </Position>
+    <Spell>
+      <FireBolt>
+        <Level>0</Level>
+      </FireBolt>
+    </Spell>
+    <Spell>
+      <EarthShard>
+        <Level>0</Level>
+      </EarthShard>
+    </Spell>
+    <Spell>
+      <IceSpike>
+        <Level>0</Level>
+      </IceSpike>
+    </Spell>
+    <Spell>
+      <WindSlash>
+        <Level>0</Level>
+      </WindSlash>
+    </Spell>
   </Wizard>
 </Root>

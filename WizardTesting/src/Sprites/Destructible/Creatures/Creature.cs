@@ -18,10 +18,15 @@ namespace WizardTesting
         {
             get { return mana; }
         }
-        protected float manaMax;
-        public float ManaMax
+        protected int manaMax;
+        public int ManaMax
         {
             get { return manaMax; }
+        }
+        protected float manaRegenMax;
+        public float ManaRegenMax
+        {
+            get { return manaRegenMax; }
         }
         protected float manaRegen;
         public float ManaRegen
@@ -33,9 +38,10 @@ namespace WizardTesting
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;
-            mana = 100.0f;
-            manaMax = mana;
-            manaRegen = 0.5f;
+            manaMax = 100;
+            mana = manaMax;
+            manaRegenMax = 0.5f;
+            manaRegen = manaRegenMax;
             manaTimer = new MTimer(100);
         }
 

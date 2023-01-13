@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 // Mostly works as a Sprite Only
 namespace WizardTesting
@@ -12,12 +13,12 @@ namespace WizardTesting
         public float Scale;
         private bool isMobile;
         private MTimer castingTimer;
-        private InstantProjectileSpell primarySpell;
-        private FireBolt fireBolt;
-        private EarthShard earthShard;
-        private IceSpike iceSpike;
-        private WindSlash windSlash;
-        private InstantProjectileSpell lightBeam;
+
+        public List<Spell> Spells = new List<Spell>();
+        private Spell primarySpell;
+        //private InstantProjectileSpell lightBeam; Removed for testing
+
+        public int Level;
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
@@ -30,15 +31,22 @@ namespace WizardTesting
             isMobile = true;
             castingTimer = new MTimer(5000);
 
-            health = 100f;
-            healthMax = health;
+            Level = 1;
+            healthMax = 100;
+            health = healthMax;
 
-            fireBolt = new FireBolt(this);
-            primarySpell = fireBolt;
-            earthShard = new EarthShard(this);
-            iceSpike = new IceSpike(this);
-            windSlash = new WindSlash(this);
-            lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
+            Spells.Add(new FireBolt(this));
+            primarySpell = Spells[0];
+            Spells.Add(new EarthShard(this));
+            Spells.Add(new IceSpike(this));
+            Spells.Add(new WindSlash(this));
+            // Removed for testing
+            //lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
+        }
+
+        public Wizard(int level, Vector2 position, int ownerId) : base(ownerId)
+        {
+
         }
 
         public void ControlMovement(GameTime gameTime)
@@ -78,31 +86,33 @@ namespace WizardTesting
 
             if (InputManager.Instance.KeyPressed(Keys.D1))
             {
-                primarySpell = fireBolt;
+                primarySpell = Spells[0];
             } 
             else if (InputManager.Instance.KeyPressed(Keys.D2))
             {
-                primarySpell = earthShard;
+                primarySpell = Spells[1];
             }
             else if (InputManager.Instance.KeyPressed(Keys.D3))
             {
-                primarySpell = iceSpike;
+                primarySpell = Spells[2];
             }
             else if (InputManager.Instance.KeyPressed(Keys.D4))
             {
-                primarySpell = windSlash;
+                primarySpell = Spells[3];
             }
 
-            if (MCursor.Instance.LeftClick() && HasMana(fireBolt.ManaCost))
+            if (MCursor.Instance.LeftClick() && HasMana(primarySpell.ManaCost))
             {
                 primarySpell.CastSpell(mousePosition);
             }
 
+            /* Removed for testing
             if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
             {
                 isMobile = false;
                 lightBeam.CastSpell(mousePosition);
             }
+            */
 
             if (InputManager.Instance.KeyPressed(Keys.H))
             {

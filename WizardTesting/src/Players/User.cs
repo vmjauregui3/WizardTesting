@@ -11,6 +11,8 @@ namespace WizardTesting
     {
         // User Player represents the user's authority and defines their ability to interact with the game.
 
+        public List<Spell> Spells = new List<Spell>();
+
         // Constructor defines the user's Player id to create their Wizard.
         public User(int id, XElement data) : base(id, data)
         {

@@ -21,7 +21,7 @@ namespace WizardTesting
             this.duration = duration;
         }
 
-        public void CastSpell(Vector2 target)
+        public override void CastSpell(Vector2 target)
         {
             CreateSimpleProjectile(target);
             base.CastSpell();

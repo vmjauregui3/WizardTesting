@@ -122,6 +122,11 @@ namespace WizardTesting
             XDocument xmlPlayer = new XDocument(
                 new XElement("Root",
                     new XElement("Wizard",
+                        new XElement("healthMax", User.Wizard.HealthMax),
+                        new XElement("manaMax", User.Wizard.ManaMax),
+                        new XElement("manaRegenMax", User.Wizard.ManaRegenMax),
+                        new XElement("Scale", User.Wizard.Scale),
+                        new XElement("MoveSpeed", User.Wizard.MoveSpeed),
                         new XElement("Position",
                             new XElement("x", (int)User.Wizard.Sprite.Position.X),
                             new XElement("y", (int)User.Wizard.Sprite.Position.Y)
@@ -129,6 +134,16 @@ namespace WizardTesting
                     )
                 )
             );
+            for(int i = 0; i < User.Wizard.Spells.Count; i++)
+            {
+                xmlPlayer.Element("Root").Element("Wizard").Add(
+                    new XElement("Spell",
+                        new XElement(User.Wizard.Spells[i].GetType().Name,
+                            new XElement("Level", User.Wizard.Spells[i].Level)
+                        )
+                    )
+                );
+            }
 
             xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
         }

@@ -28,8 +28,8 @@ namespace WizardTesting
         {
             get { return health; }
         }
-        protected float healthMax;
-        public float HealthMax
+        protected int healthMax;
+        public int HealthMax
         {
             get { return healthMax; }
         }
@@ -63,8 +63,8 @@ namespace WizardTesting
             isDead = false;
             hitDistance = 35.0f;
             MoveSpeed = 0.0f;
-            health = 10f;
-            healthMax = health;
+            healthMax = 10;
+            health = healthMax;
         }
 
         // UpdateHealth damages the object and checks its life status afterward.
