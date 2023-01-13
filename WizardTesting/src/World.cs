@@ -72,7 +72,7 @@ namespace WizardTesting
         }
 
         // Constructor creates the World that the user can interact with.
-        public World()
+        public World(string username, int worldNum)
         {
             // Links PassObject Delegates to GameCommands
             GameCommands.PassProjectile = AddProjectile;
@@ -82,7 +82,7 @@ namespace WizardTesting
             // Creates the User with id 0
             // Currently, creates the singular AIPlayer with id 1
             // TODO: Modify AIPlayer so that multiple can be created.
-            LoadData(1);
+            LoadData(username, worldNum);
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
@@ -97,14 +97,15 @@ namespace WizardTesting
             UI = new UI();
         }
 
-        public virtual void LoadData(int worldNum)
+        public virtual void LoadData(string username, int worldNum)
         {
             XDocument xml = XDocument.Load("XML\\Worlds\\World"+worldNum+".xml");
+            XDocument xmlPlayer = XDocument.Load("XML\\Players\\Users\\User"+username+".xml");
 
             XElement tempElement = null;
-            if (xml.Element("Root").Element("User") != null)
+            if (xmlPlayer.Element("Root") != null)
             {
-                tempElement = xml.Element("Root").Element("User");
+                tempElement = xmlPlayer.Element("Root");
             }
             User = new User(0, tempElement);
 
@@ -114,6 +115,22 @@ namespace WizardTesting
                 tempElement = xml.Element("Root").Element("AIPlayer");
             }
             AIPlayer = new AIPlayer(1, tempElement);
+        }
+
+        public void SaveUserData(string username)
+        {
+            XDocument xmlPlayer = new XDocument(
+                new XElement("Root",
+                    new XElement("Wizard",
+                        new XElement("Position",
+                            new XElement("x", (int)User.Wizard.Sprite.Position.X),
+                            new XElement("y", (int)User.Wizard.Sprite.Position.Y)
+                        )
+                    )
+                )
+            );
+
+            xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
         }
 
         // Updates all relevant components used for gameplay by the user and all objects in the game environment.

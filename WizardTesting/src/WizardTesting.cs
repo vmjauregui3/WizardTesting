@@ -39,6 +39,8 @@ namespace WizardTesting
 
         public static System.Globalization.CultureInfo Culture = new System.Globalization.CultureInfo("en-US");
 
+        private string username = "Gary";
+
         public WizardTesting()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -68,7 +70,7 @@ namespace WizardTesting
 
             WContent = new ContentManager(Content.ServiceProvider, "Content");
 
-            world = new World();
+            world = new World(username, 1);
         }
 
         protected override void LoadContent()
@@ -95,14 +97,16 @@ namespace WizardTesting
 
             if (paused)
             {
-                if (InputManager.Instance.KeyPressed(Keys.Delete))
+                if (InputManager.Instance.KeyPressed(Keys.S))
+                {
+                    world.SaveUserData(username);
+                }
+                else if (InputManager.Instance.KeyPressed(Keys.Delete))
                 { Exit(); }
             }
-            
-            // TODO: Add your update logic here
-
-            if (!paused)
+            else
             {
+                // TODO: Add your update logic here
                 world.Update(gameTime);
             }
             MCursor.Instance.UpdateOld();
