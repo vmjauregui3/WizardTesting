@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using System.Linq;
+using System;
+using System.Dynamic;
 
 // Mostly works as a Sprite Only
 namespace WizardTesting
@@ -18,7 +22,11 @@ namespace WizardTesting
         private Spell primarySpell;
         //private InstantProjectileSpell lightBeam; Removed for testing
 
-        public int Level;
+        private int level;
+        public int Level
+        {
+            get { return level; }
+        }
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
@@ -31,8 +39,8 @@ namespace WizardTesting
             isMobile = true;
             castingTimer = new MTimer(5000);
 
-            Level = 1;
-            healthMax = 100;
+            level = 1;
+            healthMax = 1000;
             health = healthMax;
 
             Spells.Add(new FireBolt(this));
@@ -44,10 +52,50 @@ namespace WizardTesting
             //lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
         }
 
-        public Wizard(int level, Vector2 position, int ownerId) : base(ownerId)
+        public Wizard(Vector2 position, int ownerId, float scale, float moveSpeed, int level, int healthMax, int manaMax, int manaRegenMax) : base(ownerId)
         {
+            Velocity = Vector2.Zero;
+            Scale = scale;
+            Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
+            MoveSpeed = moveSpeed;
 
+            isMobile = true;
+            castingTimer = new MTimer(5000);
+
+            this.level = level;
+            this.healthMax = healthMax;
+            this.health = healthMax;
+            this.manaMax = manaMax;
+            this.mana = manaMax;
+            this.manaRegenMax = manaRegenMax;
+            this.manaRegen = manaRegenMax;
+
+            
+            Spells.Add(new FireBolt(this));
+            primarySpell = Spells[0];
+            Spells.Add(new EarthShard(this));
+            Spells.Add(new IceSpike(this));
+            Spells.Add(new WindSlash(this));
         }
+
+        
+        public void LoadSpells(XElement data)
+        {
+            List<XElement> spellList = (from t in data.Descendants("Spell") select t).ToList<XElement>();
+            for (int i = 0; i < spellList.Count; i++)
+            {
+                Object[] parameters = { this,
+                    spellList[i].Element("level"), 
+                    spellList[i].Element("manaCost"), 
+                    spellList[i].Element("damage"), 
+                    spellList[i].Element("cooldownTimer"), 
+                    spellList[i].Element("castingTimer") 
+                };
+                Spells.Add((Spell)Activator.CreateInstance(Type.GetType(Convert.ToString(spellList[i].Name, WizardTesting.Culture)), parameters));
+            }
+            primarySpell = Spells[0];
+        }
+        
 
         public void ControlMovement(GameTime gameTime)
         {

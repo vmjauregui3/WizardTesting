@@ -1,33 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
   <Wizard>
-    <healthMax>100</healthMax>
-    <manaMax>100</manaMax>
-    <manaRegenMax>0.5</manaRegenMax>
+    <level>1</level>
+    <healthMax>1000</healthMax>
+    <manaMax>1000</manaMax>
+    <manaRegenMax>5</manaRegenMax>
     <Scale>1.5</Scale>
     <MoveSpeed>200</MoveSpeed>
     <Position>
-      <x>619</x>
-      <y>419</y>
+      <x>623</x>
+      <y>384</y>
     </Position>
-    <Spell>
+    <Spell id="0">
       <FireBolt>
-        <Level>0</Level>
+        <level>1</level>
+        <manaCost>50</manaCost>
+        <damage>10</damage>
+        <cooldownTimer>50</cooldownTimer>
+        <castingTimer>50</castingTimer>
       </FireBolt>
     </Spell>
-    <Spell>
+    <Spell id="1">
       <EarthShard>
-        <Level>0</Level>
+        <level>1</level>
+        <manaCost>40</manaCost>
+        <damage>10</damage>
+        <cooldownTimer>50</cooldownTimer>
+        <castingTimer>50</castingTimer>
       </EarthShard>
     </Spell>
-    <Spell>
+    <Spell id="2">
       <IceSpike>
-        <Level>0</Level>
+        <level>1</level>
+        <manaCost>60</manaCost>
+        <damage>10</damage>
+        <cooldownTimer>50</cooldownTimer>
+        <castingTimer>50</castingTimer>
       </IceSpike>
     </Spell>
-    <Spell>
+    <Spell id="3">
       <WindSlash>
-        <Level>0</Level>
+        <level>1</level>
+        <manaCost>30</manaCost>
+        <damage>5</damage>
+        <cooldownTimer>50</cooldownTimer>
+        <castingTimer>50</castingTimer>
       </WindSlash>
     </Spell>
   </Wizard>

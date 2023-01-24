@@ -50,11 +50,6 @@ namespace WizardTesting
             {
                 Buildings.Add(new Tower(new Vector2(Convert.ToInt32(buildingList[i].Element("Position").Element("x").Value, WizardTesting.Culture), Convert.ToInt32(buildingList[i].Element("Position").Element("y").Value, WizardTesting.Culture)), id));
             }
-
-            if (data.Element("Wizard") != null)
-            {
-                Wizard = new Wizard(new Vector2(Convert.ToInt32(data.Element("Wizard").Element("Position").Element("x").Value, WizardTesting.Culture), Convert.ToInt32(data.Element("Wizard").Element("Position").Element("y").Value, WizardTesting.Culture)), id);
-            }
         }
 
         // Updates all objects under player control.

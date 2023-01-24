@@ -13,8 +13,8 @@ namespace WizardTesting
 
         // Creatures have mana which determines when what abilities they can use and when.
         // TODO: Update mana with new stats variables.
-        protected float mana;
-        public float Mana
+        protected int mana;
+        public int Mana
         {
             get { return mana; }
         }
@@ -23,13 +23,13 @@ namespace WizardTesting
         {
             get { return manaMax; }
         }
-        protected float manaRegenMax;
-        public float ManaRegenMax
+        protected int manaRegenMax;
+        public int ManaRegenMax
         {
             get { return manaRegenMax; }
         }
-        protected float manaRegen;
-        public float ManaRegen
+        protected int manaRegen;
+        public int ManaRegen
         {
             get { return manaRegen; }
         }
@@ -38,9 +38,9 @@ namespace WizardTesting
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;
-            manaMax = 100;
+            manaMax = 1000;
             mana = manaMax;
-            manaRegenMax = 0.5f;
+            manaRegenMax = 5;
             manaRegen = manaRegenMax;
             manaTimer = new MTimer(100);
         }
@@ -70,7 +70,7 @@ namespace WizardTesting
 
         // UpdateHealth damages the object and checks its life status afterward.
         // TODO: Complicate the damage calculation using updated stats variables.
-        public virtual void UpdateMana(float manaCost)
+        public virtual void UpdateMana(int manaCost)
         {
             mana -= manaCost;
             if (mana > manaMax)
@@ -79,7 +79,7 @@ namespace WizardTesting
             }
         }
 
-        public bool HasMana(float manaCost)
+        public bool HasMana(int manaCost)
         {
             bool hasMana = true;
             if (manaCost > mana)

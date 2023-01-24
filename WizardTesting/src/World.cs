@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml;
 
 namespace WizardTesting
 {
@@ -99,17 +100,10 @@ namespace WizardTesting
 
         public virtual void LoadData(string username, int worldNum)
         {
+            LoadUserData(username);
             XDocument xml = XDocument.Load("XML\\Worlds\\World"+worldNum+".xml");
-            XDocument xmlPlayer = XDocument.Load("XML\\Players\\Users\\User"+username+".xml");
 
             XElement tempElement = null;
-            if (xmlPlayer.Element("Root") != null)
-            {
-                tempElement = xmlPlayer.Element("Root");
-            }
-            User = new User(0, tempElement);
-
-            tempElement = null;
             if (xml.Element("Root").Element("AIPlayer") != null)
             {
                 tempElement = xml.Element("Root").Element("AIPlayer");
@@ -117,11 +111,24 @@ namespace WizardTesting
             AIPlayer = new AIPlayer(1, tempElement);
         }
 
+        public void LoadUserData(string username)
+        {
+            XDocument xmlPlayer = XDocument.Load("XML\\Players\\Users\\User" + username + ".xml");
+
+            XElement tempElement = null;
+            if (xmlPlayer.Element("Root") != null)
+            {
+                tempElement = xmlPlayer.Element("Root");
+            }
+            User = new User(0, tempElement);
+        }
+
         public void SaveUserData(string username)
         {
             XDocument xmlPlayer = new XDocument(
                 new XElement("Root",
                     new XElement("Wizard",
+                        new XElement("level", User.Wizard.Level),
                         new XElement("healthMax", User.Wizard.HealthMax),
                         new XElement("manaMax", User.Wizard.ManaMax),
                         new XElement("manaRegenMax", User.Wizard.ManaRegenMax),
@@ -137,13 +144,19 @@ namespace WizardTesting
             for(int i = 0; i < User.Wizard.Spells.Count; i++)
             {
                 xmlPlayer.Element("Root").Element("Wizard").Add(
-                    new XElement("Spell",
+                    new XElement("Spell", new XAttribute("id", i),
                         new XElement(User.Wizard.Spells[i].GetType().Name,
-                            new XElement("Level", User.Wizard.Spells[i].Level)
+                            new XElement("level", User.Wizard.Spells[i].Level),
+                            new XElement("manaCost", User.Wizard.Spells[i].ManaCost),
+                            new XElement("damage", User.Wizard.Spells[i].Damage),
+                            new XElement("cooldownTimer", User.Wizard.Spells[i].CooldownTimer),
+                            new XElement("castingTimer", User.Wizard.Spells[i].CastingTimer)
                         )
                     )
                 );
             }
+            //xmlPlayer.Element("Root").Add(new XElement("Spells", User.Wizard.Spells.Select(i => new XElement("Spell", new XAttribute("id", i)))));
+
 
             xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
         }

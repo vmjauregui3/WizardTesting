@@ -18,13 +18,17 @@ namespace WizardTesting
         {
             get { return level; }
         }
-        protected float manaCost;
-        public float ManaCost
+        protected int manaCost;
+        public int ManaCost
         {
             get { return manaCost; }
         }
 
-        protected float damage;
+        protected int damage;
+        public int Damage
+        {
+            get { return damage; }
+        }
 
         protected bool isActive;
         public bool IsActive
@@ -35,13 +39,32 @@ namespace WizardTesting
         protected Creature owner;
 
         protected MTimer cooldownTimer;
-        protected MTimer castingTimer;
-
-        public Spell(Creature owner, float manaCost, int cooldown, int castTime)
+        public int CooldownTimer
         {
-            level = 0;
+            get { return cooldownTimer.MSec; }
+        }
+        protected MTimer castingTimer;
+        public int CastingTimer
+        {
+            get { return castingTimer.MSec; }
+        }
+
+        public Spell(Creature owner, int manaCost, int cooldown, int castTime)
+        {
+            level = 1;
             isActive = false;
-            damage = 0f;
+            damage = 0;
+            this.owner = owner;
+            this.manaCost = manaCost;
+            cooldownTimer = new MTimer(cooldown);
+            castingTimer = new MTimer(castTime);
+        }
+
+        public Spell(Creature owner, int level, int manaCost, int damage, int cooldown, int castTime)
+        {
+            this.level = level;
+            isActive = false;
+            this.damage = damage;
             this.owner = owner;
             this.manaCost = manaCost;
             cooldownTimer = new MTimer(cooldown);
