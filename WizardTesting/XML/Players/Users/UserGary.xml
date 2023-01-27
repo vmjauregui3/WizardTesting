@@ -8,44 +8,26 @@
     <Scale>1.5</Scale>
     <MoveSpeed>200</MoveSpeed>
     <Position>
-      <x>623</x>
-      <y>384</y>
+      <x>622</x>
+      <y>376</y>
     </Position>
-    <Spell id="0">
+    <Spells>
       <FireBolt>
         <level>1</level>
-        <manaCost>50</manaCost>
-        <damage>10</damage>
-        <cooldownTimer>50</cooldownTimer>
-        <castingTimer>50</castingTimer>
+        <exp>0</exp>
       </FireBolt>
-    </Spell>
-    <Spell id="1">
       <EarthShard>
         <level>1</level>
-        <manaCost>40</manaCost>
-        <damage>10</damage>
-        <cooldownTimer>50</cooldownTimer>
-        <castingTimer>50</castingTimer>
+        <exp>0</exp>
       </EarthShard>
-    </Spell>
-    <Spell id="2">
       <IceSpike>
         <level>1</level>
-        <manaCost>60</manaCost>
-        <damage>10</damage>
-        <cooldownTimer>50</cooldownTimer>
-        <castingTimer>50</castingTimer>
+        <exp>0</exp>
       </IceSpike>
-    </Spell>
-    <Spell id="3">
       <WindSlash>
         <level>1</level>
-        <manaCost>30</manaCost>
-        <damage>5</damage>
-        <cooldownTimer>50</cooldownTimer>
-        <castingTimer>50</castingTimer>
+        <exp>0</exp>
       </WindSlash>
-    </Spell>
+    </Spells>
   </Wizard>
 </Root>

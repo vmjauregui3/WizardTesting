@@ -18,6 +18,12 @@ namespace WizardTesting
         {
             get { return level; }
         }
+        protected int exp;
+        public int Exp
+        {
+            get { return exp;  }
+        }
+
         protected int manaCost;
         public int ManaCost
         {
@@ -51,24 +57,26 @@ namespace WizardTesting
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
+            this.owner = owner;
+            this.manaCost = manaCost;
+            cooldownTimer = new MTimer(cooldown);
+            castingTimer = new MTimer(castTime);
             level = 1;
             isActive = false;
             damage = 0;
-            this.owner = owner;
-            this.manaCost = manaCost;
-            cooldownTimer = new MTimer(cooldown);
-            castingTimer = new MTimer(castTime);
+            exp = 0;
         }
 
-        public Spell(Creature owner, int level, int manaCost, int damage, int cooldown, int castTime)
+        public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp)
         {
-            this.level = level;
-            isActive = false;
-            this.damage = damage;
             this.owner = owner;
             this.manaCost = manaCost;
             cooldownTimer = new MTimer(cooldown);
             castingTimer = new MTimer(castTime);
+            this.level = level;
+            this.exp = exp;
+            damage = 0;
+            isActive = false;
         }
 
         public virtual void CastSpell()

@@ -36,7 +36,7 @@ namespace WizardTesting
                     Convert.ToInt32(wizard.Element("manaRegenMax").Value, WizardTesting.Culture)
                     );
 
-                //Wizard.LoadSpells(wizard);
+                Wizard.LoadSpells(wizard.Element("Spells"));
             }
         }
 

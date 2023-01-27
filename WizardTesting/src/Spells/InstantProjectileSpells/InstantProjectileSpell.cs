@@ -7,31 +7,36 @@ namespace WizardTesting
 {
     public class InstantProjectileSpell : Spell
     {
-        protected float speed;
-        public float Speed
-        {
-            get { return speed; }
-        }
+        protected string path;
+        protected float spriteScale;
+
         protected int duration;
         public int Duration
         {
             get { return duration; }
         }
-        protected string path;
-        protected float spriteScale;
-
+        protected float speed;
+        public float Speed
+        {
+            get { return speed; }
+        }
+        
         public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int damage) : base(owner, manaCost, 50, 50)
         {
             this.path = path;
-            this.damage = damage;
-            this.speed = speed;
             this.spriteScale = spriteScale;
             this.duration = duration;
+            this.speed = speed;
+            this.damage = damage;
         }
 
-        public InstantProjectileSpell(Creature owner, int level, int manaCost, int damage, int cooldown, int castTime, int duration, float speed) : base(owner, level, manaCost, damage, cooldown, castTime)
+        public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int level, int exp, int damage) : base(owner, manaCost, 50, 50, level, exp)
         {
-
+            this.path = path;
+            this.spriteScale = spriteScale;
+            this.duration = duration;
+            this.speed = speed;
+            this.damage = damage;
         }
 
         public override void CastSpell(Vector2 target)

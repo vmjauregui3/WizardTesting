@@ -69,29 +69,24 @@ namespace WizardTesting
             this.mana = manaMax;
             this.manaRegenMax = manaRegenMax;
             this.manaRegen = manaRegenMax;
-
-            
-            Spells.Add(new FireBolt(this));
-            primarySpell = Spells[0];
-            Spells.Add(new EarthShard(this));
-            Spells.Add(new IceSpike(this));
-            Spells.Add(new WindSlash(this));
         }
 
         
         public void LoadSpells(XElement data)
         {
-            List<XElement> spellList = (from t in data.Descendants("Spell") select t).ToList<XElement>();
-            for (int i = 0; i < spellList.Count; i++)
+            List<XElement> spell = (from t in data.Elements() select t).ToList<XElement>();
+            for (int i = 0; i < spell.Count; i++)
             {
-                Object[] parameters = { this,
-                    spellList[i].Element("level"), 
-                    spellList[i].Element("manaCost"), 
-                    spellList[i].Element("damage"), 
-                    spellList[i].Element("cooldownTimer"), 
-                    spellList[i].Element("castingTimer") 
-                };
-                Spells.Add((Spell)Activator.CreateInstance(Type.GetType(Convert.ToString(spellList[i].Name, WizardTesting.Culture)), parameters));
+                String WT = "WizardTesting.";
+                if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(InstantProjectileSpell)))
+                {
+                    Object[] parameters = { this,
+                    Convert.ToInt32(spell[i].Element("level").Value),
+                    Convert.ToInt32(spell[i].Element("exp").Value)
+                    };
+
+                    Spells.Add((Spell)Activator.CreateInstance(Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)), parameters));
+                }
             }
             primarySpell = Spells[0];
         }

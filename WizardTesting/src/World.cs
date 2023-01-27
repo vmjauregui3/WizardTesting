@@ -141,17 +141,13 @@ namespace WizardTesting
                     )
                 )
             );
-            for(int i = 0; i < User.Wizard.Spells.Count; i++)
+            xmlPlayer.Element("Root").Element("Wizard").Add(new XElement("Spells"));
+            for (int i = 0; i < User.Wizard.Spells.Count; i++)
             {
-                xmlPlayer.Element("Root").Element("Wizard").Add(
-                    new XElement("Spell", new XAttribute("id", i),
-                        new XElement(User.Wizard.Spells[i].GetType().Name,
-                            new XElement("level", User.Wizard.Spells[i].Level),
-                            new XElement("manaCost", User.Wizard.Spells[i].ManaCost),
-                            new XElement("damage", User.Wizard.Spells[i].Damage),
-                            new XElement("cooldownTimer", User.Wizard.Spells[i].CooldownTimer),
-                            new XElement("castingTimer", User.Wizard.Spells[i].CastingTimer)
-                        )
+                xmlPlayer.Element("Root").Element("Wizard").Element("Spells").Add(      // new XAttribute("id", i),
+                    new XElement(User.Wizard.Spells[i].GetType().Name,
+                        new XElement("level", User.Wizard.Spells[i].Level),
+                        new XElement("exp", User.Wizard.Spells[i].Exp)
                     )
                 );
             }
