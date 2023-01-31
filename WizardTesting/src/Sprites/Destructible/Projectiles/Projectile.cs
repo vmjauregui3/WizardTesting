@@ -30,13 +30,14 @@ namespace WizardTesting
         // Owner tracks which Creature that produced the projectile.
         // TODO: Change the Owner to a new class that defines all game objects with agency.
         public Creature Owner;
+        protected Spell spell;
 
         // Timer tracks how long the projectile can exist before being destroyed.
         public MTimer Timer;
 
         // Constructor requires components for the Sprite, the owner information, and the target information (which is currently static).
         // TODO: Modify projectiles to allow them moving targets.
-        public Projectile(string path, float spriteScale, Vector2 position, Creature owner, Vector2 target, int duration, float speed, float damage)
+        public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage)
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
             Sprite.Scale = spriteScale;
@@ -44,7 +45,8 @@ namespace WizardTesting
             Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
 
             done = false;
-            Owner = owner;
+            Owner = ownerSpell.Owner;
+            this.spell = ownerSpell;
 
             Speed = speed;
             Damage = damage;
@@ -70,6 +72,7 @@ namespace WizardTesting
             if (HitSomething(destructibles))
             {
                 done = true;
+                spell.GainExp(1);
             }
         }
 

@@ -62,7 +62,7 @@ namespace WizardTesting
                 if (Buildings[i].IsDead)
                 {
                     Buildings.RemoveAt(i);
-                    i--;
+                    //i--;
                 }
             }
 
@@ -73,7 +73,7 @@ namespace WizardTesting
                 if (SpawnPoints[i].IsDead)
                 {
                     SpawnPoints.RemoveAt(i);
-                    i--;
+                    //i--;
                 }
             }
 
@@ -85,7 +85,7 @@ namespace WizardTesting
                 {
                     ChangeScore(world, 1);
                     Creatures.RemoveAt(i);
-                    i--;
+                    //i--;
                 }
             }
 

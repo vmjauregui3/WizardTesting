@@ -8,13 +8,13 @@
     <Scale>1.5</Scale>
     <MoveSpeed>200</MoveSpeed>
     <Position>
-      <x>622</x>
+      <x>585</x>
       <y>376</y>
     </Position>
     <Spells>
       <FireBolt>
         <level>1</level>
-        <exp>0</exp>
+        <exp>2</exp>
       </FireBolt>
       <EarthShard>
         <level>1</level>

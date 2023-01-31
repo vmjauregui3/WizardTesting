@@ -11,9 +11,11 @@ namespace WizardTesting
     {
         public MTimer SpawnTimer;
 
+        private float orbitDistance;
         public RedPentagon(Vector2 position, int ownerId) : base("Sprites/Mobs/RedPentagon", position, 1.5f, new Vector2(1, 1), 0, ownerId)
         {
             MoveSpeed = 80.0f;
+            orbitDistance = 500f;
 
             healthMax = 30;
             health = healthMax;
@@ -33,9 +35,24 @@ namespace WizardTesting
             base.Update(gameTime, enemy);
         }
 
+        public override void AI(GameTime gameTime, Wizard wizard)
+        {
+            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) > orbitDistance)
+            {
+                Sprite.Position += Pathing.DirectionToward(Sprite.Position, wizard.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            }
+
+            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance)
+            {
+                wizard.UpdateHealth(100);
+                isDead = true;
+            }
+        }
+
         public virtual void SpawnTriangle()
         {
-            GameCommands.PassSpawnPoint(new TriangleSummon(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId));
+            GameCommands.PassCreature(new Triangle(new Vector2(Sprite.Position.X, Sprite.Position.Y), this));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

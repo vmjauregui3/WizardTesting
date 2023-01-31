@@ -10,7 +10,7 @@ namespace WizardTesting
     public class LightBeam : Projectile
     {
         // FireBolts are defualt projectiles currently used for testing.
-        public LightBeam(Vector2 position, Creature owner, Vector2 target) : base("Sprites/Projectiles/LightBeam", 3f, position, owner, target, 10000, 600f, 10f)
+        public LightBeam(Vector2 position, Spell ownerSpell, Vector2 target) : base("Sprites/Projectiles/LightBeam", 3f, position, ownerSpell, target, 10000, 600f, 10f)
         {
         }
 

@@ -43,6 +43,10 @@ namespace WizardTesting
         }
 
         protected Creature owner;
+        public Creature Owner
+        {
+            get { return owner; }
+        }
 
         protected MTimer cooldownTimer;
         public int CooldownTimer
@@ -102,6 +106,11 @@ namespace WizardTesting
             {
                 castingTimer.ResetToZero();
             }
+        }
+
+        public void GainExp(int exp)
+        {
+            this.exp += exp;
         }
     }
 }

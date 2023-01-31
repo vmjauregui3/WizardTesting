@@ -9,12 +9,21 @@ namespace WizardTesting
 {
     public class Triangle : Mob
     {
+        public Creature Owner;
         private float orbitAngle, orbitDistance;
         public Triangle(Vector2 position, int ownerId) : base("Sprites/Mobs/Triangle", position, 1f, new Vector2(1, 1), 0, ownerId)
         {
             MoveSpeed = 300f;
             orbitDistance = 500.0f;
             orbitAngle = 0.0f;
+        }
+
+        public Triangle(Vector2 position, Creature owner) : base("Sprites/Mobs/Triangle", position, 1f, new Vector2(1, 1), 0, owner.OwnerId)
+        {
+            MoveSpeed = 300f;
+            orbitDistance = 500.0f;
+            orbitAngle = 0.0f;
+            Owner = owner;
         }
 
         public override void Update(GameTime gameTime, Player enemy)
@@ -34,12 +43,15 @@ namespace WizardTesting
             orbitAngle += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (orbitAngle > MathF.PI * 2)
             {
-                orbitAngle %= MathF.PI*2;
+                orbitAngle -= MathF.PI*2;
             }
 
-            Sprite.Position += Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle + 0.2f) * orbitDistance);
-            Sprite.Rotation = orbitAngle + 0.75f*MathF.PI;
+            if (!Owner.IsDead)
+            {
+                Sprite.Position += Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle + 0.2f) * orbitDistance);
+                Sprite.Rotation = orbitAngle + 0.75f * MathF.PI;
+            }
 
             if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance)
             {

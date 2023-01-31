@@ -40,7 +40,6 @@ namespace WizardTesting
                 wizard.UpdateHealth(100);
                 isDead = true;
             }
-            
         }
 
     }

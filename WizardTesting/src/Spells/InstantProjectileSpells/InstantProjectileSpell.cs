@@ -47,7 +47,7 @@ namespace WizardTesting
 
         public void CreateSimpleProjectile(Vector2 target)
         {
-            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), owner, target, duration, speed, damage));   
+            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, target, duration, speed, damage));   
         }
     }
 }
