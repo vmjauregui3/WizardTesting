@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class Map
+    public class BackMap
     {
         /*
         [XmlElement("Layer")]

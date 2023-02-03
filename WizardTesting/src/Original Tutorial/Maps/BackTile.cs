@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class Tile
+    public class BackTile
     {
         /*
         Vector2 position;

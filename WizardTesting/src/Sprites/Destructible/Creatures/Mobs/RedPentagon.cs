@@ -12,7 +12,7 @@ namespace WizardTesting
         public MTimer SpawnTimer;
 
         private float orbitDistance;
-        public RedPentagon(Vector2 position, int ownerId) : base("Sprites/Mobs/RedPentagon", position, 1.5f, new Vector2(1, 1), 0, ownerId)
+        public RedPentagon(Vector2 position, int ownerId) : base("Sprites/Mobs/RedPentagon", position, 1f, new Vector2(1, 1), 0, ownerId)
         {
             MoveSpeed = 80.0f;
             orbitDistance = 500f;

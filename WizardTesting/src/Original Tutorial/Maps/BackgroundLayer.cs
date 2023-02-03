@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class Layer
+    public class BackgroundLayer
     {
         /*
         public class TileMap

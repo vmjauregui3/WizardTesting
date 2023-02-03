@@ -16,7 +16,7 @@ namespace WizardTesting
         // World defines the environment in which the user interacts with the game objects. Currently, completely static.
         // TODO: LOW PRIORITY. Make the world non-static and interchangeable.
 
-        public BackgroundSpriteSheet Background;
+        public Map Map;
 
         // Contains the UI overlay for the user to better understand game variables.
         public UI UI;
@@ -87,6 +87,8 @@ namespace WizardTesting
             // TODO: Modify AIPlayer so that multiple can be created.
             LoadData(username, worldNum);
 
+            Map = new Map();
+
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
 
@@ -95,8 +97,6 @@ namespace WizardTesting
 
             // Variable tracked for testing.
             NumKilled = 0;
-
-            Background = new BackgroundSpriteSheet("TileSheets/ColorSquares", new Vector2(4,1));
 
             // Creates the UI Overlay.
             UI = new UI();
@@ -192,7 +192,7 @@ namespace WizardTesting
         // Draws all relevant components used for gameplay by the user and all objects in the game environment.
         public void Draw(SpriteBatch spriteBatch)
         {
-            DrawBackground(spriteBatch);
+            Map.Draw(spriteBatch);
 
             User.Draw(spriteBatch);
             AIPlayer.Draw(spriteBatch);
@@ -205,14 +205,6 @@ namespace WizardTesting
             UI.Draw(this, spriteBatch);
 
             Cursor.Draw(spriteBatch);
-        }
-        
-        public void DrawBackground(SpriteBatch spriteBatch)
-        {
-            Background.Draw(spriteBatch, 0, new Vector2(-50, -50), new Vector2(0,0));
-            Background.Draw(spriteBatch, 1, new Vector2(0, -50), new Vector2(50, 0));
-            Background.Draw(spriteBatch, 2, new Vector2(-50, 0), new Vector2(0, 50));
-            Background.Draw(spriteBatch, 3, new Vector2(0, 0), new Vector2(50, 50));
         }
     }
 }
