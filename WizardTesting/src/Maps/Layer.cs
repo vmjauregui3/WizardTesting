@@ -28,8 +28,6 @@ namespace WizardTesting
         private int[,] tileGrid;
         private Color[,] tileShades;
 
-        int squareSize = 64;
-
         public Layer(string path, Vector2 tileCount, Vector2 position, int[,] tileGrid, Color[,] tileShades)
         {
             Texture = WizardTesting.WContent.Load<Texture2D>(path);
@@ -47,8 +45,8 @@ namespace WizardTesting
 
             for (int i = 0; i < AmountOfTiles.X; i++)
             {
-                Rectangle sourceRect = new Rectangle(squareSize * i, 0, squareSize, squareSize);
-                tiles.Add(new Tile(Texture, sourceRect));
+                Rectangle sourceRect = new Rectangle((int)dimensions.X * i, 0, (int)dimensions.X, (int)dimensions.Y);
+                tiles.Add(new Tile(Texture, sourceRect, dimensions));
             }
 
             this.tileShades = tileShades;
@@ -60,7 +58,7 @@ namespace WizardTesting
             {
                 for (int i = 0; i < tileGrid.GetLength(0); i++)
                 {
-                    tiles[tileGrid[i, j]].Draw(spriteBatch, new Vector2(position.X * 32 + 32 * i, position.Y * 32 + 32 * j), tileShades[i,j]);
+                    tiles[tileGrid[i, j]].Draw(spriteBatch, new Vector2((position.X + i) * (int)dimensions.X, (position.Y + j) * (int)dimensions.Y), tileShades[i,j]);
                 }
             }
         }

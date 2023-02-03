@@ -9,17 +9,18 @@ namespace WizardTesting
 {
     public class Tile
     {
-        protected Vector2 dimensions = new Vector2(32, 32);
+        protected Vector2 dimensions;
         protected float scale;
 
         // Sprites' Textures are what is seen by the users. The sourceRect is what portion of the png is shown.
         protected Texture2D Texture;
         protected Rectangle sourceRect;
 
-        public Tile(Texture2D texture, Rectangle sourceRect)
+        public Tile(Texture2D texture, Rectangle sourceRect, Vector2 dimensions)
         {
             Texture = texture;
             this.sourceRect = sourceRect;
+            this.dimensions = dimensions;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
