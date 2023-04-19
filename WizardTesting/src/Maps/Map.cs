@@ -11,84 +11,76 @@ namespace WizardTesting
     public class Map
     {
         private static int tileSize = 64;
-        private static int zoneSize = 10;
+        private static int zoneSize = 5;
         private static int numTiles = 5;
-        public Zone[,] ZoneMap;
+        public Dictionary<string, Zone> Zones;
+        public HashSet<string> LoadedZones;
         public Vector2 PlayerZone, PlayerZonePrev;
 
         public Map(Vector2 playerPosition) {
-            ZoneMap = new Zone[5, 5];
+            Zones = new Dictionary<string, Zone>();
+            LoadedZones = new HashSet<string>();
             getPlayerZone(playerPosition);
             PlayerZonePrev = PlayerZone;
 
             //Random rnd = new Random();
-            float[][] floatGrid = Perlin.GeneratePerlinNoise(zoneSize * ZoneMap.GetLength(0), zoneSize * ZoneMap.GetLength(1), 6);
+            //float[][] floatGrid = Perlin.GeneratePerlinNoise(zoneSize * ZoneMap.GetLength(0), zoneSize * ZoneMap.GetLength(1), 6);
 
-            for (int j = 0; j < ZoneMap.GetLength(1); j++)
+            for (int j = (int)PlayerZone.Y - 3; j < (int)PlayerZone.Y + 3; j++)
             {
-                for (int i = 0; i < ZoneMap.GetLength(0); i++)
+                for (int i = (int)PlayerZone.X - 3; i < (int)PlayerZone.X + 3; i++)
                 {
-                    ZoneMap[i, j] = new Zone(zoneSize, numTiles, floatGrid, new Vector2(i, j));
+                    string zoneKey = i + "_" + j;
+                    Zones.Add(zoneKey, new Zone(zoneSize, numTiles, new Vector2(i, j)));
+                    LoadedZones.Add(zoneKey);
                 }
             }
         }
 
         public void getPlayerZone(Vector2 playerPosition)
         {
-            if ( playerPosition.X > 0 && playerPosition.X < ZoneMap.GetLength(0) * zoneSize * tileSize)
-            {
-                if (playerPosition.Y > 0 && playerPosition.Y < ZoneMap.GetLength(1) * zoneSize * tileSize)
-                {
-                    PlayerZonePrev = PlayerZone;
-                    PlayerZone = new Vector2(playerPosition.X / (tileSize * zoneSize), playerPosition.Y / (tileSize * zoneSize));
-                }
-            }
+            PlayerZonePrev = PlayerZone;
+            PlayerZone = new Vector2(playerPosition.X / (tileSize * zoneSize), playerPosition.Y / (tileSize * zoneSize));
         }
 
         public void Update(Vector2 playerPosition)
         {
+            LoadedZones.Clear();
             getPlayerZone(playerPosition);
-        }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            /*
-            for (int j = 0; j < ZoneMap.GetLength(1); j++)
+            int startY = (int)PlayerZone.Y - 1;
+            int endY = (int)PlayerZone.Y + 1;
+            if (playerPosition.Y < 0)
             {
-                for (int i = 0; i < ZoneMap.GetLength(0); i++)
-                {
-                    ZoneMap[i, j].Background.Draw(spriteBatch);
-                }
+                startY -= 1;
+                endY -= 1;
             }
-            */
-            int startY = 0;
-            int endY = ZoneMap.GetLength(1) - 1;
-            if ((int)PlayerZone.Y - 1 >= 0 )
+            int startX = (int)PlayerZone.X - 1;
+            int endX = (int)PlayerZone.X + 1;
+            if (playerPosition.X < 0)
             {
-                startY = (int)PlayerZone.Y - 1;
+                startX -= 1;
+                endX -= 1;
             }
-            if ((int)PlayerZone.Y + 1 < ZoneMap.GetLength(1))
-            {
-                endY = (int)PlayerZone.Y + 1;
-            }
-
-            int startX = 0;
-            int endX = ZoneMap.GetLength(0) - 1;
-            if ((int)PlayerZone.X - 1 >= 0)
-            {
-                startX = (int)PlayerZone.X - 1;
-            }
-            if ((int)PlayerZone.X + 1 < ZoneMap.GetLength(0))
-            {
-                endX = (int)PlayerZone.X + 1;
-            }
-
             for (int j = startY; j <= endY; j++)
             {
                 for (int i = startX; i <= endX; i++)
                 {
-                    ZoneMap[i, j].Background.Draw(spriteBatch);
+                    string zoneKey = i + "_" + j;
+                    if (!Zones.ContainsKey(zoneKey))
+                    {
+                        Zones.Add(i + "_" + j, new Zone(zoneSize, numTiles, new Vector2(i, j)));
+                    }
+                    LoadedZones.Add(zoneKey);
                 }
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (string key in LoadedZones)
+            {
+                Zones[key].Background.Draw(spriteBatch);
             }
         }
     }

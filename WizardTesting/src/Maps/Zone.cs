@@ -14,7 +14,7 @@ namespace WizardTesting
         public int[,] TileGrid;
         public Color[,] TileShades;
 
-        public Zone(int zoneSize, int numTiles, float[][] floatGrid, Vector2 zonePosition)
+        public Zone(int zoneSize, int numTiles, Vector2 zonePosition)
         {
             TileGrid = new int[zoneSize, zoneSize];
             TileShades = new Color[zoneSize, zoneSize];
@@ -23,8 +23,10 @@ namespace WizardTesting
             {
                 for (int i = 0; i < TileGrid.GetLength(0); i++)
                 {
-                    TileGrid[i, j] = GetIDUsingPerlinNoise(floatGrid[(int)zonePosition.X * zoneSize + i][(int)zonePosition.Y * zoneSize + j], 0, 1);
-                    TileShades[i, j] = GetShadeUsingPerlinNoise(floatGrid[(int)zonePosition.X * zoneSize + i][(int)zonePosition.Y * zoneSize + j]);
+                    //TileGrid[i, j] = GetIDUsingPerlinNoise(floatGrid[(int)zonePosition.X * zoneSize + i][(int)zonePosition.Y * zoneSize + j], 0, 1);
+                    TileGrid[i, j] = 0;
+                    //TileShades[i, j] = GetShadeUsingPerlinNoise(floatGrid[(int)zonePosition.X * zoneSize + i][(int)zonePosition.Y * zoneSize + j]);
+                    TileShades[i, j] = Color.White;
                 }
             }
 
