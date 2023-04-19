@@ -87,7 +87,7 @@ namespace WizardTesting
             // TODO: Modify AIPlayer so that multiple can be created.
             LoadData(username, worldNum);
 
-            Map = new Map();
+            Map = new Map(User.Wizard.Sprite.Position);
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
@@ -164,6 +164,7 @@ namespace WizardTesting
         // Updates all relevant components used for gameplay by the user and all objects in the game environment.
         public void Update(GameTime gameTime)
         {
+            Map.Update(User.Wizard.Sprite.Position);
             Camera.Instance.FollowSprite(User.Wizard.Sprite);
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
@@ -173,6 +174,7 @@ namespace WizardTesting
             AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
 
             User.Update(gameTime, AIPlayer, this);
+            UI.Update(User.Wizard);
             AIPlayer.Update(gameTime, User, this);
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.
@@ -185,8 +187,6 @@ namespace WizardTesting
                     Projectiles.RemoveAt(i);
                 }
             }
-
-            UI.Update(User.Wizard);
         }
 
         // Draws all relevant components used for gameplay by the user and all objects in the game environment.

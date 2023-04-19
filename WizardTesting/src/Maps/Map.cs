@@ -10,43 +10,86 @@ namespace WizardTesting
 {
     public class Map
     {
-        private int numTiles = 5;
-        public Layer Background;
-        public int[,] TileGrid;
-        public Color[,] TileShades;
-        public Map() {
-            TileGrid = new int[100, 100];
-            TileShades = new Color[TileGrid.GetLength(0), TileGrid.GetLength(1)];
+        private static int tileSize = 64;
+        private static int zoneSize = 10;
+        private static int numTiles = 5;
+        public Zone[,] ZoneMap;
+        public Vector2 PlayerZone, PlayerZonePrev;
 
-            float[][] floatGrid = Perlin.GeneratePerlinNoise(100, 100, 6);
+        public Map(Vector2 playerPosition) {
+            ZoneMap = new Zone[5, 5];
+            getPlayerZone(playerPosition);
+            PlayerZonePrev = PlayerZone;
 
-            Random rnd = new Random();
-            for (int j = 0; j < TileGrid.GetLength(1); j++)
+            //Random rnd = new Random();
+            float[][] floatGrid = Perlin.GeneratePerlinNoise(zoneSize * ZoneMap.GetLength(0), zoneSize * ZoneMap.GetLength(1), 6);
+
+            for (int j = 0; j < ZoneMap.GetLength(1); j++)
             {
-                for (int i = 0; i < TileGrid.GetLength(0); i++)
+                for (int i = 0; i < ZoneMap.GetLength(0); i++)
                 {
-                    TileGrid[i, j] = GetIDUsingPerlinNoise(floatGrid[i][j]);
-                    TileShades[i, j] = new Color(255, 255, 255);
+                    ZoneMap[i, j] = new Zone(zoneSize, numTiles, floatGrid, new Vector2(i, j));
                 }
             }
-
-            Background = new Layer("TileSheets/GroundTilesReduced", new Vector2(numTiles, 1), new Vector2(-50, -50), TileGrid, TileShades);
         }
 
-        public int GetIDUsingPerlinNoise(float noiseFloat)
+        public void getPlayerZone(Vector2 playerPosition)
         {
-            float perlin = Math.Clamp(noiseFloat, 0.0f, 1.0f);
-            perlin = perlin * numTiles;
-            if (perlin >= 5)
+            if ( playerPosition.X > 0 && playerPosition.X < ZoneMap.GetLength(0) * zoneSize * tileSize)
             {
-                perlin = 4;
+                if (playerPosition.Y > 0 && playerPosition.Y < ZoneMap.GetLength(1) * zoneSize * tileSize)
+                {
+                    PlayerZonePrev = PlayerZone;
+                    PlayerZone = new Vector2(playerPosition.X / (tileSize * zoneSize), playerPosition.Y / (tileSize * zoneSize));
+                }
             }
-            return (int)MathF.Floor(perlin);
+        }
+
+        public void Update(Vector2 playerPosition)
+        {
+            getPlayerZone(playerPosition);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Background.Draw(spriteBatch);
+            /*
+            for (int j = 0; j < ZoneMap.GetLength(1); j++)
+            {
+                for (int i = 0; i < ZoneMap.GetLength(0); i++)
+                {
+                    ZoneMap[i, j].Background.Draw(spriteBatch);
+                }
+            }
+            */
+            int startY = 0;
+            int endY = ZoneMap.GetLength(1) - 1;
+            if ((int)PlayerZone.Y - 1 >= 0 )
+            {
+                startY = (int)PlayerZone.Y - 1;
+            }
+            if ((int)PlayerZone.Y + 1 < ZoneMap.GetLength(1))
+            {
+                endY = (int)PlayerZone.Y + 1;
+            }
+
+            int startX = 0;
+            int endX = ZoneMap.GetLength(0) - 1;
+            if ((int)PlayerZone.X - 1 >= 0)
+            {
+                startX = (int)PlayerZone.X - 1;
+            }
+            if ((int)PlayerZone.X + 1 < ZoneMap.GetLength(0))
+            {
+                endX = (int)PlayerZone.X + 1;
+            }
+
+            for (int j = startY; j <= endY; j++)
+            {
+                for (int i = startX; i <= endX; i++)
+                {
+                    ZoneMap[i, j].Background.Draw(spriteBatch);
+                }
+            }
         }
     }
 }
