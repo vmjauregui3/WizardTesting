@@ -111,6 +111,10 @@ namespace WizardTesting
         public virtual List<Destructible> GetAllDestructibles()
         {
             List<Destructible> tempObjects = new List<Destructible>();
+            if(Wizard != null)
+            {
+                tempObjects.Add(Wizard);
+            }
             tempObjects.AddRange(Creatures.ToList<Destructible>());
             tempObjects.AddRange(SpawnPoints.ToList<Destructible>());
             tempObjects.AddRange(Buildings.ToList<Destructible>());

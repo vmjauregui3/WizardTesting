@@ -35,6 +35,8 @@ namespace WizardTesting
         }
         protected MTimer manaTimer;
 
+        private float[] attributeMods;
+
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;
@@ -43,6 +45,12 @@ namespace WizardTesting
             manaRegenMax = 5;
             manaRegen = manaRegenMax;
             manaTimer = new MTimer(100);
+
+            attributeMods = new float[Enum.GetNames(typeof(Attribute)).Length];
+            for (int i = 0; i < Enum.GetNames(typeof(Attribute)).Length; i++)
+            {
+                attributeMods[i] = 1;
+            }
         }
 
         public override void Update(GameTime gameTime, Player enemy)
@@ -77,6 +85,15 @@ namespace WizardTesting
             {
                 mana = manaMax;
             }
+        }
+
+        public override void UpdateHealthModified(float damage, Attribute attribute)
+        {
+            float finalDamage = damage;
+
+            finalDamage *= attributeMods[(int)attribute];
+
+            UpdateHealth(finalDamage);
         }
 
         public bool HasMana(int manaCost)

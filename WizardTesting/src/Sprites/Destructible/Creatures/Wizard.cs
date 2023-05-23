@@ -16,6 +16,7 @@ namespace WizardTesting
         private Vector2 mousePosition;
         public float Scale;
         private bool isMobile;
+        private bool isCasting;
         private MTimer castingTimer;
 
         public List<Spell> Spells = new List<Spell>();
@@ -37,6 +38,7 @@ namespace WizardTesting
             MoveSpeed = 200f;
 
             isMobile = true;
+            isCasting = false;
             castingTimer = new MTimer(5000);
 
             level = 1;
@@ -60,6 +62,7 @@ namespace WizardTesting
             MoveSpeed = moveSpeed;
 
             isMobile = true;
+            isCasting = false;
             castingTimer = new MTimer(5000);
 
             this.level = level;
@@ -95,29 +98,41 @@ namespace WizardTesting
         public void ControlMovement(GameTime gameTime)
         {
             if (InputManager.Instance.KeyDown(Keys.W))
-            { Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; }
+            {
+                Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+            }
             else if (InputManager.Instance.KeyDown(Keys.S))
-            { Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; }
+            { 
+                Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+            }
             else
-            { Velocity.Y = 0; }
+            { 
+                Velocity.Y = 0; 
+            }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
                 Velocity.X = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 0)
-                { Sprite.CurrentFrame.Y = 1; }
+                { 
+                    Sprite.CurrentFrame.Y = 1; 
+                }
             }
             else if (InputManager.Instance.KeyDown(Keys.D))
             {
                 Velocity.X = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 1)
-                { Sprite.CurrentFrame.Y = 0; }
+                { 
+                    Sprite.CurrentFrame.Y = 0; 
+                }
             }
             else
             { Velocity.X = 0; }
 
             if (Velocity.X != 0 || Velocity.Y != 0)
-            { isMobile = true; }
+            { 
+                isMobile = true; 
+            }
         }
 
         public override void Update(GameTime gameTime, Player enemy)
