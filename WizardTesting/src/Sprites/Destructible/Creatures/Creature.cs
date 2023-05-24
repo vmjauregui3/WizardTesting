@@ -27,6 +27,8 @@ namespace WizardTesting
 
         protected MTimer manaTimer;
 
+        public bool IsCasting;
+
         private float[] attributeMods;
 
         public Creature(int ownderId) : base(ownderId)
@@ -35,12 +37,18 @@ namespace WizardTesting
             mana = new VariableStat(1000);
             manaRegen = new VariableStat(5);
             manaTimer = new MTimer(100);
+            IsCasting = false;
 
             attributeMods = new float[Enum.GetNames(typeof(Attribute)).Length];
             for (int i = 0; i < Enum.GetNames(typeof(Attribute)).Length; i++)
             {
                 attributeMods[i] = 1;
             }
+        }
+
+        public void ToggleCasting()
+        {
+            IsCasting = !IsCasting;
         }
 
         public override void Update(GameTime gameTime, Player enemy)

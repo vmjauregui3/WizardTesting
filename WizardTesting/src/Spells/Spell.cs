@@ -36,16 +36,16 @@ namespace WizardTesting
             get { return damage; }
         }
 
-        protected bool isActive;
-        public bool IsActive
-        {
-            get { return isActive;  }
-        }
-
         protected Creature owner;
         public Creature Owner
         {
             get { return owner; }
+        }
+
+        protected bool onCooldown;
+        public bool OnCooldown
+        {
+            get { return onCooldown; }
         }
 
         protected MTimer cooldownTimer;
@@ -66,7 +66,7 @@ namespace WizardTesting
             cooldownTimer = new MTimer(cooldown);
             castingTimer = new MTimer(castTime);
             level = 1;
-            isActive = false;
+            onCooldown = false;
             damage = 0;
             exp = 0;
         }
@@ -80,31 +80,43 @@ namespace WizardTesting
             this.level = level;
             this.exp = exp;
             damage = 0;
-            isActive = false;
+            onCooldown = false;
         }
 
         public virtual void CastSpell()
         {
             owner.UpdateMana(manaCost);
+            owner.ToggleCasting();
+            onCooldown = true;
         }
 
         public virtual void CastSpell(Vector2 target)
         {
             owner.UpdateMana(manaCost);
+            owner.ToggleCasting();
+            onCooldown = true;
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            cooldownTimer.UpdateTimer(gameTime);
-            castingTimer.UpdateTimer(gameTime);
-            if (cooldownTimer.Test())
+            if (owner.IsCasting)
             {
-                cooldownTimer.ResetToZero();
+                castingTimer.UpdateTimer(gameTime);
+                if (castingTimer.Test())
+                {
+                    castingTimer.ResetToZero();
+                    owner.ToggleCasting();
+                }
             }
 
-            if (castingTimer.Test())
+            if (onCooldown)
             {
-                castingTimer.ResetToZero();
+                cooldownTimer.UpdateTimer(gameTime);
+                if (cooldownTimer.Test())
+                {
+                    cooldownTimer.ResetToZero();
+                    onCooldown = false;
+                }
             }
         }
 
