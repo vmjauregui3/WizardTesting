@@ -7,9 +7,9 @@ namespace WizardTesting
     public class Stat
     {
         public float BaseValue;
-        private List<float>[] statModifiers;
+        protected List<float>[] statModifiers;
 
-        private float value;
+        protected float value;
         public float Value
         {
             get { return value; }
@@ -25,19 +25,24 @@ namespace WizardTesting
             value = BaseValue;
         }
 
+        public virtual void UpdateBaseValue()
+        {
+            value = CalculateFinalValue();
+        }
+
         public void AddModifier(float mod, StatModifierType type)
         {
             statModifiers[(int)type].Add(mod);
-            value = CalculateFinalValue();
+            UpdateBaseValue();
         }
 
         public void RemoveModifier(float mod, StatModifierType type)
         {
             statModifiers[(int)type].Remove(mod);
-            value = CalculateFinalValue();
+            UpdateBaseValue();
         }
 
-        private float CalculateFinalValue()
+        protected float CalculateFinalValue()
         {
             float finalValue = BaseValue;
             float sumPercentAdd = 0;

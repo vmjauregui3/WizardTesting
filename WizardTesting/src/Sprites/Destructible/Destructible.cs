@@ -28,10 +28,10 @@ namespace WizardTesting
         {
             get { return health; }
         }
-        protected int healthMax;
+        protected VariableStat healthMax;
         public int HealthMax
         {
-            get { return healthMax; }
+            get { return (int)Math.Truncate(healthMax.Value); }
         }
         
         // Objests current render collisions with their distance from other objects.
@@ -63,8 +63,8 @@ namespace WizardTesting
             isDead = false;
             hitDistance = 35.0f;
             MoveSpeed = 0.0f;
-            healthMax = 10;
-            health = healthMax;
+            healthMax = new VariableStat(10);
+            health = healthMax.Value;
         }
 
         // UpdateHealth damages the object and checks its life status afterward.
@@ -77,9 +77,9 @@ namespace WizardTesting
         public virtual void UpdateHealth(float damage)
         {
             health -= damage;
-            if (health > healthMax)
+            if (health > Math.Truncate(healthMax.Value))
             {
-                health = healthMax;
+                health = (float)Math.Truncate(healthMax.Value);
             }
             CheckIfDead();
         }

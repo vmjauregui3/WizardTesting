@@ -12,8 +12,8 @@ namespace WizardTesting
         // 
         public Tower(Vector2 position, int ownerId) : base("Sprites/Buildings/Tower", position, 2f, new Vector2(1, 1), 0, ownerId)
         {
-            healthMax = 50;
-            health = healthMax;
+            healthMax = new VariableStat(50);
+            health = healthMax.Value;
         }
     }
 }

@@ -42,8 +42,8 @@ namespace WizardTesting
             castingTimer = new MTimer(5000);
 
             level = 1;
-            healthMax = 1000;
-            health = healthMax;
+            healthMax = new VariableStat(1000);
+            health = healthMax.ValueMax;
 
             Spells.Add(new FireBolt(this));
             primarySpell = Spells[0];
@@ -66,7 +66,7 @@ namespace WizardTesting
             castingTimer = new MTimer(5000);
 
             this.level = level;
-            this.healthMax = healthMax;
+            this.healthMax = new VariableStat(healthMax);
             this.health = healthMax;
             this.manaMax = manaMax;
             this.mana = manaMax;
