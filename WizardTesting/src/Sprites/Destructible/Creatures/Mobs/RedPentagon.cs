@@ -17,8 +17,7 @@ namespace WizardTesting
             MoveSpeed = 80.0f;
             orbitDistance = 500f;
 
-            healthMax = new VariableStat(30);
-            health = healthMax.ValueMax;
+            health = new VariableStat(30);
 
             SpawnTimer = new MTimer(4000);
         }

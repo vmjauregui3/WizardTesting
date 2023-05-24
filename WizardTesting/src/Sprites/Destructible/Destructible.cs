@@ -23,15 +23,10 @@ namespace WizardTesting
 
         // Objects have health which determines when they get destroyed.
         // TODO: Update health with new stats variables.
-        protected float health;
-        public float Health
+        protected VariableStat health;
+        public VariableStat Health
         {
             get { return health; }
-        }
-        protected VariableStat healthMax;
-        public int HealthMax
-        {
-            get { return (int)Math.Truncate(healthMax.Value); }
         }
         
         // Objests current render collisions with their distance from other objects.
@@ -63,8 +58,7 @@ namespace WizardTesting
             isDead = false;
             hitDistance = 35.0f;
             MoveSpeed = 0.0f;
-            healthMax = new VariableStat(10);
-            health = healthMax.Value;
+            health = new VariableStat(10);
         }
 
         // UpdateHealth damages the object and checks its life status afterward.
@@ -76,17 +70,17 @@ namespace WizardTesting
 
         public virtual void UpdateHealth(float damage)
         {
-            health -= damage;
-            if (health > Math.Truncate(healthMax.Value))
+            health.AddValue(-damage);
+            if (health.Value > health.ValueMax)
             {
-                health = (float)Math.Truncate(healthMax.Value);
+                health.SetValue(health.ValueMax);
             }
             CheckIfDead();
         }
 
         public void CheckIfDead()
         {
-            if (health <= 0)
+            if (health.Value <= 0)
             {
                 isDead = true;
             }

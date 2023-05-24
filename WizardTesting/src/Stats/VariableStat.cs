@@ -6,8 +6,6 @@ namespace WizardTesting
 {
     public class VariableStat : Stat
     {
-        protected float maxValue;
-
         protected float valueMax;
         public float ValueMax
         {
@@ -21,13 +19,22 @@ namespace WizardTesting
 
         public VariableStat(float baseValue) : base(baseValue)
         {
-            maxValue = baseValue;
-            value = baseValue;
+            valueMax = baseValue;
         }
 
         public override void UpdateBaseValue()
         {
-            maxValue = CalculateFinalValue();
+            valueMax = (float)Math.Truncate(CalculateFinalValue());
+        }
+
+        public void SetValue(float val)
+        {
+            value = val;
+        }
+
+        public void AddValue(float val)
+        {
+            value += val;
         }
     }
 }

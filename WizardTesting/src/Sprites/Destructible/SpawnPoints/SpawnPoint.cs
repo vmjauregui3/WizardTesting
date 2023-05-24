@@ -19,8 +19,7 @@ namespace WizardTesting
             SpawnTimer = new MTimer(2500);
             isDead = false;
             hitDistance = 25.0f;
-            healthMax = new VariableStat(100);
-            health = healthMax.ValueMax;
+            health = new VariableStat(100);
         }
 
         public override void Update(GameTime gameTime, Player enemy)

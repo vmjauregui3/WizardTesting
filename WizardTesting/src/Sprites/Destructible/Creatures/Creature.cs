@@ -13,26 +13,18 @@ namespace WizardTesting
 
         // Creatures have mana which determines when what abilities they can use and when.
         // TODO: Update mana with new stats variables.
-        protected int mana;
-        public int Mana
+        protected VariableStat mana;
+        public VariableStat Mana
         {
             get { return mana; }
         }
-        protected int manaMax;
-        public int ManaMax
+
+        protected VariableStat manaRegen;
+        public VariableStat ManaRegen
         {
-            get { return manaMax; }
+            get { return mana; }
         }
-        protected int manaRegenMax;
-        public int ManaRegenMax
-        {
-            get { return manaRegenMax; }
-        }
-        protected int manaRegen;
-        public int ManaRegen
-        {
-            get { return manaRegen; }
-        }
+
         protected MTimer manaTimer;
 
         private float[] attributeMods;
@@ -40,10 +32,8 @@ namespace WizardTesting
         public Creature(int ownderId) : base(ownderId)
         {
             MoveSpeed = 100.0f;
-            manaMax = 1000;
-            mana = manaMax;
-            manaRegenMax = 5;
-            manaRegen = manaRegenMax;
+            mana = new VariableStat(1000);
+            manaRegen = new VariableStat(5);
             manaTimer = new MTimer(100);
 
             attributeMods = new float[Enum.GetNames(typeof(Attribute)).Length];
@@ -55,19 +45,19 @@ namespace WizardTesting
 
         public override void Update(GameTime gameTime, Player enemy)
         {
-            if (mana != manaMax)
+            if (mana.Value != mana.ValueMax)
             {
                 manaTimer.UpdateTimer(gameTime);
                 if (manaTimer.Test())
                 {
-                    if (mana + manaRegen <= manaMax)
+                    if (mana.Value + manaRegen.Value <= mana.ValueMax)
                     {
-                        mana += manaRegen;
+                        mana.AddValue(manaRegen.Value);
                         manaTimer.ResetToZero();
                     }
-                    else if (mana + manaRegen > manaMax)
+                    else if (mana.Value + manaRegen.Value > mana.ValueMax)
                     {
-                        mana = manaMax;
+                        mana.SetValue(mana.ValueMax);
                         manaTimer.ResetToZero();
                     }
                 }
@@ -80,10 +70,10 @@ namespace WizardTesting
         // TODO: Complicate the damage calculation using updated stats variables.
         public virtual void UpdateMana(int manaCost)
         {
-            mana -= manaCost;
-            if (mana > manaMax)
+            mana.AddValue(-manaCost);
+            if (mana.Value > mana.ValueMax)
             {
-                mana = manaMax;
+                mana.SetValue(mana.ValueMax);
             }
         }
 
@@ -99,7 +89,7 @@ namespace WizardTesting
         public bool HasMana(int manaCost)
         {
             bool hasMana = true;
-            if (manaCost > mana)
+            if (manaCost > mana.Value)
             {
                 hasMana = false;
             }

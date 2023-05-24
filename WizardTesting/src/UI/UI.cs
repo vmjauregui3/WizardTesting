@@ -34,8 +34,8 @@ namespace WizardTesting
         public void Update(Wizard userWizard)
         {
             screenOrigin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Camera.Instance.Transform));
-            healthBar.Update(userWizard.Health, userWizard.HealthMax, screenOrigin, barHeight);
-            manaBar.Update(userWizard.Mana, userWizard.ManaMax, screenOrigin, 0);
+            healthBar.Update(userWizard.Health.Value, userWizard.Health.ValueMax, screenOrigin, barHeight);
+            manaBar.Update(userWizard.Mana.Value, userWizard.Mana.ValueMax, screenOrigin, 0);
         }
 
         public void Draw(World world, SpriteBatch spriteBatch)
