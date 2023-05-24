@@ -15,10 +15,7 @@ namespace WizardTesting
     {
         private Vector2 mousePosition;
         public float Scale;
-        private MTimer castingTimer;
 
-        public List<Spell> Spells = new List<Spell>();
-        private Spell primarySpell;
         //private InstantProjectileSpell lightBeam; Removed for testing
 
         private int level;
@@ -34,9 +31,6 @@ namespace WizardTesting
             //hitDistance = 35f;
 
             MoveSpeed = 200f;
-
-            castingTimer = new MTimer(5000);
-
             level = 1;
             health = new VariableStat(1000);
 
@@ -56,12 +50,10 @@ namespace WizardTesting
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
             MoveSpeed = moveSpeed;
 
-            castingTimer = new MTimer(5000);
-
             this.level = level;
-            this.health = new VariableStat(healthMax);
-            this.mana = new VariableStat(manaMax);
-            this.manaRegen = new VariableStat(manaRegenMax);
+            health = new VariableStat(healthMax);
+            mana = new VariableStat(manaMax);
+            manaRegen = new VariableStat(manaRegenMax);
         }
 
         
@@ -96,9 +88,7 @@ namespace WizardTesting
                 Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
             }
             else
-            { 
-                Velocity.Y = 0; 
-            }
+            { Velocity.Y = 0; }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
@@ -118,13 +108,6 @@ namespace WizardTesting
             }
             else
             { Velocity.X = 0; }
-
-            /*
-            if (Velocity.X != 0 || Velocity.Y != 0)
-            { 
-                isMobile = true; 
-            }
-            */
         }
 
         public void ControlCasting()
@@ -149,6 +132,10 @@ namespace WizardTesting
             if (MCursor.Instance.LeftClick() && HasMana(primarySpell.ManaCost))
             {
                 primarySpell.CastSpell(mousePosition);
+            }
+            else if (MCursor.Instance.RightClick() && HasMana(secondarySpell.ManaCost))
+            {
+                secondarySpell.CastSpell(mousePosition);
             }
         }
 

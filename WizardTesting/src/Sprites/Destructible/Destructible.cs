@@ -22,7 +22,6 @@ namespace WizardTesting
         public float MoveSpeed;
 
         // Objects have health which determines when they get destroyed.
-        // TODO: Update health with new stats variables.
         protected VariableStat health;
         public VariableStat Health
         {

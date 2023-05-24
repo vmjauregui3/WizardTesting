@@ -12,22 +12,22 @@ namespace WizardTesting
         // Creature is an abstract grouping of destructibles that have some form of intelligence commanding them.
 
         // Creatures have mana which determines when what abilities they can use and when.
-        // TODO: Update mana with new stats variables.
         protected VariableStat mana;
         public VariableStat Mana
         {
             get { return mana; }
         }
-
         protected VariableStat manaRegen;
         public VariableStat ManaRegen
         {
             get { return mana; }
         }
-
         protected MTimer manaTimer;
 
         public bool IsCasting;
+        public List<Spell> Spells = new List<Spell>();
+        protected Spell primarySpell;
+        protected Spell secondarySpell;
 
         private float[] attributeMods;
 
