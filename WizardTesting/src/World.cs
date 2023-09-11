@@ -40,6 +40,11 @@ namespace WizardTesting
         // Lists all the destructibles in the gameworld.
         public List<Destructible> AllDestructibles = new List<Destructible>();
 
+
+        private static int zoneRadius = 1;
+        public HashSet<string> LoadedZones;
+        public Vector2 PlayerZone, PlayerZonePrev;
+
         // Adds a Creature to the world under designated Player's control.
         public virtual void AddCreature(object mob)
         {
@@ -87,7 +92,11 @@ namespace WizardTesting
             // TODO: Modify AIPlayer so that multiple can be created.
             LoadData(username, worldNum);
 
-            Map = new Map(User.Wizard.Sprite.Position);
+            Map = new Map();
+
+            LoadedZones = new HashSet<string>();
+            getPlayerZone(User.Wizard.Sprite.Position);
+            LoadZones();
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
@@ -157,14 +166,40 @@ namespace WizardTesting
             }
             //xmlPlayer.Element("Root").Add(new XElement("Spells", User.Wizard.Spells.Select(i => new XElement("Spell", new XAttribute("id", i)))));
 
-
             xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
+        }
+
+        public void getPlayerZone(Vector2 playerPosition)
+        {
+            PlayerZonePrev = PlayerZone;
+            PlayerZone = Map.getPlayerZone(playerPosition);
+        }
+
+        public void LoadZones()
+        {
+            for (int j = (int)PlayerZone.Y - zoneRadius; j <= (int)PlayerZone.Y + zoneRadius; j++)
+            {
+                for (int i = (int)PlayerZone.X - zoneRadius; i <= (int)PlayerZone.X + zoneRadius; i++)
+                {
+                    string zoneKey = i + "_" + j;
+                    Map.CheckHasKey(i, j);
+                    LoadedZones.Add(zoneKey);
+                }
+            }
         }
 
         // Updates all relevant components used for gameplay by the user and all objects in the game environment.
         public void Update(GameTime gameTime)
         {
-            Map.Update(User.Wizard.Sprite.Position);
+            getPlayerZone(User.Wizard.Sprite.Position);
+
+            if (!PlayerZone.Equals(PlayerZonePrev))
+            {
+                LoadedZones.Clear();
+                LoadZones();
+            }
+            //Map.Update();
+
             Camera.Instance.FollowSprite(User.Wizard.Sprite);
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
@@ -192,7 +227,7 @@ namespace WizardTesting
         // Draws all relevant components used for gameplay by the user and all objects in the game environment.
         public void Draw(SpriteBatch spriteBatch)
         {
-            Map.Draw(spriteBatch);
+            Map.Draw(spriteBatch, LoadedZones);
 
             User.Draw(spriteBatch);
             AIPlayer.Draw(spriteBatch);
