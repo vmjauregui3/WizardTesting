@@ -23,9 +23,9 @@ namespace WizardTesting
             //float[][] floatGrid = Perlin.GeneratePerlinNoise(zoneSize * ZoneMap.GetLength(0), zoneSize * ZoneMap.GetLength(1), 6);
         }
 
-        public Vector2 getPlayerZone(Vector2 playerPosition)
+        public Vector2 getZone(Vector2 position)
         {
-            return new Vector2( (int)Math.Floor(playerPosition.X / (tileSize * zoneSize)), (int)Math.Floor(playerPosition.Y / (tileSize * zoneSize)));
+            return new Vector2( (int)Math.Floor(position.X / (tileSize * zoneSize)), (int)Math.Floor(position.Y / (tileSize * zoneSize)));
         }
 
         public void CheckHasKey(int i, int j)

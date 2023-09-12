@@ -51,6 +51,8 @@ namespace WizardTesting
             IsCasting = !IsCasting;
         }
 
+        
+
         public override void Update(GameTime gameTime, Player enemy)
         {
             if (mana.Value != mana.ValueMax)

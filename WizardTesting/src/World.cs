@@ -95,7 +95,8 @@ namespace WizardTesting
             Map = new Map();
 
             LoadedZones = new HashSet<string>();
-            getPlayerZone(User.Wizard.Sprite.Position);
+            PlayerZone = getZone(User.Wizard.Sprite.Position);
+            PlayerZonePrev = PlayerZone;
             LoadZones();
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
@@ -169,10 +170,17 @@ namespace WizardTesting
             xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
         }
 
-        public void getPlayerZone(Vector2 playerPosition)
+        public Vector2 getZone(Vector2 position)
         {
-            PlayerZonePrev = PlayerZone;
-            PlayerZone = Map.getPlayerZone(playerPosition);
+            return Map.getZone(position);
+        }
+
+        public string getZoneKey(Vector2 position)
+        {
+            Vector2 zone = Map.getZone(position);
+            string zoneKey = (int)zone.X + "_" + (int)zone.Y;
+
+            return zoneKey;
         }
 
         public void LoadZones()
@@ -191,7 +199,8 @@ namespace WizardTesting
         // Updates all relevant components used for gameplay by the user and all objects in the game environment.
         public void Update(GameTime gameTime)
         {
-            getPlayerZone(User.Wizard.Sprite.Position);
+            PlayerZonePrev = PlayerZone;
+            PlayerZone = getZone(User.Wizard.Sprite.Position);
 
             if (!PlayerZone.Equals(PlayerZonePrev))
             {
@@ -215,7 +224,15 @@ namespace WizardTesting
             // Loops through all projectiles backward and removes them if they need to be destroyed.
             for (int i = Projectiles.Count - 1; i >= 0; i--)
             {
-                Projectiles[i].Update(gameTime, AllDestructibles);
+                string zoneKey = getZoneKey(Projectiles[i].Sprite.Position);
+                if (LoadedZones.Contains(zoneKey))
+                {
+                    Projectiles[i].Update(gameTime, AllDestructibles);
+                }
+                else
+                {
+                    Projectiles[i].SetIsDone();
+                }
 
                 if (Projectiles[i].Done)
                 {

@@ -57,7 +57,7 @@ namespace WizardTesting
         {
             for (int i = Buildings.Count - 1; i >= 0; i--)
             {
-                Buildings[i].Update(gameTime, enemy);
+                UpdateIfLoaded(gameTime, enemy, world, Buildings[i]);
 
                 if (Buildings[i].IsDead)
                 {
@@ -68,7 +68,7 @@ namespace WizardTesting
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
             {
-                SpawnPoints[i].Update(gameTime, enemy);
+                UpdateIfLoaded(gameTime, enemy, world, SpawnPoints[i]);
 
                 if (SpawnPoints[i].IsDead)
                 {
@@ -79,7 +79,7 @@ namespace WizardTesting
 
             for (int i = Creatures.Count - 1; i >= 0; i--)
             {
-                Creatures[i].Update(gameTime, enemy);
+                UpdateIfLoaded(gameTime, enemy, world, Creatures[i]);
 
                 if (Creatures[i].IsDead)
                 {
@@ -92,6 +92,20 @@ namespace WizardTesting
             if (Wizard != null)
             {
                 Wizard.Update(gameTime, enemy);
+            }
+        }
+
+        public void UpdateIfLoaded(GameTime gameTime, Player enemy, World world, Destructible obj)
+        {
+            string zoneKey = world.getZoneKey(obj.Sprite.Position);
+            if (world.LoadedZones.Contains(zoneKey))
+            {
+                obj.SetIsLoaded(true);
+                obj.Update(gameTime, enemy);
+            }
+            else
+            {
+                obj.SetIsLoaded(false);
             }
         }
         
@@ -134,17 +148,26 @@ namespace WizardTesting
         {
             for (int i = Buildings.Count - 1; i >= 0; i--)
             {
-                Buildings[i].Draw(spriteBatch);
+                if (Buildings[i].IsLoaded)
+                {
+                    Buildings[i].Draw(spriteBatch);
+                }
             }
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
             {
-                SpawnPoints[i].Draw(spriteBatch);
+                if (SpawnPoints[i].IsLoaded)
+                {
+                    SpawnPoints[i].Draw(spriteBatch);
+                }
             }
 
             for (int i = Creatures.Count - 1; i >= 0; i--)
             {
-                Creatures[i].Draw(spriteBatch);
+                if (Creatures[i].IsLoaded)
+                {
+                    Creatures[i].Draw(spriteBatch);
+                }
             }
 
             if (Wizard != null)

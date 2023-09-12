@@ -57,6 +57,11 @@ namespace WizardTesting
             Direction.Normalize();
         }
 
+        public void SetIsDone()
+        {
+            done = true;
+        }
+
         // Updates the Projectile's Sprite and Timer.
         // Default Projectile moves linearly toward target at a constant speed and is destroyed upon impact or after life duration.
         public virtual void Update(GameTime gameTime, List<Destructible> destructibles)

@@ -50,6 +50,12 @@ namespace WizardTesting
             get { return ownerId; }
         }
 
+        protected bool isLoaded;
+        public bool IsLoaded
+        {
+            get { return isLoaded; }
+        }
+
         // The constructor requires an ID to be created.
         public Destructible(int ownerId)
         {
@@ -58,6 +64,18 @@ namespace WizardTesting
             hitDistance = 35.0f;
             MoveSpeed = 0.0f;
             health = new VariableStat(10);
+        }
+
+        public void CheckIfDead()
+        {
+            if (health.Value <= 0)
+            {
+                isDead = true;
+            }
+        }
+        public void SetIsLoaded(bool isLoaded)
+        {
+            this.isLoaded = isLoaded;
         }
 
         // UpdateHealth damages the object and checks its life status afterward.
@@ -75,14 +93,6 @@ namespace WizardTesting
                 health.SetValue(health.ValueMax);
             }
             CheckIfDead();
-        }
-
-        public void CheckIfDead()
-        {
-            if (health.Value <= 0)
-            {
-                isDead = true;
-            }
         }
 
         // Updates the Sprite.
