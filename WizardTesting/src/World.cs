@@ -41,7 +41,7 @@ namespace WizardTesting
         public List<Destructible> AllDestructibles = new List<Destructible>();
 
 
-        private static int zoneRadius = 1;
+        private static int zoneRadius = 5;
         public HashSet<string> LoadedZones;
         public Vector2 PlayerZone, PlayerZonePrev;
 

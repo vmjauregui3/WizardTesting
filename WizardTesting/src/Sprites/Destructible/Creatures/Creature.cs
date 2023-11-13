@@ -39,8 +39,8 @@ namespace WizardTesting
             manaTimer = new MTimer(100);
             IsCasting = false;
 
-            attributeMods = new float[Enum.GetNames(typeof(Attribute)).Length];
-            for (int i = 0; i < Enum.GetNames(typeof(Attribute)).Length; i++)
+            attributeMods = new float[Enum.GetNames(typeof(SpellAttribute)).Length];
+            for (int i = 0; i < Enum.GetNames(typeof(SpellAttribute)).Length; i++)
             {
                 attributeMods[i] = 1;
             }
@@ -87,7 +87,7 @@ namespace WizardTesting
             }
         }
 
-        public override void UpdateHealthModified(float damage, Attribute attribute)
+        public override void UpdateHealthModified(float damage, SpellAttribute attribute)
         {
             float finalDamage = damage;
 

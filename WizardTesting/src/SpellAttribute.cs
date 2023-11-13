@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WizardTesting
 {
-    public enum Attribute
+    public enum SpellAttribute
     {
         Physical,
         Psychic,

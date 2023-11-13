@@ -80,7 +80,7 @@ namespace WizardTesting
 
         // UpdateHealth damages the object and checks its life status afterward.
         // TODO: Complicate the damage calculation using updated stats variables.
-        public virtual void UpdateHealthModified(float damage, Attribute attribute)
+        public virtual void UpdateHealthModified(float damage, SpellAttribute attribute)
         {
             UpdateHealth(damage);
         }
