@@ -31,7 +31,7 @@ namespace WizardTesting
 
         private float[] attributeMods;
 
-        public Creature(int ownderId) : base(ownderId)
+        public Creature(int ownerId) : base(ownerId)
         {
             MoveSpeed = 100.0f;
             mana = new VariableStat(1000);
