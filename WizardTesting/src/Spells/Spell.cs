@@ -24,11 +24,22 @@ namespace WizardTesting
             get { return exp;  }
         }
 
+        protected int manaCostBase;
+
         protected int manaCost;
         public int ManaCost
         {
             get { return manaCost; }
         }
+
+        protected int upkeepCost;
+        public int UpkeepCost
+        {
+            get { return upkeepCost; }
+        }
+
+        protected int upkeepCostBase;
+
 
         protected int damage;
         public int Damage
@@ -59,6 +70,12 @@ namespace WizardTesting
             get { return castingTimer.MSec; }
         }
 
+        protected bool isActive;
+        public bool IsActive
+        {
+            get { return isActive; }
+        }
+
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
             this.owner = owner;
@@ -67,6 +84,7 @@ namespace WizardTesting
             castingTimer = new MTimer(castTime);
             level = 1;
             onCooldown = false;
+            isActive = false;
             damage = 0;
             exp = 0;
         }
@@ -81,6 +99,7 @@ namespace WizardTesting
             this.exp = exp;
             damage = 0;
             onCooldown = false;
+            isActive = false;
         }
 
         public virtual void CastSpell()
@@ -95,6 +114,11 @@ namespace WizardTesting
             owner.UpdateMana(manaCost);
             owner.ToggleCasting();
             onCooldown = true;
+        }
+
+        public virtual void UpkeepSpell()
+        {
+            owner.UpdateMana(upkeepCost);
         }
 
         public virtual void Update(GameTime gameTime)

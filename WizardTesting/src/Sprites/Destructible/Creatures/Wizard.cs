@@ -36,6 +36,7 @@ namespace WizardTesting
 
             Spells.Add(new FireBolt(this));
             primarySpell = Spells[0];
+            secondarySpell = Spells[0];
             Spells.Add(new EarthShard(this));
             Spells.Add(new IceSpike(this));
             Spells.Add(new WindSlash(this));
@@ -74,6 +75,7 @@ namespace WizardTesting
                 }
             }
             primarySpell = Spells[0];
+            secondarySpell = Spells[0];
         }
         
 
