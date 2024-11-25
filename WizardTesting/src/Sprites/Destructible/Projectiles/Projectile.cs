@@ -53,8 +53,7 @@ namespace WizardTesting
 
             Timer = new MTimer(duration);
 
-            Direction = target - position;
-            Direction.Normalize();
+            Direction = Vector2.Normalize(target - position);
         }
 
         public void SetIsDone()
