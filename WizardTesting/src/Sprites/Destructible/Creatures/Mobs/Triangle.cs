@@ -36,8 +36,9 @@ namespace WizardTesting
             base.Draw(spriteBatch);
         }
 
-        public override void AI(GameTime gameTime, Wizard wizard)
+        public override void AI(GameTime gameTime, World world)
         {
+            Creature targetCreature = world.User.Wizard;
             //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, wizard.Sprite.Position);
 
             orbitAngle += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -53,9 +54,9 @@ namespace WizardTesting
                 Sprite.Rotation = orbitAngle + 0.75f * MathF.PI;
             }
 
-            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance)
+            if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {
-                wizard.UpdateHealth(10);
+                targetCreature.UpdateHealth(10);
                 isDead = true;
             }
         }

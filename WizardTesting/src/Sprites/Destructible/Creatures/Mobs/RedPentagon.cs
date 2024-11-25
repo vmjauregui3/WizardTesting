@@ -34,17 +34,18 @@ namespace WizardTesting
             base.Update(gameTime, world);
         }
 
-        public override void AI(GameTime gameTime, Wizard wizard)
+        public override void AI(GameTime gameTime, World world)
         {
-            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) > orbitDistance)
+            Creature targetCreature = world.User.Wizard;
+            if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) > orbitDistance)
             {
-                Sprite.Position += Pathing.DirectionToward(Sprite.Position, wizard.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             }
 
-            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance)
+            if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {
-                wizard.UpdateHealth(100);
+                targetCreature.UpdateHealth(100);
                 isDead = true;
             }
         }
