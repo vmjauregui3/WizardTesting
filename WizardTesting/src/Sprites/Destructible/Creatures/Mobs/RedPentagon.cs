@@ -22,7 +22,7 @@ namespace WizardTesting
             SpawnTimer = new MTimer(4000);
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
             SpawnTimer.UpdateTimer(gameTime);
             if (SpawnTimer.Test())
@@ -31,7 +31,7 @@ namespace WizardTesting
                 SpawnTimer.ResetToZero();
             }
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         public override void AI(GameTime gameTime, Wizard wizard)

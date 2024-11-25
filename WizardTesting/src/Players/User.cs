@@ -41,9 +41,9 @@ namespace WizardTesting
         }
 
         // Updates their Player.
-        public override void Update(GameTime gameTime, Player enemy, World world)
+        public override void Update(GameTime gameTime, World world)
         {
-            base.Update(gameTime, enemy, world);
+            base.Update(gameTime, world);
         }
 
     }

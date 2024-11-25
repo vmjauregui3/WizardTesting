@@ -95,8 +95,13 @@ namespace WizardTesting
             CheckIfDead();
         }
 
+        public virtual void Update(GameTime gameTime)
+        {
+            Sprite.Update(gameTime);
+        }
+
         // Updates the Sprite.
-        public virtual void Update(GameTime gameTime, Player enemy)
+        public virtual void Update(GameTime gameTime, World world)
         {
             Sprite.Update(gameTime);
         }

@@ -17,16 +17,16 @@ namespace WizardTesting
             spell = new FireBolt(this);
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
             CastTimer.UpdateTimer(gameTime);
             if (CastTimer.Test())
             {
-                spell.CastSpell(enemy.Wizard.Sprite.Position);
+                spell.CastSpell(world.User.Wizard.Sprite.Position);
                 CastTimer.ResetToZero();
             }
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         public override void AI(GameTime gameTime, Wizard wizard)

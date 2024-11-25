@@ -141,7 +141,7 @@ namespace WizardTesting
             }
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime)
         {
             mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
@@ -181,7 +181,7 @@ namespace WizardTesting
             { Sprite.IsActive = false; }
 
             Sprite.Position += Velocity;
-            base.Update(gameTime, enemy);
+            base.Update(gameTime);
         }
     }
 }

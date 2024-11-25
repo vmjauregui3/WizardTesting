@@ -19,13 +19,13 @@ namespace WizardTesting
         }
 
         // Update requires the information of the Mob's enemy.
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
             // Generic Mobs target the User's Wizard using default AI and are always active.
-            AI(gameTime, enemy.Wizard);
+            AI(gameTime, world.User.Wizard);
             Sprite.IsActive = true;
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         // Default AI moves straight toward User Wizard and deals 1 damage before dying.

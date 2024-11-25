@@ -53,11 +53,11 @@ namespace WizardTesting
         }
 
         // Updates all objects under player control.
-        public virtual void Update(GameTime gameTime, Player enemy, World world)
+        public virtual void Update(GameTime gameTime, World world)
         {
             for (int i = Buildings.Count - 1; i >= 0; i--)
             {
-                UpdateIfLoaded(gameTime, enemy, world, Buildings[i]);
+                UpdateIfLoaded(gameTime, world, Buildings[i]);
 
                 if (Buildings[i].IsDead)
                 {
@@ -68,7 +68,7 @@ namespace WizardTesting
 
             for (int i = SpawnPoints.Count - 1; i >= 0; i--)
             {
-                UpdateIfLoaded(gameTime, enemy, world, SpawnPoints[i]);
+                UpdateIfLoaded(gameTime, world, SpawnPoints[i]);
 
                 if (SpawnPoints[i].IsDead)
                 {
@@ -79,7 +79,7 @@ namespace WizardTesting
 
             for (int i = Creatures.Count - 1; i >= 0; i--)
             {
-                UpdateIfLoaded(gameTime, enemy, world, Creatures[i]);
+                UpdateIfLoaded(gameTime, world, Creatures[i]);
 
                 if (Creatures[i].IsDead)
                 {
@@ -91,17 +91,17 @@ namespace WizardTesting
 
             if (Wizard != null)
             {
-                Wizard.Update(gameTime, enemy);
+                Wizard.Update(gameTime);
             }
         }
 
-        public void UpdateIfLoaded(GameTime gameTime, Player enemy, World world, Destructible obj)
+        public void UpdateIfLoaded(GameTime gameTime, World world, Destructible obj)
         {
             string zoneKey = world.getZoneKey(obj.Sprite.Position);
             if (world.LoadedZones.Contains(zoneKey))
             {
                 obj.SetIsLoaded(true);
-                obj.Update(gameTime, enemy);
+                obj.Update(gameTime, world);
             }
             else
             {

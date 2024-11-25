@@ -26,9 +26,9 @@ namespace WizardTesting
             Owner = owner;
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
