@@ -14,20 +14,20 @@ namespace WizardTesting
 
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
-            if (enemy.Wizard.Sprite.Position.X > Sprite.Position.X)
+            if (world.User.Wizard.Sprite.Position.X > Sprite.Position.X)
             {
                 if (Sprite.CurrentFrame.Y != 2)
                 { Sprite.CurrentFrame.Y = 2; }
             }
-            else if (enemy.Wizard.Sprite.Position.X < Sprite.Position.X)
+            else if (world.User.Wizard.Sprite.Position.X < Sprite.Position.X)
             {
                 if (Sprite.CurrentFrame.Y != 1)
                 { Sprite.CurrentFrame.Y = 1; }
             }
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
     }

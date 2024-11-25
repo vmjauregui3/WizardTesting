@@ -217,9 +217,9 @@ namespace WizardTesting
             AllDestructibles.AddRange(User.GetAllDestructibles());
             AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
 
-            User.Update(gameTime, AIPlayer, this);
+            User.Update(gameTime, this);
             UI.Update(User.Wizard);
-            AIPlayer.Update(gameTime, User, this);
+            AIPlayer.Update(gameTime, this);
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.
             for (int i = Projectiles.Count - 1; i >= 0; i--)

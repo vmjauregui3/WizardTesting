@@ -19,25 +19,26 @@ namespace WizardTesting
         }
 
         // Update requires the information of the Mob's enemy.
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
             // Generic Mobs target the User's Wizard using default AI and are always active.
-            AI(gameTime, enemy.Wizard);
+            AI(gameTime, world);
             Sprite.IsActive = true;
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         // Default AI moves straight toward User Wizard and deals 1 damage before dying.
-        public virtual void AI(GameTime gameTime, Wizard wizard)
+        public virtual void AI(GameTime gameTime, World world)
         {
-            Sprite.Position += Pathing.DirectionToward(Sprite.Position, wizard.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Creature targetCreature = world.User.Wizard;
+            Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, enemy.Sprite.Position);
 
             
-            if (Pathing.GetDistance(Sprite.Position, wizard.Sprite.Position) < wizard.HitDistance )
+            if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance )
             {
-                wizard.UpdateHealth(100);
+                targetCreature.UpdateHealth(100);
                 isDead = true;
             }
         }

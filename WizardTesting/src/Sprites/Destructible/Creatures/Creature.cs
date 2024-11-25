@@ -51,9 +51,7 @@ namespace WizardTesting
             IsCasting = !IsCasting;
         }
 
-        
-
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime)
         {
             if (mana.Value != mana.ValueMax)
             {
@@ -73,7 +71,30 @@ namespace WizardTesting
                 }
             }
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime);
+        }
+
+        public override void Update(GameTime gameTime, World world)
+        {
+            if (mana.Value != mana.ValueMax)
+            {
+                manaTimer.UpdateTimer(gameTime);
+                if (manaTimer.Test())
+                {
+                    if (mana.Value + manaRegen.Value <= mana.ValueMax)
+                    {
+                        mana.AddValue(manaRegen.Value);
+                        manaTimer.ResetToZero();
+                    }
+                    else if (mana.Value + manaRegen.Value > mana.ValueMax)
+                    {
+                        mana.SetValue(mana.ValueMax);
+                        manaTimer.ResetToZero();
+                    }
+                }
+            }
+
+            base.Update(gameTime, world);
         }
 
         // UpdateHealth damages the object and checks its life status afterward.

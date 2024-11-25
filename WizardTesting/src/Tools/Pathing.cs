@@ -31,12 +31,27 @@ namespace WizardTesting
         }
         */
 
+        // Return the Normalize direction from the position to the target
         public static Vector2 DirectionToward(Vector2 pos, Vector2 target)
         {
-            Vector2 direction = Vector2.Zero;
-            direction = target - pos;
-            direction.Normalize();
-            return direction;
+            return Vector2.Normalize(target - pos);
+        }
+
+        // Return the Dot Product of two vectors after normalizing their magnitude
+        public static float NormDot(Vector2 vec1, Vector2 vec2)
+        {
+            return Vector2.Dot(Vector2.Normalize(vec1), Vector2.Normalize(vec2));
+        }
+
+        public static float CrossProduct(Vector2 vec1, Vector2 vec2)
+        {
+            return vec1.X * vec2.Y - vec1.Y * vec2.X;
+        }
+
+        // Return the normalized sum of two vectors
+        public static Vector2 NormSum(Vector2 direction1, Vector2 direction2)
+        {
+            return Vector2.Normalize(direction1 + direction2);
         }
 
         public static Vector2 OrbitToward(Vector2 pos, Vector2 target, float orbitDis, float orbitAngle)

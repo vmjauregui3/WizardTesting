@@ -22,7 +22,7 @@ namespace WizardTesting
             health = new VariableStat(100);
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
             SpawnTimer.UpdateTimer(gameTime);
             if(SpawnTimer.Test())
@@ -31,7 +31,7 @@ namespace WizardTesting
                 SpawnTimer.ResetToZero();
             }
 
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         public virtual void GetHit()

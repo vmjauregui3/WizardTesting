@@ -15,9 +15,9 @@ namespace WizardTesting
 
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime, World world)
         {
-            base.Update(gameTime, enemy);
+            base.Update(gameTime, world);
         }
 
         public override void SpawnMob()
@@ -28,7 +28,7 @@ namespace WizardTesting
 
             if(num <= 8)
             {
-                tempMob = new Square(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
+                tempMob = new DodgeSquare(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
             }
             else if(num <= 9)
             {

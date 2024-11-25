@@ -36,6 +36,7 @@ namespace WizardTesting
 
             Spells.Add(new FireBolt(this));
             primarySpell = Spells[0];
+            secondarySpell = Spells[0];
             Spells.Add(new EarthShard(this));
             Spells.Add(new IceSpike(this));
             Spells.Add(new WindSlash(this));
@@ -74,6 +75,7 @@ namespace WizardTesting
                 }
             }
             primarySpell = Spells[0];
+            secondarySpell = Spells[0];
         }
         
 
@@ -139,7 +141,7 @@ namespace WizardTesting
             }
         }
 
-        public override void Update(GameTime gameTime, Player enemy)
+        public override void Update(GameTime gameTime)
         {
             mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
@@ -179,7 +181,7 @@ namespace WizardTesting
             { Sprite.IsActive = false; }
 
             Sprite.Position += Velocity;
-            base.Update(gameTime, enemy);
+            base.Update(gameTime);
         }
     }
 }
