@@ -46,7 +46,7 @@ namespace WizardTesting
         {
             foreach (string key in loadedZones)
             {
-                Zones[key].Background.Draw(spriteBatch);
+                Zones[key].Layer.Draw(spriteBatch);
             }
         }
     }

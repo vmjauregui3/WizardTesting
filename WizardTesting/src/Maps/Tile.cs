@@ -16,6 +16,9 @@ namespace WizardTesting
         protected Texture2D Texture;
         protected Rectangle sourceRect;
 
+        protected bool filled, impassible, unpathable;
+        protected float cost;
+
         public Tile(Texture2D texture, Rectangle sourceRect, Vector2 dimensions)
         {
             Texture = texture;

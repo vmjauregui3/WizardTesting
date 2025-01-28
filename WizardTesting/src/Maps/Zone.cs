@@ -10,7 +10,7 @@ namespace WizardTesting
 {
     public class Zone
     {
-        public Layer Background;
+        public Layer Layer;
         public int[,] TileGrid;
         public Color[,] TileShades;
 
@@ -30,7 +30,7 @@ namespace WizardTesting
                 }
             }
 
-            Background = new Layer("TileSheets/GroundTilesReduced", new Vector2(numTiles, 1), new Vector2(zoneSize * zonePosition.X, zoneSize * zonePosition.Y), TileGrid, TileShades);
+            Layer = new Layer("TileSheets/GroundTilesReduced", new Vector2(numTiles, 1), new Vector2(zoneSize * zonePosition.X, zoneSize * zonePosition.Y), TileGrid, TileShades);
         }
 
         public int GetIDUsingPerlinNoise(float noiseFloat, int min, int max)
