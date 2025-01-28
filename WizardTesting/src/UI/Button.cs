@@ -22,10 +22,11 @@ namespace WizardTesting
         PassObject ButtonClicked;
 
         public Button(string path, Vector2 position, Vector2 dimensions, string fontPath, string text, PassObject ButtonClicked, object info)
-            : base(path, position, dimensions)
+            : base(path, position, dimensions, Vector2.Zero)
         {
             this.text = text;
             this.ButtonClicked = ButtonClicked;
+            this.info = info;
 
             if (fontPath != "")
             {

@@ -32,7 +32,7 @@ namespace WizardTesting
             healthBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Red);
             manaBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue);
 
-            tempButton = new Button("Sprites/SolidBar", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
+            tempButton = new Button("Sprites/ButtonBlank", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
         }
 
         public void Update(Wizard userWizard)

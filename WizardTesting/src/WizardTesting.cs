@@ -29,6 +29,9 @@ namespace WizardTesting
             get { return gameOrigin; } 
         }
 
+        public int gameState;
+        private MainMenu mainMenu;
+
         private World world;
 
         public bool paused = false;
@@ -46,7 +49,7 @@ namespace WizardTesting
             graphics = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "Content";
-            IsMouseVisible = false;
+            IsMouseVisible = true;
 
             //camera = new Camera();
         }
@@ -70,6 +73,9 @@ namespace WizardTesting
 
             WContent = new ContentManager(Content.ServiceProvider, "Content");
 
+            gameState = 0;
+            mainMenu = new MainMenu(ChangeGameState, ExitGame);
+
             world = new World(username, 1);
         }
 
@@ -89,26 +95,36 @@ namespace WizardTesting
             InputManager.Instance.Update(gameTime);
             MCursor.Instance.Update();
 
-            if ( InputManager.Instance.KeyPressed(Keys.Escape) )
-            { 
-                paused = !paused;
-                IsMouseVisible = !IsMouseVisible;
-            } // Exit();
-
-            if (paused)
+            if (gameState == 0)
             {
-                if (InputManager.Instance.KeyPressed(Keys.S))
+                mainMenu.Update();
+            }
+            else if (gameState == 1)
+            {
+                if (InputManager.Instance.KeyPressed(Keys.Escape))
                 {
-                    world.SaveUserData(username);
+                    paused = !paused;
+                    IsMouseVisible = !IsMouseVisible;
+                } // Exit();
+
+                if (paused)
+                {
+                    if (InputManager.Instance.KeyPressed(Keys.S))
+                    {
+                        world.SaveUserData(username);
+                    }
+                    else if (InputManager.Instance.KeyPressed(Keys.Delete))
+                    {
+                        ChangeGameState(0);
+                    }
                 }
-                else if (InputManager.Instance.KeyPressed(Keys.Delete))
-                { Exit(); }
+                else
+                {
+                    // TODO: Add your update logic here
+                    world.Update(gameTime);
+                }
             }
-            else
-            {
-                // TODO: Add your update logic here
-                world.Update(gameTime);
-            }
+            
             MCursor.Instance.UpdateOld();
 
             //camera.Follow(world.wizard.Sprite);
@@ -124,10 +140,36 @@ namespace WizardTesting
 
             //spriteBatch.Begin(transformMatrix: camera.Transform);
             spriteBatch.Begin(transformMatrix: Camera.Instance.Transform);
-            world.Draw(spriteBatch);
+            if (gameState == 0)
+            {
+                mainMenu.Draw(spriteBatch);
+            }
+            else if (gameState == 1)
+            {
+                world.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public virtual void ChangeGameState(object info)
+        {
+            gameState = Convert.ToInt32(info, Culture);
+            if (gameState == 0)
+            {
+                IsMouseVisible = true;
+            }
+            else if (gameState == 1)
+            {
+                paused = false;
+                IsMouseVisible = false;
+            }
+        }
+
+        public virtual void ExitGame(object info)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
