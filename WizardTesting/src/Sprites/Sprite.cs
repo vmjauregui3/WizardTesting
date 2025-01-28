@@ -79,7 +79,35 @@ namespace WizardTesting
             Tint = Color.White;
         }
 
-        // This constructor is used for creating sprites whose origin is not in the center of the image.
+        // This constructor is used for creating sprites whose scale is different than the original image and whose origin is not centered.
+        public Sprite(string path, Vector2 position, float scale, Vector2 origin)
+        {
+            Texture = WizardTesting.WContent.Load<Texture2D>(path);
+            sourceRect = new Rectangle(0, 0, (int)Texture.Bounds.Width, (int)Texture.Bounds.Height);
+            this.origin = origin;
+            dimensions = new Vector2((int)Texture.Bounds.Width, (int)Texture.Bounds.Height);
+
+            Position = position;
+            Scale = scale;
+            Rotation = 0.0f;
+            Tint = Color.White;
+        }
+
+        // This constructor is used for creating sprites whose dimensions need to be adaptable.
+        public Sprite(string path, Vector2 position, Vector2 dimensions)
+        {
+            Texture = WizardTesting.WContent.Load<Texture2D>(path);
+            sourceRect = new Rectangle(0, 0, (int)Texture.Bounds.Width, (int)Texture.Bounds.Height);
+            origin = new Vector2((int)Texture.Bounds.Width / 2, (int)Texture.Bounds.Height / 2);
+            this.dimensions = dimensions;
+
+            Position = position;
+            Scale = 1f;
+            Rotation = 0.0f;
+            Tint = Color.White;
+        }
+
+        // This constructor is used for creating sprites whose dimensions are adaptable and whose origin is not in the center of the image.
         public Sprite(string path, Vector2 position, Vector2 dimensions, Vector2 origin)
         {
             Texture = WizardTesting.WContent.Load<Texture2D>(path);
@@ -93,6 +121,13 @@ namespace WizardTesting
             Tint = Color.White;
         }
 
+
+        // Update is for updating the image should it need to be change. This is mostly used for inheritance.
+        public virtual void Update()
+        {
+
+        }
+
         // Update is for updating the image should it need to be change. This is mostly used for inheritance.
         public virtual void Update(GameTime gameTime)
         {
@@ -104,6 +139,22 @@ namespace WizardTesting
         {
             spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, (int)Dimensions.X, (int)Dimensions.Y),
                 sourceRect, Tint, Rotation, Origin, SpriteEffects.None, 0.0f);
+        }
+
+        public virtual bool Hover()
+        {
+            return HoverSprite();
+        }
+
+        public virtual bool HoverSprite()
+        {
+            Vector2 mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
+
+            if ( ((mousePosition.X >= Position.X) && (mousePosition.X <= (Position.X + dimensions.X))) && ((mousePosition.Y >= Position.Y) && (mousePosition.Y <= (Position.Y + dimensions.Y))))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
