@@ -3,8 +3,8 @@
 	<User>
 		<Wizard>
 			<Position>
-				<x>100</x>
-				<y>300</y>
+				<x>128</x>
+				<y>256</y>
 			</Position>
 		</Wizard>
 		<Building>
@@ -19,16 +19,16 @@
 		<SpawnPoint>
 			<type>Portal</type>
 			<Position>
-				<x>1300</x>
-				<y>100</y>
+				<x>1344</x>
+				<y>128</y>
 			</Position>
 			<timerOffset>0</timerOffset>
 		</SpawnPoint>
 		<SpawnPoint>
 			<type>Portal</type>
 			<Position>
-				<x>1300</x>
-				<y>800</y>
+				<x>1344</x>
+				<y>832</y>
 			</Position>
 			<timerOffset>500</timerOffset>
 		</SpawnPoint>

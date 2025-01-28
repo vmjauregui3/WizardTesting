@@ -26,7 +26,7 @@ namespace WizardTesting
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
-            Scale = 1.5f;
+            Scale = 1.0f;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
 
