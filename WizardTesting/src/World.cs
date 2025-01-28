@@ -103,7 +103,7 @@ namespace WizardTesting
             Camera.Instance.Follow(User.Wizard.Sprite);
 
             // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
-            Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y));
+            Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
 
             // Variable tracked for testing.
             NumKilled = 0;
