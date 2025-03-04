@@ -81,6 +81,7 @@ namespace WizardTesting
         {
             get { return isActive; }
         }
+        protected MTimer upkeepTimer = new MTimer(1000);
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
@@ -131,9 +132,9 @@ namespace WizardTesting
             StartCasting();
         }
 
-        public virtual void UpkeepSpell()
+        public virtual void UpkeepEffect()
         {
-            owner.UpdateMana(upkeepCost);
+            
         }
 
         public virtual void Update(GameTime gameTime)
@@ -157,6 +158,24 @@ namespace WizardTesting
                 {
                     cooldownTimer.ResetToZero();
                     onCooldown = false;
+                }
+            }
+
+            if (isActive)
+            {
+                upkeepTimer.UpdateTimer(gameTime);
+                if (upkeepTimer.Test())
+                {
+                    if(owner.HasMana(upkeepCost))
+                    {
+                        owner.UpdateMana(upkeepCost);
+                        UpkeepEffect();
+                    }
+                    else
+                    {
+                        isActive = false;
+                    }
+                    upkeepTimer.ResetToZero();
                 }
             }
         }
