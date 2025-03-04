@@ -18,9 +18,6 @@ namespace WizardTesting
 
         public Map Map;
 
-        // Contains the representation of the cursor on the screen and gameworld for user visibility and game referencing.
-        public Sprite Cursor;
-
         // Creates the user player. Currently static, but may be adapted for multiplayer.
         public User User;
 
@@ -95,9 +92,6 @@ namespace WizardTesting
 
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
-
-            // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
-            Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
 
         }
 
@@ -199,9 +193,7 @@ namespace WizardTesting
             //Map.Update();
 
             Camera.Instance.FollowSprite(User.Wizard.Sprite);
-            Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
-
-
+            
             AllDestructibles.Clear();
             AllDestructibles.AddRange(User.GetAllDestructibles());
             AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
@@ -234,7 +226,6 @@ namespace WizardTesting
         {
             Map.Draw(spriteBatch, LoadedZones);
 
-            User.Draw(spriteBatch);
             AIPlayer.Draw(spriteBatch);
 
             for (int i = Projectiles.Count - 1; i >= 0; i--)
@@ -242,7 +233,7 @@ namespace WizardTesting
                 Projectiles[i].Draw(spriteBatch);
             }
 
-            Cursor.Draw(spriteBatch);
+            User.Draw(spriteBatch);
         }
     }
 }
