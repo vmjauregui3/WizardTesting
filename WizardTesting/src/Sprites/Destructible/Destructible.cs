@@ -92,6 +92,10 @@ namespace WizardTesting
             {
                 health.SetValue(health.ValueMax);
             }
+            if (health.Value < health.ValueMax)
+            {
+                health.SetValue(0);
+            }
             CheckIfDead();
         }
 
