@@ -40,7 +40,7 @@ namespace WizardTesting
 
         protected int upkeepCostBase;
 
-
+        // Not sure all spells have damage
         protected int damage;
         public int Damage
         {
