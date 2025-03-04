@@ -11,8 +11,10 @@ namespace WizardTesting
     public class User : Player
     {
         // User Player represents the user's authority and defines their ability to interact with the game.
-
         public List<Spell> Spells = new List<Spell>();
+
+        // Contains the UI overlay for the user to better understand game variables.
+        public UI UI;
 
         // Constructor defines the user's Player id to create their Wizard.
         public User(int id, XElement data) : base(id, data)
@@ -38,12 +40,22 @@ namespace WizardTesting
 
                 Wizard.LoadSpells(wizard.Element("Spells"));
             }
+
+            // Creates the UI Overlay.
+            UI = new UI();
         }
 
         // Updates their Player.
         public override void Update(GameTime gameTime, World world)
         {
             base.Update(gameTime, world);
+            UI.Update(Wizard);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            UI.Draw(spriteBatch);
         }
 
     }

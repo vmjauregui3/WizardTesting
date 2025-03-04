@@ -13,7 +13,6 @@ namespace WizardTesting
         private SpriteFont font;
         private Vector2 screenOrigin;
 
-        private string killCountString;
         private DisplayBar healthBar;
         private DisplayBar manaBar;
 
@@ -22,10 +21,16 @@ namespace WizardTesting
         private int barWidth;
         private int barHeight;
         private int barBorder;
+
+        // Contains the representation of the cursor on the screen and gameworld for user visibility and game referencing.
+        public Sprite Cursor;
+
         public UI()
         {
+            // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
+            Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
+
             font = WizardTesting.WContent.Load<SpriteFont>("Fonts/ComicSansMS16");
-            killCountString = "Enemies Killed: ";
             barWidth = 206;
             barHeight = 26;
             barBorder = 3;
@@ -37,19 +42,23 @@ namespace WizardTesting
 
         public void Update(Wizard userWizard)
         {
+            Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
+
             screenOrigin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Camera.Instance.Transform));
             healthBar.Update(userWizard.Health.Value, userWizard.Health.ValueMax, screenOrigin, barHeight);
             manaBar.Update(userWizard.Mana.Value, userWizard.Mana.ValueMax, screenOrigin, 0);
             tempButton.Update();
         }
 
-        public void Draw(World world, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 stringDimensions = font.MeasureString(killCountString+world.NumKilled);
-            spriteBatch.DrawString(font, killCountString + world.NumKilled, new Vector2(10, 10) + screenOrigin, Color.Black);
+            //Vector2 stringDimensions = font.MeasureString(killCountString+world.NumKilled);
+            //spriteBatch.DrawString(font, killCountString + world.NumKilled, new Vector2(10, 10) + screenOrigin, Color.Black);
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch);
             tempButton.Draw(spriteBatch);
+
+            Cursor.Draw(spriteBatch);
         }
     }
 }

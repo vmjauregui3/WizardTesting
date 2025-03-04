@@ -18,21 +18,12 @@ namespace WizardTesting
 
         public Map Map;
 
-        // Contains the UI overlay for the user to better understand game variables.
-        public UI UI;
-
-        // Contains the representation of the cursor on the screen and gameworld for user visibility and game referencing.
-        public Sprite Cursor;
-
         // Creates the user player. Currently static, but may be adapted for multiplayer.
         public User User;
 
         // Creates the AIPlayer. Currently static, but may be adapted for multiple teams.
         // TODO: Create method of defining AIPlayers that is flexible and replicable. Requires alteration of AIPlayer.
         public AIPlayer AIPlayer;
-
-        // Variable currently used for testing (not required for RPG progression).
-        public int NumKilled;
 
         // Lists all projectiles in gameworld.
         public List<Projectile> Projectiles = new List<Projectile>();
@@ -102,14 +93,6 @@ namespace WizardTesting
             // Creates the Camera Instance that follows the user and controls what portion of the gameworld is drawn on screen.
             Camera.Instance.Follow(User.Wizard.Sprite);
 
-            // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
-            Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
-
-            // Variable tracked for testing.
-            NumKilled = 0;
-
-            // Creates the UI Overlay.
-            UI = new UI();
         }
 
         public virtual void LoadData(string username, int worldNum)
@@ -210,15 +193,12 @@ namespace WizardTesting
             //Map.Update();
 
             Camera.Instance.FollowSprite(User.Wizard.Sprite);
-            Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
-
-
+            
             AllDestructibles.Clear();
             AllDestructibles.AddRange(User.GetAllDestructibles());
             AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
 
             User.Update(gameTime, this);
-            UI.Update(User.Wizard);
             AIPlayer.Update(gameTime, this);
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.
@@ -246,7 +226,6 @@ namespace WizardTesting
         {
             Map.Draw(spriteBatch, LoadedZones);
 
-            User.Draw(spriteBatch);
             AIPlayer.Draw(spriteBatch);
 
             for (int i = Projectiles.Count - 1; i >= 0; i--)
@@ -254,9 +233,7 @@ namespace WizardTesting
                 Projectiles[i].Draw(spriteBatch);
             }
 
-            UI.Draw(this, spriteBatch);
-
-            Cursor.Draw(spriteBatch);
+            User.Draw(spriteBatch);
         }
     }
 }
