@@ -133,11 +133,11 @@ namespace WizardTesting
 
             if (MCursor.Instance.LeftClick() && HasMana(primarySpell.ManaCost))
             {
-                primarySpell.CastSpell(mousePosition);
+                primarySpell.QuickCast(mousePosition);
             }
             else if (MCursor.Instance.RightClick() && HasMana(secondarySpell.ManaCost))
             {
-                secondarySpell.CastSpell(mousePosition);
+                secondarySpell.QuickCast(mousePosition);
             }
         }
 
@@ -153,7 +153,11 @@ namespace WizardTesting
             }
             else if (InputManager.Instance.KeyPressed(Keys.Escape))
             {
-                ToggleCasting();
+                StopCasting();
+            }
+            else
+            {
+                Velocity = Vector2.Zero;
             }
 
             /* Removed for testing
@@ -177,7 +181,7 @@ namespace WizardTesting
             //if (!isMobile)
             //{ Velocity = Vector2.Zero; }
 
-            if (Velocity.X == 0 && Velocity.Y == 0)
+            if (Velocity.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }
 
             Sprite.Position += Velocity;

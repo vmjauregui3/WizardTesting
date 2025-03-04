@@ -19,10 +19,10 @@ namespace WizardTesting
 
         }
 
-        public override void CastSpell()
+        public override void StartCasting()
         {
             owner.UpdateHealth(healValue);
-            base.CastSpell();
+            base.StartCasting();
         }
     }
 }

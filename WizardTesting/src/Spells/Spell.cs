@@ -64,6 +64,12 @@ namespace WizardTesting
         {
             get { return cooldownTimer.MSec; }
         }
+
+        protected bool isCasting;
+        public bool IsCasting
+        {
+            get { return isCasting; }
+        }
         protected MTimer castingTimer;
         public int CastingTimer
         {
@@ -84,6 +90,7 @@ namespace WizardTesting
             castingTimer = new MTimer(castTime);
             level = 1;
             onCooldown = false;
+            isCasting = false;
             isActive = false;
             damage = 0;
             exp = 0;
@@ -99,21 +106,29 @@ namespace WizardTesting
             this.exp = exp;
             damage = 0;
             onCooldown = false;
+            isCasting = false;
             isActive = false;
         }
 
-        public virtual void CastSpell()
+        public virtual void StartCasting()
         {
-            owner.UpdateMana(manaCost);
-            owner.ToggleCasting();
-            onCooldown = true;
+            if (!IsCasting)
+            {
+                isCasting = true;
+                owner.UpdateMana(manaCost);
+                owner.StartCasting();
+                onCooldown = true;
+            }
         }
 
-        public virtual void CastSpell(Vector2 target)
+        public virtual void QuickCast(Vector2 target)
         {
-            owner.UpdateMana(manaCost);
-            owner.ToggleCasting();
-            onCooldown = true;
+            StartCasting();
+        }
+
+        public virtual void CastEffect()
+        {
+
         }
 
         public virtual void UpkeepSpell()
@@ -123,13 +138,15 @@ namespace WizardTesting
 
         public virtual void Update(GameTime gameTime)
         {
-            if (owner.IsCasting)
+            if (IsCasting)
             {
                 castingTimer.UpdateTimer(gameTime);
                 if (castingTimer.Test())
                 {
                     castingTimer.ResetToZero();
-                    owner.ToggleCasting();
+                    isCasting = false;
+                    owner.StopCasting();
+                    CastEffect();
                 }
             }
 

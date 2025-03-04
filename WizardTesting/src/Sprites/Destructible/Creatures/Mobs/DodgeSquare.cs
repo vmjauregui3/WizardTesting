@@ -22,7 +22,7 @@ namespace WizardTesting
             CastTimer.UpdateTimer(gameTime);
             if (CastTimer.Test())
             {
-                spell.CastSpell(world.User.Wizard.Sprite.Position);
+                spell.QuickCast(world.User.Wizard.Sprite.Position);
                 CastTimer.ResetToZero();
             }
 

@@ -20,7 +20,9 @@ namespace WizardTesting
         {
             get { return speed; }
         }
-        
+
+        public Vector2 Target;
+
         public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int damage) : base(owner, manaCost, 50, 50)
         {
             this.path = path;
@@ -39,15 +41,15 @@ namespace WizardTesting
             this.damage = damage;
         }
 
-        public override void CastSpell(Vector2 target)
+        public override void QuickCast(Vector2 target)
         {
-            CreateSimpleProjectile(target);
-            base.CastSpell();
+            Target = target;
+            base.QuickCast(target);
         }
 
-        public void CreateSimpleProjectile(Vector2 target)
+        public override void CastEffect()
         {
-            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, target, duration, speed, damage));   
+            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, Target, duration, speed, damage));   
         }
     }
 }

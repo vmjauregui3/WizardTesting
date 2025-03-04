@@ -92,7 +92,7 @@ namespace WizardTesting
             {
                 health.SetValue(health.ValueMax);
             }
-            if (health.Value < health.ValueMax)
+            if (health.Value < 0)
             {
                 health.SetValue(0);
             }
