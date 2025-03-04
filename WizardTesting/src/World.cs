@@ -18,9 +18,6 @@ namespace WizardTesting
 
         public Map Map;
 
-        // Contains the UI overlay for the user to better understand game variables.
-        public UI UI;
-
         // Contains the representation of the cursor on the screen and gameworld for user visibility and game referencing.
         public Sprite Cursor;
 
@@ -102,8 +99,6 @@ namespace WizardTesting
             // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
             Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
 
-            // Creates the UI Overlay.
-            UI = new UI();
         }
 
         public virtual void LoadData(string username, int worldNum)
@@ -212,7 +207,6 @@ namespace WizardTesting
             AllDestructibles.AddRange(AIPlayer.GetAllDestructibles());
 
             User.Update(gameTime, this);
-            UI.Update(User.Wizard);
             AIPlayer.Update(gameTime, this);
 
             // Loops through all projectiles backward and removes them if they need to be destroyed.
@@ -247,8 +241,6 @@ namespace WizardTesting
             {
                 Projectiles[i].Draw(spriteBatch);
             }
-
-            UI.Draw(this, spriteBatch);
 
             Cursor.Draw(spriteBatch);
         }
