@@ -83,7 +83,6 @@ namespace WizardTesting
 
                 if (Creatures[i].IsDead)
                 {
-                    ChangeScore(world, 1);
                     Creatures.RemoveAt(i);
                     //i--;
                 }
@@ -134,13 +133,6 @@ namespace WizardTesting
             tempObjects.AddRange(Buildings.ToList<Destructible>());
 
             return tempObjects;
-        }
-
-
-        // Records the Score of the Player. Used for testing primarily by AIPlayer.
-        public virtual void ChangeScore(World world, int score)
-        {
-
         }
 
         // Draws all objects under Player control.

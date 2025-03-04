@@ -26,12 +26,5 @@ namespace WizardTesting
         {
             base.Update(gameTime, world);
         }
-        
-        // Used to track user progress for testing.
-        public override void ChangeScore(World world, int score)
-        {
-            world.NumKilled++;
-        }
-
     }
 }

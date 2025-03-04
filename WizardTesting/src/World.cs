@@ -31,9 +31,6 @@ namespace WizardTesting
         // TODO: Create method of defining AIPlayers that is flexible and replicable. Requires alteration of AIPlayer.
         public AIPlayer AIPlayer;
 
-        // Variable currently used for testing (not required for RPG progression).
-        public int NumKilled;
-
         // Lists all projectiles in gameworld.
         public List<Projectile> Projectiles = new List<Projectile>();
 
@@ -104,9 +101,6 @@ namespace WizardTesting
 
             // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
             Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
-
-            // Variable tracked for testing.
-            NumKilled = 0;
 
             // Creates the UI Overlay.
             UI = new UI();
