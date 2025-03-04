@@ -104,9 +104,7 @@ namespace WizardTesting
 
         public Vector2 GetScreenPos(MouseState MOUSE)
         {
-            Vector2 tempVec = new Vector2(MOUSE.Position.X, MOUSE.Position.Y);
-
-            return tempVec;
+            return new Vector2(MOUSE.Position.X, MOUSE.Position.Y); ;
         }
 
         public virtual bool LeftClick()
