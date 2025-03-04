@@ -112,23 +112,23 @@ namespace WizardTesting
 
         public virtual void StartCasting()
         {
-            if (!IsCasting)
+            if (!isCasting && !onCooldown)
             {
                 isCasting = true;
+                onCooldown = true;
                 owner.UpdateMana(manaCost);
                 owner.StartCasting();
-                onCooldown = true;
             }
-        }
-
-        public virtual void QuickCast(Vector2 target)
-        {
-            StartCasting();
         }
 
         public virtual void CastEffect()
         {
 
+        }
+
+        public virtual void QuickCast(Vector2 target)
+        {
+            StartCasting();
         }
 
         public virtual void UpkeepSpell()
@@ -138,7 +138,7 @@ namespace WizardTesting
 
         public virtual void Update(GameTime gameTime)
         {
-            if (IsCasting)
+            if (isCasting)
             {
                 castingTimer.UpdateTimer(gameTime);
                 if (castingTimer.Test())
