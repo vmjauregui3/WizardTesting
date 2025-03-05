@@ -76,6 +76,7 @@ namespace WizardTesting
             }
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
+            Spells.Add(new HealLesser(this));
         }
         
 
@@ -170,7 +171,7 @@ namespace WizardTesting
 
             if (InputManager.Instance.KeyPressed(Keys.H))
             {
-                UpdateHealth(-10);
+                Spells[4].StartCasting();
             }
 
             foreach(Spell spell in Spells)
