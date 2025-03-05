@@ -26,7 +26,7 @@ namespace WizardTesting
 
         public override void CastEffect()
         {
-            owner.MoveSpeed.AddModifier(2, StatModifierType.PercentMultiply);
+            owner.MoveSpeed.AddModifier(2f, StatModifierType.PercentMultiply);
         }
 
     }

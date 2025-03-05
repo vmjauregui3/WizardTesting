@@ -152,9 +152,8 @@ namespace WizardTesting
             mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
             Sprite.IsActive = true;
-            if(!IsCasting)
+            if (!IsCasting)
             {
-                ControlMovement(gameTime);
                 ControlCasting();
             }
             else if (InputManager.Instance.KeyPressed(Keys.Escape))
@@ -163,8 +162,9 @@ namespace WizardTesting
             }
             else
             {
-                Velocity = Vector2.Zero;
+                //Velocity = Vector2.Zero;
             }
+
 
             /* Removed for testing
             if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
@@ -174,11 +174,12 @@ namespace WizardTesting
             }
             */
 
-            foreach(Spell spell in Spells)
+            foreach (Spell spell in Spells)
             {
                 spell.Update(gameTime);
             }
 
+            ControlMovement(gameTime);
             //if (!isMobile)
             //{ Velocity = Vector2.Zero; }
 

@@ -7,7 +7,9 @@ namespace WizardTesting
     public class Stat
     {
         public float BaseValue;
-        protected List<float>[] statModifiers;
+        protected List<float> flatModifiers;
+        protected List<float> percentAddModifiers;
+        protected List<float> percentMultiplyModifiers;
 
         protected float value;
         public float Value
@@ -16,7 +18,9 @@ namespace WizardTesting
         }
         public Stat()
         {
-            statModifiers = new List<float>[3];
+            flatModifiers = new List<float>();
+            percentAddModifiers = new List<float>();
+            percentMultiplyModifiers = new List<float>();
         }
 
         public Stat(float baseValue) : this()
@@ -32,13 +36,35 @@ namespace WizardTesting
 
         public void AddModifier(float mod, StatModifierType type)
         {
-            statModifiers[(int)type].Add(mod);
+            if(type == StatModifierType.Flat)
+            {
+                flatModifiers.Add(mod);
+            }
+            else if(type == StatModifierType.PercentAdd)
+            {
+                percentAddModifiers.Add(mod);
+            }
+            else if(type == StatModifierType.PercentMultiply)
+            {
+                percentMultiplyModifiers.Add(mod);
+            }
             UpdateValue();
         }
 
         public void RemoveModifier(float mod, StatModifierType type)
         {
-            statModifiers[(int)type].Remove(mod);
+            if (type == StatModifierType.Flat)
+            {
+                flatModifiers.Remove(mod);
+            }
+            else if (type == StatModifierType.PercentAdd)
+            {
+                percentAddModifiers.Remove(mod);
+            }
+            else if (type == StatModifierType.PercentMultiply)
+            {
+                percentMultiplyModifiers.Remove(mod);
+            }
             UpdateValue();
         }
 
@@ -47,23 +73,25 @@ namespace WizardTesting
             float finalValue = BaseValue;
             float sumPercentAdd = 0;
 
-            for (int i = 0; i < statModifiers[0].Count; i++)
+            foreach (float mod in flatModifiers)
             {
-                finalValue += statModifiers[0][i];
+                finalValue += mod;
             }
 
-            for (int i = 0; i < statModifiers[1].Count; i++)
+            foreach (float mod in percentAddModifiers)
             {
-                sumPercentAdd += statModifiers[1][i];
+                sumPercentAdd += mod;
             }
             finalValue *= (1 + sumPercentAdd);
 
-            for (int i = 0; i < statModifiers[2].Count; i++)
+            foreach (float mod in percentMultiplyModifiers)
             {
-                finalValue *= (1 + statModifiers[0][i]);
+                finalValue *= mod;
             }
             
             return (float)Math.Round(finalValue, 4);
         }
     }
 }
+
+

@@ -54,10 +54,12 @@ namespace WizardTesting
         public void StartCasting()
         {
             IsCasting = true;
+            MoveSpeed.AddModifier(0.1f, StatModifierType.PercentMultiply);
         }
         public void StopCasting()
         {
             IsCasting = false;
+            MoveSpeed.RemoveModifier(0.1f, StatModifierType.PercentMultiply);
         }
 
         public override void Update(GameTime gameTime)
