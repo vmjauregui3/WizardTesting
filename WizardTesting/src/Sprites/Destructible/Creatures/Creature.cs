@@ -51,6 +51,15 @@ namespace WizardTesting
             IsCasting = !IsCasting;
         }
 
+        public void StartCasting()
+        {
+            IsCasting = true;
+        }
+        public void StopCasting()
+        {
+            IsCasting = false;
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (mana.Value != mana.ValueMax)

@@ -9,7 +9,6 @@ namespace WizardTesting
 {
     public class EarthShard : InstantProjectileSpell
     {
-        // FireBolts are defualt projectiles currently used for testing.
         public EarthShard(Creature owner) : base(owner, 40, "Sprites/Projectiles/EarthShard", 3f, 10000, 400f, 10)
         {
 

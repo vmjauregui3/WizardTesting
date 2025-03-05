@@ -9,7 +9,7 @@ namespace WizardTesting
 {
     public class IceSpike : InstantProjectileSpell
     {
-        // FireBolts are defualt projectiles currently used for testing.
+
         public IceSpike(Creature owner) : base(owner, 60, "Sprites/Projectiles/IceSpike", 3f, 10000, 800f, 10)
         {
 
@@ -19,5 +19,6 @@ namespace WizardTesting
         {
 
         }
+
     }
 }

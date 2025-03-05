@@ -9,7 +9,6 @@ namespace WizardTesting
 {
     public class WindSlash : InstantProjectileSpell
     {
-        // FireBolts are defualt projectiles currently used for testing.
         public WindSlash(Creature owner) : base(owner, 30, "Sprites/Projectiles/WindSlash", 3f, 10000, 800f, 5)
         {
 

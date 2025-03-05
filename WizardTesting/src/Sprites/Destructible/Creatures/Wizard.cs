@@ -64,7 +64,7 @@ namespace WizardTesting
             for (int i = 0; i < spell.Count; i++)
             {
                 String WT = "WizardTesting.";
-                if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(InstantProjectileSpell)))
+                if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(Spell)))
                 {
                     Object[] parameters = { this,
                     Convert.ToInt32(spell[i].Element("level").Value),
@@ -76,6 +76,7 @@ namespace WizardTesting
             }
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
+            Spells.Add(new HealLesser(this));
         }
         
 
@@ -133,11 +134,11 @@ namespace WizardTesting
 
             if (MCursor.Instance.LeftClick() && HasMana(primarySpell.ManaCost))
             {
-                primarySpell.CastSpell(mousePosition);
+                primarySpell.QuickCast(mousePosition);
             }
             else if (MCursor.Instance.RightClick() && HasMana(secondarySpell.ManaCost))
             {
-                secondarySpell.CastSpell(mousePosition);
+                secondarySpell.QuickCast(mousePosition);
             }
         }
 
@@ -153,7 +154,11 @@ namespace WizardTesting
             }
             else if (InputManager.Instance.KeyPressed(Keys.Escape))
             {
-                ToggleCasting();
+                StopCasting();
+            }
+            else
+            {
+                Velocity = Vector2.Zero;
             }
 
             /* Removed for testing
@@ -166,7 +171,7 @@ namespace WizardTesting
 
             if (InputManager.Instance.KeyPressed(Keys.H))
             {
-                UpdateHealth(-10);
+                Spells[4].StartCasting();
             }
 
             foreach(Spell spell in Spells)
@@ -177,7 +182,7 @@ namespace WizardTesting
             //if (!isMobile)
             //{ Velocity = Vector2.Zero; }
 
-            if (Velocity.X == 0 && Velocity.Y == 0)
+            if (Velocity.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }
 
             Sprite.Position += Velocity;
