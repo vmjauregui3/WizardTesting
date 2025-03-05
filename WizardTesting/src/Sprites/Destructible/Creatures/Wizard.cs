@@ -30,7 +30,7 @@ namespace WizardTesting
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
 
-            MoveSpeed = 200f;
+            MoveSpeed = new Stat(200f);
             level = 1;
             health = new VariableStat(1000);
 
@@ -49,7 +49,7 @@ namespace WizardTesting
             Velocity = Vector2.Zero;
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
-            MoveSpeed = moveSpeed;
+            MoveSpeed = new Stat(moveSpeed);
 
             this.level = level;
             health = new VariableStat(healthMax);
@@ -84,18 +84,18 @@ namespace WizardTesting
         {
             if (InputManager.Instance.KeyDown(Keys.W))
             {
-                Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Velocity.Y = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
             }
             else if (InputManager.Instance.KeyDown(Keys.S))
             { 
-                Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Velocity.Y = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
             }
             else
             { Velocity.Y = 0; }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
-                Velocity.X = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Velocity.X = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 0)
                 { 
                     Sprite.CurrentFrame.Y = 1; 
@@ -103,7 +103,7 @@ namespace WizardTesting
             }
             else if (InputManager.Instance.KeyDown(Keys.D))
             {
-                Velocity.X = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Velocity.X = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 1)
                 { 
                     Sprite.CurrentFrame.Y = 0; 
@@ -140,6 +140,11 @@ namespace WizardTesting
             {
                 secondarySpell.QuickCast(mousePosition);
             }
+
+            if (InputManager.Instance.KeyPressed(Keys.H))
+            {
+                Spells[4].StartCasting();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -168,11 +173,6 @@ namespace WizardTesting
                 lightBeam.CastSpell(mousePosition);
             }
             */
-
-            if (InputManager.Instance.KeyPressed(Keys.H))
-            {
-                Spells[4].StartCasting();
-            }
 
             foreach(Spell spell in Spells)
             {

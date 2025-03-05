@@ -15,7 +15,7 @@ namespace WizardTesting
         public Mob(string path, Vector2 position, float scale, Vector2 frameCount, int switchFrame, int ownerId) : base(ownerId)
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y), scale, frameCount, switchFrame);
-            MoveSpeed = 100f;
+            MoveSpeed = new Stat(100f);
         }
 
         // Update requires the information of the Mob's enemy.
@@ -32,7 +32,7 @@ namespace WizardTesting
         public virtual void AI(GameTime gameTime, World world)
         {
             Creature targetCreature = world.User.Wizard;
-            Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, enemy.Sprite.Position);
 
             

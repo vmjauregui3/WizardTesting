@@ -25,7 +25,7 @@ namespace WizardTesting
             value = BaseValue;
         }
 
-        public virtual void UpdateBaseValue()
+        public virtual void UpdateValue()
         {
             value = CalculateFinalValue();
         }
@@ -33,13 +33,13 @@ namespace WizardTesting
         public void AddModifier(float mod, StatModifierType type)
         {
             statModifiers[(int)type].Add(mod);
-            UpdateBaseValue();
+            UpdateValue();
         }
 
         public void RemoveModifier(float mod, StatModifierType type)
         {
             statModifiers[(int)type].Remove(mod);
-            UpdateBaseValue();
+            UpdateValue();
         }
 
         protected float CalculateFinalValue()

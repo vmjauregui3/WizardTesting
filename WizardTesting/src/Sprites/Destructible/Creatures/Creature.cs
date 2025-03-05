@@ -33,7 +33,7 @@ namespace WizardTesting
 
         public Creature(int ownerId) : base(ownerId)
         {
-            MoveSpeed = 100.0f;
+            MoveSpeed = new Stat(100.0f);
             mana = new VariableStat(1000);
             manaRegen = new VariableStat(5);
             manaTimer = new MTimer(100);

@@ -22,7 +22,7 @@ namespace WizardTesting
             valueMax = baseValue;
         }
 
-        public override void UpdateBaseValue()
+        public override void UpdateValue()
         {
             valueMax = (float)Math.Truncate(CalculateFinalValue());
         }

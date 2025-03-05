@@ -33,7 +33,7 @@ namespace WizardTesting
         {
             Creature targetCreature = world.User.Wizard;
             Vector2 dodgeVector = Vector2.Zero;
-            float dodgeUrgency = hitDistance / MoveSpeed;
+            float dodgeUrgency = hitDistance / MoveSpeed.Value;
             for (int i = world.Projectiles.Count - 1; i >= 0; i--)
             {
                 if (world.Projectiles[i].Owner.OwnerId != OwnerId)
@@ -58,7 +58,7 @@ namespace WizardTesting
             Vector2 moveDirection = Vector2.Normalize(dodgeVector * dodgeUrgency + toTarget * (1 - dodgeUrgency));
 
 
-            Sprite.Position += moveDirection * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Sprite.Position += moveDirection * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {

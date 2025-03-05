@@ -19,7 +19,7 @@ namespace WizardTesting
 
         // All game objects have a direction and speed.
         protected Vector2 Velocity;
-        public float MoveSpeed;
+        public Stat MoveSpeed;
 
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
@@ -62,7 +62,7 @@ namespace WizardTesting
             this.ownerId = ownerId;
             isDead = false;
             hitDistance = 35.0f;
-            MoveSpeed = 0.0f;
+            MoveSpeed = new Stat(0.0f);
             health = new VariableStat(10);
         }
 

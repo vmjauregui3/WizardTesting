@@ -14,7 +14,7 @@ namespace WizardTesting
         private float orbitDistance;
         public RedPentagon(Vector2 position, int ownerId) : base("Sprites/Mobs/RedPentagon", position, 1f, new Vector2(1, 1), 0, ownerId)
         {
-            MoveSpeed = 80.0f;
+            MoveSpeed = new Stat(80.0f);
             orbitDistance = 500f;
 
             health = new VariableStat(30);
@@ -39,7 +39,7 @@ namespace WizardTesting
             Creature targetCreature = world.User.Wizard;
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) > orbitDistance)
             {
-                Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             }
 
