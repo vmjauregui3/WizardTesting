@@ -7,51 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class WindSlash : Spell
+    public class WindSlash : InstantProjectileSpell
     {
-        protected string path;
-        protected float spriteScale;
+        public WindSlash(Creature owner) : base(owner, 30, "Sprites/Projectiles/WindSlash", 3f, 10000, 800f, 5)
+        {
 
-        protected int duration;
-        public int Duration
-        {
-            get { return duration; }
-        }
-        protected float speed;
-        public float Speed
-        {
-            get { return speed; }
         }
 
-        public Vector2 Target;
+        public WindSlash(Creature owner, int level, int exp) : base(owner, 30, "Sprites/Projectiles/WindSlash", 3f, 10000, 800f, level, exp, 5)
+        {
 
-        // FireBolts are defualt projectiles currently used for testing.
-        public WindSlash(Creature owner) : base(owner, 30, 50, 50)
-        {
-            path = "Sprites/Projectiles/WindSlash";
-            spriteScale = 3f;
-            duration = 10000;
-            speed = 800f;
-            damage = 5;
-        }
-        public WindSlash(Creature owner, int level, int exp) : base(owner, 30, 50, 50, level, exp)
-        {
-            path = "Sprites/Projectiles/WindSlash";
-            spriteScale = 3f;
-            duration = 10000;
-            speed = 800f;
-            damage = 5;
-        }
-
-        public override void QuickCast(Vector2 target)
-        {
-            Target = target;
-            base.QuickCast(target);
-        }
-
-        public override void CastEffect()
-        {
-            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, Target, duration, speed, damage));
         }
     }
 }
