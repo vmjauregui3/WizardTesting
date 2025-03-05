@@ -56,11 +56,11 @@ namespace WizardTesting
             {
                 sumPercentAdd += statModifiers[1][i];
             }
-            finalValue *= 1 + sumPercentAdd;
+            finalValue *= (1 + sumPercentAdd);
 
             for (int i = 0; i < statModifiers[2].Count; i++)
             {
-                finalValue *= 1 + statModifiers[0][i];
+                finalValue *= (1 + statModifiers[0][i]);
             }
             
             return (float)Math.Round(finalValue, 4);

@@ -19,10 +19,6 @@ namespace WizardTesting
             get { return level; }
         }
         protected int exp;
-        public int Exp
-        {
-            get { return exp;  }
-        }
 
         protected int manaCostBase;
 
