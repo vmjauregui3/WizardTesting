@@ -40,13 +40,6 @@ namespace WizardTesting
 
         protected int upkeepCostBase;
 
-        // Not sure all spells have damage
-        protected int damage;
-        public int Damage
-        {
-            get { return damage; }
-        }
-
         protected Creature owner;
         public Creature Owner
         {
@@ -93,7 +86,6 @@ namespace WizardTesting
             onCooldown = false;
             isCasting = false;
             isActive = false;
-            damage = 0;
             exp = 0;
         }
 
@@ -105,7 +97,6 @@ namespace WizardTesting
             castingTimer = new MTimer(castTime);
             this.level = level;
             this.exp = exp;
-            damage = 0;
             onCooldown = false;
             isCasting = false;
             isActive = false;
