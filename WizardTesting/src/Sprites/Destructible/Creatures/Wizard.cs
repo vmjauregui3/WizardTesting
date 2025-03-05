@@ -64,7 +64,7 @@ namespace WizardTesting
             for (int i = 0; i < spell.Count; i++)
             {
                 String WT = "WizardTesting.";
-                if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(InstantProjectileSpell)))
+                if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(Spell)))
                 {
                     Object[] parameters = { this,
                     Convert.ToInt32(spell[i].Element("level").Value),
