@@ -24,21 +24,18 @@ namespace WizardTesting
             get { return exp;  }
         }
 
-        protected int manaCostBase;
 
-        protected int manaCost;
+        protected Stat manaCost;
         public int ManaCost
         {
-            get { return manaCost; }
+            get { return (int)Math.Round(manaCost.Value, 4); }
         }
 
-        protected int upkeepCost;
+        protected Stat upkeepCost;
         public int UpkeepCost
         {
-            get { return upkeepCost; }
+            get { return (int)Math.Round(upkeepCost.Value, 4); }
         }
-
-        protected int upkeepCostBase;
 
         protected Creature owner;
         public Creature Owner
@@ -79,7 +76,7 @@ namespace WizardTesting
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
             this.owner = owner;
-            this.manaCost = manaCost;
+            this.manaCost = new Stat(manaCost);
             cooldownTimer = new MTimer(cooldown);
             castingTimer = new MTimer(castTime);
             level = 1;
@@ -92,7 +89,7 @@ namespace WizardTesting
         public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp)
         {
             this.owner = owner;
-            this.manaCost = manaCost;
+            this.manaCost = new Stat(manaCost);
             cooldownTimer = new MTimer(cooldown);
             castingTimer = new MTimer(castTime);
             this.level = level;
@@ -108,7 +105,7 @@ namespace WizardTesting
             {
                 isCasting = true;
                 onCooldown = true;
-                owner.UpdateMana(manaCost);
+                owner.UpdateMana(ManaCost);
                 owner.StartCasting();
             }
         }
@@ -157,9 +154,9 @@ namespace WizardTesting
                 upkeepTimer.UpdateTimer(gameTime);
                 if (upkeepTimer.Test())
                 {
-                    if(owner.HasMana(upkeepCost))
+                    if(owner.HasMana(UpkeepCost))
                     {
-                        owner.UpdateMana(upkeepCost);
+                        owner.UpdateMana(UpkeepCost);
                         UpkeepEffect();
                     }
                     else
