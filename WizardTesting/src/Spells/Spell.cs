@@ -48,10 +48,6 @@ namespace WizardTesting
             get { return onCooldown; }
         }
         protected MTimer cooldownTimer;
-        public int CooldownTimer
-        {
-            get { return cooldownTimer.MSec; }
-        }
 
         protected bool isCasting;
         public bool IsCasting
@@ -59,10 +55,6 @@ namespace WizardTesting
             get { return isCasting; }
         }
         protected MTimer castingTimer;
-        public int CastingTimer
-        {
-            get { return castingTimer.MSec; }
-        }
 
         protected bool needsUpkeep;
         public bool NeedsUpkeep
