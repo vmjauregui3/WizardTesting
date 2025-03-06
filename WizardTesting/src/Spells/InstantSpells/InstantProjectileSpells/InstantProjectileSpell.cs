@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WizardTesting
 {
-    public class InstantProjectileSpell : Spell
+    public class InstantProjectileSpell : InstantSpell
     {
         protected string path;
         protected float spriteScale;

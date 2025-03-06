@@ -56,12 +56,7 @@ namespace WizardTesting
         }
         protected MTimer castingTimer;
 
-        protected bool needsUpkeep;
-        public bool NeedsUpkeep
-        {
-            get { return needsUpkeep; }
-        }
-        protected MTimer upkeepTimer = new MTimer(1000);
+
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
@@ -72,7 +67,6 @@ namespace WizardTesting
             level = 1;
             onCooldown = false;
             isCasting = false;
-            needsUpkeep = false;
             exp = 0;
         }
 
@@ -86,7 +80,6 @@ namespace WizardTesting
             this.exp = exp;
             onCooldown = false;
             isCasting = false;
-            needsUpkeep = false;
         }
 
         public virtual void StartCasting()
@@ -147,24 +140,6 @@ namespace WizardTesting
                 {
                     cooldownTimer.ResetToZero();
                     onCooldown = false;
-                }
-            }
-
-            if (needsUpkeep)
-            {
-                upkeepTimer.UpdateTimer(gameTime);
-                if (upkeepTimer.Test())
-                {
-                    if(owner.HasMana(UpkeepCost))
-                    {
-                        owner.AddMana(-UpkeepCost);
-                        UpkeepEffect();
-                    }
-                    else
-                    {
-                        needsUpkeep = false;
-                    }
-                    upkeepTimer.ResetToZero();
                 }
             }
         }
