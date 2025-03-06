@@ -33,34 +33,34 @@ namespace WizardTesting
 
         public void AddModifier(float mod, StatModifierType type)
         {
-            if(type == StatModifierType.Flat)
+            switch(type)
             {
-                flatModifiers.Add(mod);
-            }
-            else if(type == StatModifierType.PercentAdd)
-            {
-                percentAddModifiers.Add(mod);
-            }
-            else if(type == StatModifierType.PercentMultiply)
-            {
-                percentMultiplyModifiers.Add(mod);
+                case StatModifierType.Flat:
+                    flatModifiers.Add(mod);
+                    break;
+                case StatModifierType.PercentAdd:
+                    percentAddModifiers.Add(mod);
+                    break;
+                case StatModifierType.PercentMultiply:
+                    percentMultiplyModifiers.Add(mod);
+                    break;
             }
             UpdateValue();
         }
 
         public void RemoveModifier(float mod, StatModifierType type)
         {
-            if (type == StatModifierType.Flat)
+            switch (type)
             {
-                flatModifiers.Remove(mod);
-            }
-            else if (type == StatModifierType.PercentAdd)
-            {
-                percentAddModifiers.Remove(mod);
-            }
-            else if (type == StatModifierType.PercentMultiply)
-            {
-                percentMultiplyModifiers.Remove(mod);
+                case StatModifierType.Flat:
+                    flatModifiers.Remove(mod);
+                    break;
+                case StatModifierType.PercentAdd:
+                    percentAddModifiers.Remove(mod);
+                    break;
+                case StatModifierType.PercentMultiply:
+                    percentMultiplyModifiers.Remove(mod);
+                    break;
             }
             UpdateValue();
         }
