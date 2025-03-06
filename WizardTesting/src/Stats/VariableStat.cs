@@ -12,11 +12,6 @@ namespace WizardTesting
             get { return valueMax; }
         }
 
-        public VariableStat() : base()
-        {
-
-        }
-
         public VariableStat(float baseValue) : base(baseValue)
         {
             valueMax = baseValue;

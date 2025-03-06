@@ -26,6 +26,8 @@ namespace WizardTesting
                 CastTimer.ResetToZero();
             }
 
+            spell.Update(gameTime);
+
             base.Update(gameTime, world);
         }
 

@@ -16,17 +16,14 @@ namespace WizardTesting
         {
             get { return value; }
         }
-        public Stat()
-        {
-            flatModifiers = new List<float>();
-            percentAddModifiers = new List<float>();
-            percentMultiplyModifiers = new List<float>();
-        }
 
-        public Stat(float baseValue) : this()
+        public Stat(float baseValue)
         {
             BaseValue = baseValue;
             value = BaseValue;
+            flatModifiers = new List<float>();
+            percentAddModifiers = new List<float>();
+            percentMultiplyModifiers = new List<float>();
         }
 
         public virtual void UpdateValue()

@@ -15,15 +15,5 @@ namespace WizardTesting
             Type = type;
         }
 
-        /*
-        public readonly int Order;
-        public StatModifier(float value, StatModifierType type, int order)
-        {
-            Value = value;
-            Type = type;
-            Order = order;
-        }
-        */
-
     }
 }
