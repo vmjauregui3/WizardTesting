@@ -69,16 +69,15 @@ namespace WizardTesting
                 manaTimer.UpdateTimer(gameTime);
                 if (manaTimer.Test())
                 {
-                    if (mana.Value + manaRegen.Value <= mana.ValueMax)
-                    {
-                        mana.AddValue(manaRegen.Value);
-                        manaTimer.ResetToZero();
-                    }
-                    else if (mana.Value + manaRegen.Value > mana.ValueMax)
+                    if (mana.Value + manaRegen.Value > mana.ValueMax)
                     {
                         mana.SetValue(mana.ValueMax);
-                        manaTimer.ResetToZero();
                     }
+                    else
+                    {
+                        mana.AddValue(manaRegen.Value);
+                    }
+                    manaTimer.ResetToZero();
                 }
             }
 

@@ -24,7 +24,6 @@ namespace WizardTesting
             get { return exp;  }
         }
 
-
         protected Stat manaCost;
         public int ManaCost
         {
@@ -48,7 +47,6 @@ namespace WizardTesting
         {
             get { return onCooldown; }
         }
-
         protected MTimer cooldownTimer;
         public int CooldownTimer
         {
