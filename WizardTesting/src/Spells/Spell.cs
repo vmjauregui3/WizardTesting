@@ -103,7 +103,7 @@ namespace WizardTesting
             {
                 isCasting = true;
                 onCooldown = true;
-                owner.UpdateMana(ManaCost);
+                owner.AddMana(-ManaCost);
                 owner.StartCasting();
             }
         }
@@ -154,7 +154,7 @@ namespace WizardTesting
                 {
                     if(owner.HasMana(UpkeepCost))
                     {
-                        owner.UpdateMana(UpkeepCost);
+                        owner.AddMana(-UpkeepCost);
                         UpkeepEffect();
                     }
                     else

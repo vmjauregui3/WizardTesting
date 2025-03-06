@@ -18,11 +18,6 @@ namespace WizardTesting
 
         //private InstantProjectileSpell lightBeam; Removed for testing
 
-        private int level;
-        public int Level
-        {
-            get { return level; }
-        }
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
