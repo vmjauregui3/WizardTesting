@@ -74,6 +74,7 @@ namespace WizardTesting
             Spells.Add(new HealLesser(this));
             Spells.Add(new BuffSpeed(this));
             Spells.Add(new Dash(this));
+            Spells.Add(new SpeedBoost(this));
         }
 
         public override void TranslatePosition(Vector2 translation)
@@ -154,6 +155,10 @@ namespace WizardTesting
             else if (InputManager.Instance.KeyPressed(Keys.Space))
             {
                 Spells[6].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.Z))
+            {
+                Spells[7].StartCasting();
             }
         }
 

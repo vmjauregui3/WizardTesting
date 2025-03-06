@@ -30,11 +30,6 @@ namespace WizardTesting
             get { return (int)Math.Round(manaCost.Value, 4); }
         }
 
-        protected Stat upkeepCost;
-        public int UpkeepCost
-        {
-            get { return (int)Math.Round(upkeepCost.Value, 4); }
-        }
 
         protected Creature owner;
         public Creature Owner
