@@ -64,10 +64,10 @@ namespace WizardTesting
             get { return castingTimer.MSec; }
         }
 
-        protected bool isActive;
-        public bool IsActive
+        protected bool needsUpkeep;
+        public bool NeedsUpkeep
         {
-            get { return isActive; }
+            get { return needsUpkeep; }
         }
         protected MTimer upkeepTimer = new MTimer(1000);
 
@@ -80,7 +80,7 @@ namespace WizardTesting
             level = 1;
             onCooldown = false;
             isCasting = false;
-            isActive = false;
+            needsUpkeep = false;
             exp = 0;
         }
 
@@ -94,7 +94,7 @@ namespace WizardTesting
             this.exp = exp;
             onCooldown = false;
             isCasting = false;
-            isActive = false;
+            needsUpkeep = false;
         }
 
         public virtual void StartCasting()
@@ -108,9 +108,10 @@ namespace WizardTesting
             }
         }
 
-        public virtual void CastEffect()
+        public virtual void StopCasting()
         {
-
+            isCasting = false;
+            castingTimer.ResetToZero();
         }
 
         public virtual void QuickCast(Vector2 target)
@@ -118,9 +119,19 @@ namespace WizardTesting
             StartCasting();
         }
 
+        public virtual void CastEffect()
+        {
+
+        }
+
         public virtual void UpkeepEffect()
         {
             
+        }
+
+        public virtual void EndEffect()
+        {
+
         }
 
         public virtual void Update(GameTime gameTime)
@@ -147,7 +158,7 @@ namespace WizardTesting
                 }
             }
 
-            if (isActive)
+            if (needsUpkeep)
             {
                 upkeepTimer.UpdateTimer(gameTime);
                 if (upkeepTimer.Test())
@@ -159,7 +170,7 @@ namespace WizardTesting
                     }
                     else
                     {
-                        isActive = false;
+                        needsUpkeep = false;
                     }
                     upkeepTimer.ResetToZero();
                 }

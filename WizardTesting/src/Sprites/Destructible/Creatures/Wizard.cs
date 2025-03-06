@@ -72,6 +72,7 @@ namespace WizardTesting
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
             Spells.Add(new HealLesser(this));
+            Spells.Add(new BuffSpeed(this));
         }
         
 
@@ -140,6 +141,10 @@ namespace WizardTesting
             {
                 Spells[4].StartCasting();
             }
+            else if (InputManager.Instance.KeyPressed(Keys.L))
+            {
+                Spells[5].StartCasting();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -154,6 +159,13 @@ namespace WizardTesting
             else if (InputManager.Instance.KeyPressed(Keys.Escape))
             {
                 StopCasting();
+                foreach (Spell spell in Spells)
+                {
+                    if (spell.IsCasting)
+                    {
+                        spell.StopCasting();
+                    }
+                }
             }
             else
             {
