@@ -94,7 +94,7 @@ namespace WizardTesting
             {
                 if (Owner.OwnerId != destructibles[i].OwnerId && Pathing.GetDistance(Sprite.Position, destructibles[i].Sprite.Position) < destructibles[i].HitDistance)
                 {
-                    destructibles[i].UpdateHealth(Damage);
+                    destructibles[i].AddHealth(-Damage);
                     return true;
                 }
             }

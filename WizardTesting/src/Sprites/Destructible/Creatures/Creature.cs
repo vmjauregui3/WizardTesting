@@ -109,13 +109,13 @@ namespace WizardTesting
             }
         }
 
-        public override void UpdateHealthModified(float damage, SpellAttribute attribute)
+        public override void AddHealthModified(float damage, SpellAttribute attribute)
         {
             float finalDamage = damage;
 
             finalDamage *= attributeMods[(int)attribute];
 
-            UpdateHealth(finalDamage);
+            AddHealth(-finalDamage);
         }
 
         public bool HasMana(int manaCost)

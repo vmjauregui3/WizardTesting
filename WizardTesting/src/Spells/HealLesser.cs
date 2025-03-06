@@ -26,7 +26,7 @@ namespace WizardTesting
 
         public override void CastEffect()
         {
-            owner.UpdateHealth(-healValue.Value);
+            owner.AddHealth(healValue.Value);
         }
     }
 }
