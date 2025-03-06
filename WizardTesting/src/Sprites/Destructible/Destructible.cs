@@ -18,7 +18,7 @@ namespace WizardTesting
         public AnimatedSprite Sprite;
 
         // All game objects have a direction and speed.
-        protected Vector2 Velocity;
+        public Vector2 Velocity;
         public Stat MoveSpeed;
 
         // Objects have health which determines when they get destroyed.
@@ -97,6 +97,11 @@ namespace WizardTesting
                 health.SetValue(0);
             }
             CheckIfDead();
+        }
+
+        public virtual void TranslatePosition(Vector2 translation)
+        {
+            Sprite.Position += translation;
         }
 
         public virtual void Update(GameTime gameTime)

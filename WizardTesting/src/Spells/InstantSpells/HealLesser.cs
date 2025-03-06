@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WizardTesting
 {
-    public class HealLesser : Spell
+    public class HealLesser : InstantSpell
     {
 
         private Stat healValue;

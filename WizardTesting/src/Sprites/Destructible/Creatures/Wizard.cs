@@ -73,8 +73,14 @@ namespace WizardTesting
             secondarySpell = Spells[0];
             Spells.Add(new HealLesser(this));
             Spells.Add(new BuffSpeed(this));
+            Spells.Add(new Dash(this));
         }
-        
+
+        public override void TranslatePosition(Vector2 translation)
+        {
+            base.TranslatePosition(translation);
+            Camera.Instance.FollowSprite(Sprite);
+        }
 
         public void ControlMovement(GameTime gameTime)
         {
@@ -144,6 +150,10 @@ namespace WizardTesting
             else if (InputManager.Instance.KeyPressed(Keys.L))
             {
                 Spells[5].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.Space))
+            {
+                Spells[6].StartCasting();
             }
         }
 
