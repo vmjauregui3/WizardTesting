@@ -38,7 +38,7 @@ namespace WizardTesting
             this.damage = new Stat(damage);
         }
 
-        public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int level, int exp, int damage) : base(owner, manaCost, 50, 50, level, exp)
+        public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int damage, int level, int exp) : base(owner, manaCost, 50, 50, level, exp)
         {
             this.path = path;
             this.spriteScale = spriteScale;

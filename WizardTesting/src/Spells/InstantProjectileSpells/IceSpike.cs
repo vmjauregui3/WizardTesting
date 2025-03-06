@@ -15,7 +15,7 @@ namespace WizardTesting
 
         }
 
-        public IceSpike(Creature owner, int level, int exp) : base(owner, 60, "Sprites/Projectiles/IceSpike", 3f, 10000, 800f, level, exp, 10)
+        public IceSpike(Creature owner, int level, int exp) : base(owner, 60, "Sprites/Projectiles/IceSpike", 3f, 10000, 800f, 10, level, exp)
         {
 
         }

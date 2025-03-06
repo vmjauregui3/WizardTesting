@@ -14,7 +14,7 @@ namespace WizardTesting
 
         }
 
-        public EarthShard(Creature owner, int level, int exp) : base(owner, 40, "Sprites/Projectiles/EarthShard", 3f, 10000, 400f, level, exp, 10)
+        public EarthShard(Creature owner, int level, int exp) : base(owner, 40, "Sprites/Projectiles/EarthShard", 3f, 10000, 400f, 10, level, exp)
         {
 
         }

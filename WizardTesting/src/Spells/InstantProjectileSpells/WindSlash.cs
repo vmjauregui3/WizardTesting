@@ -14,7 +14,7 @@ namespace WizardTesting
 
         }
 
-        public WindSlash(Creature owner, int level, int exp) : base(owner, 30, "Sprites/Projectiles/WindSlash", 3f, 10000, 800f, level, exp, 5)
+        public WindSlash(Creature owner, int level, int exp) : base(owner, 30, "Sprites/Projectiles/WindSlash", 3f, 10000, 800f, 5, level, exp)
         {
 
         }
