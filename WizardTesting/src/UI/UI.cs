@@ -51,7 +51,7 @@ namespace WizardTesting
 
         public void ShowStatBars(List<Destructible> destructibles)
         {
-            statBars = new List<StatDisplayBar>();
+            statBars.Clear();
             foreach (Destructible destructible in destructibles)
             {
                 if (destructible.IsLoaded)
@@ -65,6 +65,7 @@ namespace WizardTesting
         public void ToggleStatBars()
         {
             showingStatBars = !showingStatBars;
+            statBars.Clear();
         }
 
         public void Update(User user, World world)
