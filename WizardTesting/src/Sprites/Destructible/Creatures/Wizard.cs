@@ -16,10 +16,13 @@ namespace WizardTesting
         private Vector2 mousePosition;
         public float Scale;
 
+        private User user;
+
         //private InstantProjectileSpell lightBeam; Removed for testing
 
-        public Wizard(Vector2 position, int ownerId) : base(ownerId)
+        public Wizard(User user, Vector2 position) : base(user.Id)
         {
+            this.user = user;
             Velocity = Vector2.Zero;
             Scale = 1.0f;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
@@ -37,10 +40,12 @@ namespace WizardTesting
             Spells.Add(new WindSlash(this));
             // Removed for testing
             //lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
+            isLoaded = true;
         }
 
-        public Wizard(Vector2 position, int ownerId, float scale, float moveSpeed, int level, int healthMax, int manaMax, int manaRegenMax) : base(ownerId)
+        public Wizard(User user, Vector2 position, float scale, float moveSpeed, int level, int healthMax, int manaMax, int manaRegenMax) : base(user.Id)
         {
+            this.user = user;
             Velocity = Vector2.Zero;
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
@@ -50,6 +55,8 @@ namespace WizardTesting
             health = new VariableStat(healthMax);
             mana = new VariableStat(manaMax);
             manaRegen = new VariableStat(manaRegenMax);
+
+            isLoaded = true;
         }
 
         
@@ -76,6 +83,7 @@ namespace WizardTesting
             Spells.Add(new Dash(this));
             Spells.Add(new SpeedBoost(this));
             Spells.Add(new Regeneration(this));
+            Spells.Add(new ShowStats(this, user.UI));
         }
 
         public override void TranslatePosition(Vector2 translation)
@@ -164,6 +172,10 @@ namespace WizardTesting
             else if (InputManager.Instance.KeyPressed(Keys.R))
             {
                 Spells[8].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.T))
+            {
+                Spells[9].StartCasting();
             }
         }
 

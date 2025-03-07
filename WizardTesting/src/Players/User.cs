@@ -19,6 +19,9 @@ namespace WizardTesting
         // Constructor defines the user's Player id to create their Wizard.
         public User(int id, XElement data) : base(id, data)
         {
+            // Creates the UI Overlay.
+            UI = new UI();
+
             // The Wizard is the user's representation in the game world.
 
             //Wizard = new Wizard(new Vector2(100, 300), id);
@@ -28,8 +31,8 @@ namespace WizardTesting
             {
                 XElement wizard = data.Element("Wizard");
                 Wizard = new Wizard(
+                    this,
                     new Vector2(Convert.ToInt32(wizard.Element("Position").Element("x").Value, WizardTesting.Culture), Convert.ToInt32(data.Element("Wizard").Element("Position").Element("y").Value, WizardTesting.Culture)),
-                    id,
                     Convert.ToSingle(wizard.Element("Scale").Value, WizardTesting.Culture),
                     Convert.ToSingle(wizard.Element("MoveSpeed").Value, WizardTesting.Culture),
                     Convert.ToInt32(wizard.Element("level").Value, WizardTesting.Culture),
@@ -40,16 +43,13 @@ namespace WizardTesting
 
                 Wizard.LoadSpells(wizard.Element("Spells"));
             }
-
-            // Creates the UI Overlay.
-            UI = new UI();
         }
 
         // Updates their Player.
         public override void Update(GameTime gameTime, World world)
         {
             base.Update(gameTime, world);
-            UI.Update(Wizard);
+            UI.Update(this, world);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
