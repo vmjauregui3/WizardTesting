@@ -29,8 +29,11 @@ namespace WizardTesting
 
         // Owner tracks which Creature that produced the projectile.
         // TODO: Change the Owner to a new class that defines all game objects with agency.
-        public Creature Owner;
         protected Spell spell;
+        public Spell Spell
+        {
+            get { return spell; }
+        }
 
         // Timer tracks how long the projectile can exist before being destroyed.
         public MTimer Timer;
@@ -45,8 +48,7 @@ namespace WizardTesting
             Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
 
             done = false;
-            Owner = ownerSpell.Owner;
-            this.spell = ownerSpell;
+            spell = ownerSpell;
 
             Speed = speed;
             Damage = damage;
@@ -90,14 +92,15 @@ namespace WizardTesting
         // TODO: Modify projectile to check whether it hits SpawnPoints.
         public virtual bool HitSomething(List<Destructible> destructibles)
         {
-            for (int i = destructibles.Count - 1; i >= 0; i--)
+            foreach (Destructible destructible in destructibles)
             {
-                if (Owner.OwnerId != destructibles[i].OwnerId && Pathing.GetDistance(Sprite.Position, destructibles[i].Sprite.Position) < destructibles[i].HitDistance)
+                if (spell.Owner.OwnerId != destructible.OwnerId && Pathing.GetDistance(Sprite.Position, destructible.Sprite.Position) < destructible.HitDistance)
                 {
-                    destructibles[i].AddHealth(-Damage);
+                    destructible.AddHealth(-Damage);
                     return true;
                 }
             }
+
             return false;
         }
     }

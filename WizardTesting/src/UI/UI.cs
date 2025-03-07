@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WizardTesting
 {
@@ -15,6 +16,9 @@ namespace WizardTesting
 
         private StatDisplayBar healthBar;
         private StatDisplayBar manaBar;
+
+        private bool showingStatBars;
+        private List<StatDisplayBar> statBars;
 
         private Button tempButton;
 
@@ -39,7 +43,28 @@ namespace WizardTesting
             barBackOffset = new Vector2(barBackOffset.X, barBackOffset.Y + barHeight);
             manaBar = new StatDisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue, barBackOffset);
 
+            showingStatBars = false;
+            statBars = new List<StatDisplayBar>();
+
             tempButton = new Button("Sprites/ButtonBlank", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
+        }
+
+        public void ShowStatBars(List<Destructible> destructibles)
+        {
+            statBars = new List<StatDisplayBar>();
+            foreach (Destructible destructible in destructibles)
+            {
+                if (destructible.IsLoaded)
+                {
+                    statBars.Add(new StatDisplayBar(new Vector2(destructible.Sprite.Dimensions.X, 10), 1, Color.Red, new Vector2(-(destructible.Sprite.Dimensions.X / 2), -(destructible.Sprite.Dimensions.Y/2)-12)));
+                    statBars[^1].Update(destructible.Health, destructible.Sprite.Position);
+                }
+            }
+        }
+
+        public void ToggleStatBars()
+        {
+            showingStatBars = !showingStatBars;
         }
 
         public void Update(User user, World world)
@@ -50,6 +75,10 @@ namespace WizardTesting
             healthBar.Update(user.Wizard.Health, screenOrigin);
             manaBar.Update(user.Wizard.Mana, screenOrigin);
             tempButton.Update();
+            if (showingStatBars)
+            {
+                ShowStatBars(world.AllDestructibles);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -58,6 +87,12 @@ namespace WizardTesting
             //spriteBatch.DrawString(font, killCountString + world.NumKilled, new Vector2(10, 10) + screenOrigin, Color.Black);
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch);
+
+            foreach (StatDisplayBar statBar in statBars)
+            {
+                statBar.Draw(spriteBatch);
+            }
+
             tempButton.Draw(spriteBatch);
 
             Cursor.Draw(spriteBatch);

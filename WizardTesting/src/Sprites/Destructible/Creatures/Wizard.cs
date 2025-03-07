@@ -37,6 +37,7 @@ namespace WizardTesting
             Spells.Add(new WindSlash(this));
             // Removed for testing
             //lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
+            isLoaded = true;
         }
 
         public Wizard(Vector2 position, int ownerId, float scale, float moveSpeed, int level, int healthMax, int manaMax, int manaRegenMax) : base(ownerId)
@@ -50,6 +51,8 @@ namespace WizardTesting
             health = new VariableStat(healthMax);
             mana = new VariableStat(manaMax);
             manaRegen = new VariableStat(manaRegenMax);
+
+            isLoaded = true;
         }
 
         

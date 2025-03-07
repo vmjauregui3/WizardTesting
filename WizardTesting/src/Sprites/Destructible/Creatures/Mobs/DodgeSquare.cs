@@ -38,7 +38,7 @@ namespace WizardTesting
             float dodgeUrgency = hitDistance / MoveSpeed.Value;
             for (int i = world.Projectiles.Count - 1; i >= 0; i--)
             {
-                if (world.Projectiles[i].Owner.OwnerId != OwnerId)
+                if (world.Projectiles[i].Spell.Owner.OwnerId != OwnerId)
                 {
                     Vector2 threatVector = Pathing.DirectionToward(world.Projectiles[i].Sprite.Position, Sprite.Position);
                     if (Pathing.NormDot(threatVector, world.Projectiles[i].Direction) > 0.8f)
