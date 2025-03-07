@@ -49,7 +49,7 @@ namespace WizardTesting
         public override void Update(GameTime gameTime, World world)
         {
             base.Update(gameTime, world);
-            UI.Update(Wizard);
+            UI.Update(this, world);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

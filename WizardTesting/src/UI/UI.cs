@@ -34,19 +34,19 @@ namespace WizardTesting
             barWidth = 206;
             barHeight = 26;
             barBorder = 3;
-            healthBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Red);
-            manaBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue);
+            healthBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Red, new Vector2(10, -10 - barHeight));
+            manaBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue, new Vector2(10, -10));
 
             tempButton = new Button("Sprites/ButtonBlank", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
         }
 
-        public void Update(Wizard userWizard)
+        public void Update(User user, World world)
         {
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
             screenOrigin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Camera.Instance.Transform));
-            healthBar.Update(userWizard.Health.Value, userWizard.Health.ValueMax, screenOrigin, barHeight);
-            manaBar.Update(userWizard.Mana.Value, userWizard.Mana.ValueMax, screenOrigin, 0);
+            healthBar.Update(user.Wizard.Health.Value, user.Wizard.Health.ValueMax, screenOrigin);
+            manaBar.Update(user.Wizard.Mana.Value, user.Wizard.Mana.ValueMax, screenOrigin);
             tempButton.Update();
         }
 
