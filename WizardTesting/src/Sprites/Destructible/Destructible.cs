@@ -18,8 +18,8 @@ namespace WizardTesting
         public AnimatedSprite Sprite;
 
         // All game objects have a direction and speed.
-        protected Vector2 Velocity;
-        public float MoveSpeed;
+        public Vector2 Velocity;
+        public Stat MoveSpeed;
 
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
@@ -62,7 +62,7 @@ namespace WizardTesting
             this.ownerId = ownerId;
             isDead = false;
             hitDistance = 35.0f;
-            MoveSpeed = 0.0f;
+            MoveSpeed = new Stat(0.0f);
             health = new VariableStat(10);
         }
 
@@ -80,23 +80,28 @@ namespace WizardTesting
 
         // UpdateHealth damages the object and checks its life status afterward.
         // TODO: Complicate the damage calculation using updated stats variables.
-        public virtual void UpdateHealthModified(float damage, SpellAttribute attribute)
+        public virtual void AddHealthModified(float damage, SpellAttribute attribute)
         {
-            UpdateHealth(damage);
+            AddHealth(-damage);
         }
 
-        public virtual void UpdateHealth(float damage)
+        public virtual void AddHealth(float damage)
         {
-            health.AddValue(-damage);
+            health.AddValue(damage);
             if (health.Value > health.ValueMax)
             {
                 health.SetValue(health.ValueMax);
             }
-            if (health.Value < 0)
+            else if (health.Value < 0)
             {
                 health.SetValue(0);
             }
             CheckIfDead();
+        }
+
+        public virtual void TranslatePosition(Vector2 translation)
+        {
+            Sprite.Position += translation;
         }
 
         public virtual void Update(GameTime gameTime)

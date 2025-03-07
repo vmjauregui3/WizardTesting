@@ -7,39 +7,62 @@ namespace WizardTesting
     public class Stat
     {
         public float BaseValue;
-        protected List<float>[] statModifiers;
+        protected List<float> flatModifiers;
+        protected List<float> percentAddModifiers;
+        protected List<float> percentMultiplyModifiers;
 
         protected float value;
         public float Value
         {
             get { return value; }
         }
-        public Stat()
-        {
-            statModifiers = new List<float>[3];
-        }
 
-        public Stat(float baseValue) : this()
+        public Stat(float baseValue)
         {
             BaseValue = baseValue;
             value = BaseValue;
+            flatModifiers = new List<float>();
+            percentAddModifiers = new List<float>();
+            percentMultiplyModifiers = new List<float>();
         }
 
-        public virtual void UpdateBaseValue()
+        public virtual void UpdateValue()
         {
             value = CalculateFinalValue();
         }
 
         public void AddModifier(float mod, StatModifierType type)
         {
-            statModifiers[(int)type].Add(mod);
-            UpdateBaseValue();
+            switch(type)
+            {
+                case StatModifierType.Flat:
+                    flatModifiers.Add(mod);
+                    break;
+                case StatModifierType.PercentAdd:
+                    percentAddModifiers.Add(mod);
+                    break;
+                case StatModifierType.PercentMultiply:
+                    percentMultiplyModifiers.Add(mod);
+                    break;
+            }
+            UpdateValue();
         }
 
         public void RemoveModifier(float mod, StatModifierType type)
         {
-            statModifiers[(int)type].Remove(mod);
-            UpdateBaseValue();
+            switch (type)
+            {
+                case StatModifierType.Flat:
+                    flatModifiers.Remove(mod);
+                    break;
+                case StatModifierType.PercentAdd:
+                    percentAddModifiers.Remove(mod);
+                    break;
+                case StatModifierType.PercentMultiply:
+                    percentMultiplyModifiers.Remove(mod);
+                    break;
+            }
+            UpdateValue();
         }
 
         protected float CalculateFinalValue()
@@ -47,23 +70,25 @@ namespace WizardTesting
             float finalValue = BaseValue;
             float sumPercentAdd = 0;
 
-            for (int i = 0; i < statModifiers[0].Count; i++)
+            foreach (float mod in flatModifiers)
             {
-                finalValue += statModifiers[0][i];
+                finalValue += mod;
             }
 
-            for (int i = 0; i < statModifiers[1].Count; i++)
+            foreach (float mod in percentAddModifiers)
             {
-                sumPercentAdd += statModifiers[1][i];
+                sumPercentAdd += mod;
             }
             finalValue *= (1 + sumPercentAdd);
 
-            for (int i = 0; i < statModifiers[2].Count; i++)
+            foreach (float mod in percentMultiplyModifiers)
             {
-                finalValue *= (1 + statModifiers[0][i]);
+                finalValue *= mod;
             }
             
             return (float)Math.Round(finalValue, 4);
         }
     }
 }
+
+

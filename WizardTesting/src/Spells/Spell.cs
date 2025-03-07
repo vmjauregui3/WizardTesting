@@ -24,18 +24,12 @@ namespace WizardTesting
             get { return exp;  }
         }
 
-
         protected Stat manaCost;
         public int ManaCost
         {
             get { return (int)Math.Round(manaCost.Value, 4); }
         }
 
-        protected Stat upkeepCost;
-        public int UpkeepCost
-        {
-            get { return (int)Math.Round(upkeepCost.Value, 4); }
-        }
 
         protected Creature owner;
         public Creature Owner
@@ -48,12 +42,7 @@ namespace WizardTesting
         {
             get { return onCooldown; }
         }
-
         protected MTimer cooldownTimer;
-        public int CooldownTimer
-        {
-            get { return cooldownTimer.MSec; }
-        }
 
         protected bool isCasting;
         public bool IsCasting
@@ -61,17 +50,8 @@ namespace WizardTesting
             get { return isCasting; }
         }
         protected MTimer castingTimer;
-        public int CastingTimer
-        {
-            get { return castingTimer.MSec; }
-        }
 
-        protected bool isActive;
-        public bool IsActive
-        {
-            get { return isActive; }
-        }
-        protected MTimer upkeepTimer = new MTimer(1000);
+
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
@@ -82,7 +62,6 @@ namespace WizardTesting
             level = 1;
             onCooldown = false;
             isCasting = false;
-            isActive = false;
             exp = 0;
         }
 
@@ -96,7 +75,6 @@ namespace WizardTesting
             this.exp = exp;
             onCooldown = false;
             isCasting = false;
-            isActive = false;
         }
 
         public virtual void StartCasting()
@@ -105,14 +83,15 @@ namespace WizardTesting
             {
                 isCasting = true;
                 onCooldown = true;
-                owner.UpdateMana(ManaCost);
+                owner.AddMana(-ManaCost);
                 owner.StartCasting();
             }
         }
 
-        public virtual void CastEffect()
+        public virtual void StopCasting()
         {
-
+            isCasting = false;
+            castingTimer.ResetToZero();
         }
 
         public virtual void QuickCast(Vector2 target)
@@ -120,9 +99,19 @@ namespace WizardTesting
             StartCasting();
         }
 
+        public virtual void CastEffect()
+        {
+
+        }
+
         public virtual void UpkeepEffect()
         {
             
+        }
+
+        public virtual void EndEffect()
+        {
+
         }
 
         public virtual void Update(GameTime gameTime)
@@ -146,24 +135,6 @@ namespace WizardTesting
                 {
                     cooldownTimer.ResetToZero();
                     onCooldown = false;
-                }
-            }
-
-            if (isActive)
-            {
-                upkeepTimer.UpdateTimer(gameTime);
-                if (upkeepTimer.Test())
-                {
-                    if(owner.HasMana(UpkeepCost))
-                    {
-                        owner.UpdateMana(UpkeepCost);
-                        UpkeepEffect();
-                    }
-                    else
-                    {
-                        isActive = false;
-                    }
-                    upkeepTimer.ResetToZero();
                 }
             }
         }

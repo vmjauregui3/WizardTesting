@@ -9,13 +9,11 @@ namespace WizardTesting
         public readonly float Value;
         public readonly StatModifierType Type;
 
-        public readonly int Order;
-
-        public StatModifier(float value, StatModifierType type, int order)
+        public StatModifier(float value, StatModifierType type)
         {
             Value = value;
             Type = type;
-            Order = order;
         }
+
     }
 }

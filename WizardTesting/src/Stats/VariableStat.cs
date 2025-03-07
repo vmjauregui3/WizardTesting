@@ -12,17 +12,12 @@ namespace WizardTesting
             get { return valueMax; }
         }
 
-        public VariableStat() : base()
-        {
-
-        }
-
         public VariableStat(float baseValue) : base(baseValue)
         {
             valueMax = baseValue;
         }
 
-        public override void UpdateBaseValue()
+        public override void UpdateValue()
         {
             valueMax = (float)Math.Truncate(CalculateFinalValue());
         }

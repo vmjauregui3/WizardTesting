@@ -18,11 +18,6 @@ namespace WizardTesting
 
         //private InstantProjectileSpell lightBeam; Removed for testing
 
-        private int level;
-        public int Level
-        {
-            get { return level; }
-        }
         public Wizard(Vector2 position, int ownerId) : base(ownerId)
         {
             Velocity = Vector2.Zero;
@@ -30,7 +25,7 @@ namespace WizardTesting
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
 
-            MoveSpeed = 200f;
+            MoveSpeed = new Stat(200f);
             level = 1;
             health = new VariableStat(1000);
 
@@ -49,7 +44,7 @@ namespace WizardTesting
             Velocity = Vector2.Zero;
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
-            MoveSpeed = moveSpeed;
+            MoveSpeed = new Stat(moveSpeed);
 
             this.level = level;
             health = new VariableStat(healthMax);
@@ -77,25 +72,34 @@ namespace WizardTesting
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
             Spells.Add(new HealLesser(this));
+            Spells.Add(new BuffSpeed(this));
+            Spells.Add(new Dash(this));
+            Spells.Add(new SpeedBoost(this));
+            Spells.Add(new Regeneration(this));
         }
-        
+
+        public override void TranslatePosition(Vector2 translation)
+        {
+            base.TranslatePosition(translation);
+            Camera.Instance.FollowSprite(Sprite);
+        }
 
         public void ControlMovement(GameTime gameTime)
         {
             if (InputManager.Instance.KeyDown(Keys.W))
             {
-                Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Velocity.Y = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
             }
             else if (InputManager.Instance.KeyDown(Keys.S))
             { 
-                Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Velocity.Y = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
             }
             else
             { Velocity.Y = 0; }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
-                Velocity.X = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Velocity.X = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 0)
                 { 
                     Sprite.CurrentFrame.Y = 1; 
@@ -103,7 +107,7 @@ namespace WizardTesting
             }
             else if (InputManager.Instance.KeyDown(Keys.D))
             {
-                Velocity.X = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Velocity.X = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Sprite.CurrentFrame.Y == 1)
                 { 
                     Sprite.CurrentFrame.Y = 0; 
@@ -140,6 +144,27 @@ namespace WizardTesting
             {
                 secondarySpell.QuickCast(mousePosition);
             }
+
+            if (InputManager.Instance.KeyPressed(Keys.H))
+            {
+                Spells[4].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.L))
+            {
+                Spells[5].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.Space))
+            {
+                Spells[6].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.Z))
+            {
+                Spells[7].StartCasting();
+            }
+            else if (InputManager.Instance.KeyPressed(Keys.R))
+            {
+                Spells[8].StartCasting();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -147,19 +172,22 @@ namespace WizardTesting
             mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
             Sprite.IsActive = true;
-            if(!IsCasting)
+            if (!IsCasting)
             {
-                ControlMovement(gameTime);
                 ControlCasting();
             }
-            else if (InputManager.Instance.KeyPressed(Keys.Escape))
+            else if (InputManager.Instance.KeyPressed(Keys.X))
             {
                 StopCasting();
+                foreach (Spell spell in Spells)
+                {
+                    if (spell.IsCasting)
+                    {
+                        spell.StopCasting();
+                    }
+                }
             }
-            else
-            {
-                Velocity = Vector2.Zero;
-            }
+
 
             /* Removed for testing
             if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
@@ -169,18 +197,12 @@ namespace WizardTesting
             }
             */
 
-            if (InputManager.Instance.KeyPressed(Keys.H))
-            {
-                Spells[4].StartCasting();
-            }
-
-            foreach(Spell spell in Spells)
+            foreach (Spell spell in Spells)
             {
                 spell.Update(gameTime);
             }
 
-            //if (!isMobile)
-            //{ Velocity = Vector2.Zero; }
+            ControlMovement(gameTime);
 
             if (Velocity.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }

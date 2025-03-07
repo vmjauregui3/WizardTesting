@@ -13,14 +13,14 @@ namespace WizardTesting
         private float orbitAngle, orbitDistance;
         public Triangle(Vector2 position, int ownerId) : base("Sprites/Mobs/Triangle", position, 1f, new Vector2(1, 1), 0, ownerId)
         {
-            MoveSpeed = 300f;
+            MoveSpeed = new Stat(300f);
             orbitDistance = 500.0f;
             orbitAngle = 0.0f;
         }
 
         public Triangle(Vector2 position, Creature owner) : base("Sprites/Mobs/Triangle", position, 1f, new Vector2(1, 1), 0, owner.OwnerId)
         {
-            MoveSpeed = 300f;
+            MoveSpeed = new Stat(300f);
             orbitDistance = 500.0f;
             orbitAngle = 0.0f;
             Owner = owner;
@@ -49,14 +49,14 @@ namespace WizardTesting
 
             if (!Owner.IsDead)
             {
-                Sprite.Position += Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Sprite.Position += Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle + 0.2f) * orbitDistance);
                 Sprite.Rotation = orbitAngle + 0.75f * MathF.PI;
             }
 
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {
-                targetCreature.UpdateHealth(10);
+                targetCreature.AddHealth(-10);
                 isDead = true;
             }
         }

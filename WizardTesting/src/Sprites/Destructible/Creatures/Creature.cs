@@ -11,6 +11,12 @@ namespace WizardTesting
     {
         // Creature is an abstract grouping of destructibles that have some form of intelligence commanding them.
 
+        protected int level;
+        public int Level
+        {
+            get { return level; }
+        }
+
         // Creatures have mana which determines when what abilities they can use and when.
         protected VariableStat mana;
         public VariableStat Mana
@@ -33,7 +39,7 @@ namespace WizardTesting
 
         public Creature(int ownerId) : base(ownerId)
         {
-            MoveSpeed = 100.0f;
+            MoveSpeed = new Stat(100.0f);
             mana = new VariableStat(1000);
             manaRegen = new VariableStat(5);
             manaTimer = new MTimer(100);
@@ -54,10 +60,12 @@ namespace WizardTesting
         public void StartCasting()
         {
             IsCasting = true;
+            MoveSpeed.AddModifier(0.5f, StatModifierType.PercentMultiply);
         }
         public void StopCasting()
         {
             IsCasting = false;
+            MoveSpeed.RemoveModifier(0.5f, StatModifierType.PercentMultiply);
         }
 
         public override void Update(GameTime gameTime)
@@ -67,16 +75,8 @@ namespace WizardTesting
                 manaTimer.UpdateTimer(gameTime);
                 if (manaTimer.Test())
                 {
-                    if (mana.Value + manaRegen.Value <= mana.ValueMax)
-                    {
-                        mana.AddValue(manaRegen.Value);
-                        manaTimer.ResetToZero();
-                    }
-                    else if (mana.Value + manaRegen.Value > mana.ValueMax)
-                    {
-                        mana.SetValue(mana.ValueMax);
-                        manaTimer.ResetToZero();
-                    }
+                    AddMana((int)manaRegen.Value);
+                    manaTimer.ResetToZero();
                 }
             }
 
@@ -90,16 +90,8 @@ namespace WizardTesting
                 manaTimer.UpdateTimer(gameTime);
                 if (manaTimer.Test())
                 {
-                    if (mana.Value + manaRegen.Value <= mana.ValueMax)
-                    {
-                        mana.AddValue(manaRegen.Value);
-                        manaTimer.ResetToZero();
-                    }
-                    else if (mana.Value + manaRegen.Value > mana.ValueMax)
-                    {
-                        mana.SetValue(mana.ValueMax);
-                        manaTimer.ResetToZero();
-                    }
+                    AddMana((int)manaRegen.Value);
+                    manaTimer.ResetToZero();
                 }
             }
 
@@ -108,22 +100,22 @@ namespace WizardTesting
 
         // UpdateHealth damages the object and checks its life status afterward.
         // TODO: Complicate the damage calculation using updated stats variables.
-        public virtual void UpdateMana(int manaCost)
+        public virtual void AddMana(int manaCost)
         {
-            mana.AddValue(-manaCost);
+            mana.AddValue(manaCost);
             if (mana.Value > mana.ValueMax)
             {
                 mana.SetValue(mana.ValueMax);
             }
         }
 
-        public override void UpdateHealthModified(float damage, SpellAttribute attribute)
+        public override void AddHealthModified(float damage, SpellAttribute attribute)
         {
             float finalDamage = damage;
 
             finalDamage *= attributeMods[(int)attribute];
 
-            UpdateHealth(finalDamage);
+            AddHealth(-finalDamage);
         }
 
         public bool HasMana(int manaCost)

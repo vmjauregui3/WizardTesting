@@ -15,7 +15,7 @@ namespace WizardTesting
 
         }
         
-        public FireBolt(Creature owner, int level, int exp) : base(owner, 50, "Sprites/Projectiles/FireBolt", 3f, 10000, 600f, level, exp, 10)
+        public FireBolt(Creature owner, int level, int exp) : base(owner, 50, "Sprites/Projectiles/FireBolt", 3f, 10000, 600f, 10, level, exp)
         {
 
         }
