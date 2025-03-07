@@ -19,11 +19,6 @@ namespace WizardTesting
             healValue = new Stat(50f);
         }
 
-        public override void StartCasting()
-        {
-            base.StartCasting();
-        }
-
         public override void CastEffect()
         {
             owner.AddHealth(healValue.Value);

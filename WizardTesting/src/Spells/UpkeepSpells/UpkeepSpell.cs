@@ -31,6 +31,19 @@ namespace WizardTesting
             needsUpkeep = false;
         }
 
+        public override void StartCasting()
+        {
+            if (!needsUpkeep)
+            {
+                base.StartCasting();
+            }
+            else
+            {
+                EndEffect();
+                upkeepTimer.ResetToZero();
+            }
+        }
+
         public override void CastEffect()
         {
             needsUpkeep = true;

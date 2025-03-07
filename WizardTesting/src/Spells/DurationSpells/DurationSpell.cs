@@ -23,6 +23,14 @@ namespace WizardTesting
             activeTimer = new MTimer(duration);
         }
 
+        public override void StartCasting()
+        {
+            if (!isActive)
+            {
+                base.StartCasting();
+            }
+        }
+
         public override void CastEffect()
         {
             isActive = true;

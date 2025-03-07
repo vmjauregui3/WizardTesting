@@ -9,12 +9,12 @@ namespace WizardTesting
 
         private Stat SpeedMultiplier;
 
-        public SpeedBoost(Creature owner) : base(owner, 200, 5000, 100, 100)
+        public SpeedBoost(Creature owner) : base(owner, 200, 5000, 100, 50)
         {
             SpeedMultiplier = new Stat(2f);
         }
 
-        public SpeedBoost(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 100, level, exp)
+        public SpeedBoost(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
         {
             SpeedMultiplier = new Stat(2f);
         }

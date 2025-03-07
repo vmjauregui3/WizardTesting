@@ -75,6 +75,7 @@ namespace WizardTesting
             Spells.Add(new BuffSpeed(this));
             Spells.Add(new Dash(this));
             Spells.Add(new SpeedBoost(this));
+            Spells.Add(new Regeneration(this));
         }
 
         public override void TranslatePosition(Vector2 translation)
@@ -160,6 +161,10 @@ namespace WizardTesting
             {
                 Spells[7].StartCasting();
             }
+            else if (InputManager.Instance.KeyPressed(Keys.R))
+            {
+                Spells[8].StartCasting();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -171,7 +176,7 @@ namespace WizardTesting
             {
                 ControlCasting();
             }
-            else if (InputManager.Instance.KeyPressed(Keys.Escape))
+            else if (InputManager.Instance.KeyPressed(Keys.X))
             {
                 StopCasting();
                 foreach (Spell spell in Spells)
@@ -181,10 +186,6 @@ namespace WizardTesting
                         spell.StopCasting();
                     }
                 }
-            }
-            else
-            {
-                //Velocity = Vector2.Zero;
             }
 
 
@@ -202,8 +203,6 @@ namespace WizardTesting
             }
 
             ControlMovement(gameTime);
-            //if (!isMobile)
-            //{ Velocity = Vector2.Zero; }
 
             if (Velocity.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }
