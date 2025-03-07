@@ -13,8 +13,8 @@ namespace WizardTesting
         private SpriteFont font;
         private Vector2 screenOrigin;
 
-        private DisplayBar healthBar;
-        private DisplayBar manaBar;
+        private StatDisplayBar healthBar;
+        private StatDisplayBar manaBar;
 
         private Button tempButton;
 
@@ -34,8 +34,10 @@ namespace WizardTesting
             barWidth = 206;
             barHeight = 26;
             barBorder = 3;
-            healthBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Red, new Vector2(10, -10 - barHeight));
-            manaBar = new DisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue, new Vector2(10, -10));
+            Vector2 barBackOffset = new Vector2(10, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - 10 - 2*barHeight);
+            healthBar = new StatDisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Red, barBackOffset);
+            barBackOffset = new Vector2(barBackOffset.X, barBackOffset.Y + barHeight);
+            manaBar = new StatDisplayBar(new Vector2(barWidth, barHeight), barBorder, Color.Blue, barBackOffset);
 
             tempButton = new Button("Sprites/ButtonBlank", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
         }
@@ -45,8 +47,8 @@ namespace WizardTesting
             Cursor.Position = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
             screenOrigin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Camera.Instance.Transform));
-            healthBar.Update(user.Wizard.Health.Value, user.Wizard.Health.ValueMax, screenOrigin);
-            manaBar.Update(user.Wizard.Mana.Value, user.Wizard.Mana.ValueMax, screenOrigin);
+            healthBar.Update(user.Wizard.Health, screenOrigin);
+            manaBar.Update(user.Wizard.Mana, screenOrigin);
             tempButton.Update();
         }
 
