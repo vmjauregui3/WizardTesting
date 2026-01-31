@@ -20,6 +20,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/ComicSansMS16.spritefont
 
+#begin Fonts/ComicSansMS16.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/ComicSansMS16.spritefont
+
 #begin Screens/FadeImage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -31,6 +38,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Screens/FadeImage.png
+
+#begin Screens/FadeImage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Screens/FadeImage.png
+
+#begin Screens/WTSplash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Screens/WTSplash.png
 
 #begin Screens/WTSplash.png
 /importer:TextureImporter
@@ -56,6 +87,18 @@
 /processorParam:TextureFormat=Color
 /build:Screens/WTSplashTransparent.png
 
+#begin Screens/WTSplashTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Screens/WTSplashTransparent.png
+
 #begin Sprites/BarBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,6 +110,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/BarBackground.png
+
+#begin Sprites/BarBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/BarBackground.png
+
+#begin Sprites/BaseWizard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/BaseWizard.png
 
 #begin Sprites/BaseWizard.png
 /importer:TextureImporter
@@ -92,6 +159,42 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Buildings/Tower.png
 
+#begin Sprites/Buildings/Tower.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Buildings/Tower.png;Sprites/Buildings/Tower
+
+#begin Sprites/Buildings/Tower.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Buildings/Tower.png;Sprites/Buildings/Tower
+
+#begin Sprites/ButtonBlank.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/ButtonBlank.png
+
 #begin Sprites/ButtonBlank.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -116,6 +219,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Cursor.png
 
+#begin Sprites/Cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Cursor.png
+
 #begin Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -126,7 +241,43 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png
+/build:Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png;Sprites/Mobs/Goblinoids/GoblinSpriteSheet
+
+#begin Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png;Sprites/Mobs/GoblinSpriteSheet
+
+#begin Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png;Sprites/Mobs/Goblinoids/GoblinSpriteSheet
+
+#begin Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Goblinoids/GoblinSpriteSheet.png;Sprites/Mobs/Goblinoids/GoblinSpriteSheet
 
 #begin Sprites/Mobs/Modrons/MonodroneSpriteSheet.png
 /importer:TextureImporter
@@ -138,7 +289,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Mobs/Modrons/MonodroneSpriteSheet.png
+/build:Sprites/Mobs/Modrons/MonodroneSpriteSheet.png;Sprites/Mobs/Modrons/MonodroneSpriteSheet
+
+#begin Sprites/Mobs/Modrons/MonodroneSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Modrons/MonodroneSpriteSheet.png;Sprites/Mobs/Modrons/MonodroneSpriteSheet
+
+#begin Sprites/Mobs/Modrons/MonodroneSpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Modrons/MonodroneSpriteSheet.png;Sprites/Mobs/Modrons/MonodroneSpriteSheet
 
 #begin Sprites/Mobs/RedPentagon.png
 /importer:TextureImporter
@@ -152,6 +327,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/RedPentagon.png
 
+#begin Sprites/Mobs/RedPentagon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/RedPentagon.png;Sprites/Mobs/RedPentagon
+
+#begin Sprites/Mobs/RedPentagon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/RedPentagon.png;Sprites/Mobs/RedPentagon
+
 #begin Sprites/Mobs/ScaleScout.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -163,6 +362,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/ScaleScout.png
+
+#begin Sprites/Mobs/ScaleScout.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/ScaleScout.png;Sprites/Mobs/ScaleScout
+
+#begin Sprites/Mobs/ScaleScout.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/ScaleScout.png;Sprites/Mobs/ScaleScout
 
 #begin Sprites/Mobs/Square.png
 /importer:TextureImporter
@@ -176,6 +399,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/Square.png
 
+#begin Sprites/Mobs/Square.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Square.png;Sprites/Mobs/Square
+
+#begin Sprites/Mobs/Square.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Square.png;Sprites/Mobs/Square
+
 #begin Sprites/Mobs/Triangle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -187,6 +434,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Mobs/Triangle.png
+
+#begin Sprites/Mobs/Triangle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Triangle.png;Sprites/Mobs/Triangle
+
+#begin Sprites/Mobs/Triangle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Mobs/Triangle.png;Sprites/Mobs/Triangle
 
 #begin Sprites/Projectiles/AcidOrb.png
 /importer:TextureImporter
@@ -200,6 +471,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/AcidOrb.png
 
+#begin Sprites/Projectiles/AcidOrb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/AcidOrb.png;Sprites/Projectiles/AcidOrb
+
+#begin Sprites/Projectiles/AcidOrb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/AcidOrb.png;Sprites/Projectiles/AcidOrb
+
 #begin Sprites/Projectiles/EarthShard.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -211,6 +506,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/EarthShard.png
+
+#begin Sprites/Projectiles/EarthShard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/EarthShard.png;Sprites/Projectiles/EarthShard
+
+#begin Sprites/Projectiles/EarthShard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/EarthShard.png;Sprites/Projectiles/EarthShard
 
 #begin Sprites/Projectiles/FireBolt.png
 /importer:TextureImporter
@@ -224,6 +543,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/FireBolt.png
 
+#begin Sprites/Projectiles/FireBolt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/FireBolt.png;Sprites/Projectiles/FireBolt
+
+#begin Sprites/Projectiles/FireBolt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/FireBolt.png;Sprites/Projectiles/FireBolt
+
 #begin Sprites/Projectiles/IceSpike.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -235,6 +578,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/IceSpike.png
+
+#begin Sprites/Projectiles/IceSpike.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/IceSpike.png;Sprites/Projectiles/IceSpike
+
+#begin Sprites/Projectiles/IceSpike.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/IceSpike.png;Sprites/Projectiles/IceSpike
 
 #begin Sprites/Projectiles/LightBeam.png
 /importer:TextureImporter
@@ -248,6 +615,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/LightBeam.png
 
+#begin Sprites/Projectiles/LightBeam.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/LightBeam.png;Sprites/Projectiles/LightBeam
+
+#begin Sprites/Projectiles/LightBeam.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/LightBeam.png;Sprites/Projectiles/LightBeam
+
 #begin Sprites/Projectiles/WindSlash.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -259,6 +650,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/WindSlash.png
+
+#begin Sprites/Projectiles/WindSlash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/WindSlash.png;Sprites/Projectiles/WindSlash
+
+#begin Sprites/Projectiles/WindSlash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/WindSlash.png;Sprites/Projectiles/WindSlash
+
+#begin Sprites/SolidBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SolidBar.png
 
 #begin Sprites/SolidBar.png
 /importer:TextureImporter
@@ -284,6 +711,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/SpawnPoints/Portal.png
 
+#begin Sprites/SpawnPoints/Portal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/Portal.png;Sprites/SpawnPoints/Portal
+
+#begin Sprites/SpawnPoints/Portal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/Portal.png;Sprites/SpawnPoints/Portal
+
 #begin Sprites/SpawnPoints/SquareSummon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -296,6 +747,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/SpawnPoints/SquareSummon.png
 
+#begin Sprites/SpawnPoints/SquareSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/SquareSummon.png;Sprites/SpawnPoints/SquareSummon
+
+#begin Sprites/SpawnPoints/SquareSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/SquareSummon.png;Sprites/SpawnPoints/SquareSummon
+
 #begin Sprites/SpawnPoints/TriangleSummon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -307,6 +782,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/SpawnPoints/TriangleSummon.png
+
+#begin Sprites/SpawnPoints/TriangleSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/TriangleSummon.png;Sprites/SpawnPoints/TriangleSummon
+
+#begin Sprites/SpawnPoints/TriangleSummon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpawnPoints/TriangleSummon.png;Sprites/SpawnPoints/TriangleSummon
+
+#begin Sprites/TitleScreenPlaceholder.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/TitleScreenPlaceholder.png
 
 #begin Sprites/TitleScreenPlaceholder.png
 /importer:TextureImporter
@@ -331,6 +842,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TileSheets/GroundTiles.png
+
+#begin TileSheets/GroundTiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TileSheets/GroundTiles.png
+
+#begin TileSheets/GroundTilesReduced.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TileSheets/GroundTilesReduced.png
 
 #begin TileSheets/GroundTilesReduced.png
 /importer:TextureImporter
