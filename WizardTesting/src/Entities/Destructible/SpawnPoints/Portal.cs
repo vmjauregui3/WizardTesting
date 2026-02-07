@@ -28,7 +28,7 @@ namespace WizardTesting
 
             if(num <= 8)
             {
-                tempMob = new DodgeSquare(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
+                tempMob = new Charger(new Vector2(Sprite.Position.X, Sprite.Position.Y), OwnerId);
             }
             else if(num <= 9)
             {
