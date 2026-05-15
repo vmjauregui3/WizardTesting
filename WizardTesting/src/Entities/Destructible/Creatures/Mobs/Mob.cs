@@ -16,6 +16,7 @@ namespace WizardTesting
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y), scale, frameCount, switchFrame);
             MoveSpeed = new Stat(100f);
+            Sprite.IsActive = true;
         }
 
         // Update requires the information of the Mob's enemy.
@@ -23,7 +24,6 @@ namespace WizardTesting
         {
             // Generic Mobs target the User's Wizard using default AI and are always active.
             AI(gameTime, world);
-            Sprite.IsActive = true;
 
             base.Update(gameTime, world);
         }

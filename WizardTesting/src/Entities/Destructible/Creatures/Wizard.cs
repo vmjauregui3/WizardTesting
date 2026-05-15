@@ -38,6 +38,11 @@ namespace WizardTesting
             Spells.Add(new EarthShard(this));
             Spells.Add(new IceSpike(this));
             Spells.Add(new WindSlash(this));
+            Spells.Add(new HealLesser(this));
+            Spells.Add(new BuffSpeed(this));
+            Spells.Add(new Dash(this));
+            Spells.Add(new SpeedBoost(this));
+            Spells.Add(new Regeneration(this));
             // Removed for testing
             //lightBeam = new InstantProjectileSpell(this, 1f, "Sprites/Projectiles/LightBeam", 3f, 10000, 600f, 5f);
             isLoaded = true;
@@ -78,11 +83,6 @@ namespace WizardTesting
             }
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
-            Spells.Add(new HealLesser(this));
-            Spells.Add(new BuffSpeed(this));
-            Spells.Add(new Dash(this));
-            Spells.Add(new SpeedBoost(this));
-            Spells.Add(new Regeneration(this));
             Spells.Add(new ShowStats(this, user.UI));
         }
 

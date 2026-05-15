@@ -130,7 +130,7 @@ namespace WizardTesting
                         new XElement("manaMax", User.Wizard.Mana.ValueMax),
                         new XElement("manaRegenMax", User.Wizard.ManaRegen.ValueMax),
                         new XElement("Scale", User.Wizard.Scale),
-                        new XElement("MoveSpeed", User.Wizard.MoveSpeed),
+                        new XElement("MoveSpeed", User.Wizard.MoveSpeed.Value),
                         new XElement("Position",
                             new XElement("x", (int)User.Wizard.Sprite.Position.X),
                             new XElement("y", (int)User.Wizard.Sprite.Position.Y)
