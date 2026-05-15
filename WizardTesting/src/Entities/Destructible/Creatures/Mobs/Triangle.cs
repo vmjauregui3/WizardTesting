@@ -47,7 +47,7 @@ namespace WizardTesting
                 orbitAngle -= MathF.PI*2;
             }
 
-            if (!Owner.IsDead)
+            if (!Owner.IsDestroyed)
             {
                 Sprite.Position += Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle + 0.2f) * orbitDistance);
@@ -57,7 +57,7 @@ namespace WizardTesting
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {
                 targetCreature.AddHealth(-10);
-                isDead = true;
+                isDestroyed = true;
             }
         }
     }

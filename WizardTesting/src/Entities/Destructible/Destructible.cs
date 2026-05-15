@@ -37,10 +37,10 @@ namespace WizardTesting
         }
 
         // isDead tracks when the object still needs to be updated and drawn.
-        protected bool isDead;
-        public bool IsDead
+        protected bool isDestroyed;
+        public bool IsDestroyed
         {
-            get { return isDead; }
+            get { return isDestroyed; }
         }
 
         // ownerID determines how the object interacts with its surroundings.
@@ -60,7 +60,7 @@ namespace WizardTesting
         public Destructible(int ownerId)
         {
             this.ownerId = ownerId;
-            isDead = false;
+            isDestroyed = false;
             hitDistance = 35.0f;
             MoveSpeed = new Stat(0.0f);
             health = new VariableStat(10);
@@ -70,7 +70,7 @@ namespace WizardTesting
         {
             if (health.Value <= 0)
             {
-                isDead = true;
+                isDestroyed = true;
             }
         }
         public void SetIsLoaded(bool isLoaded)

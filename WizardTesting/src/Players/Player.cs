@@ -59,7 +59,7 @@ namespace WizardTesting
             {
                 UpdateIfLoaded(gameTime, world, Buildings[i]);
 
-                if (Buildings[i].IsDead)
+                if (Buildings[i].IsDestroyed)
                 {
                     Buildings.RemoveAt(i);
                     //i--;
@@ -70,7 +70,7 @@ namespace WizardTesting
             {
                 UpdateIfLoaded(gameTime, world, SpawnPoints[i]);
 
-                if (SpawnPoints[i].IsDead)
+                if (SpawnPoints[i].IsDestroyed)
                 {
                     SpawnPoints.RemoveAt(i);
                     //i--;
@@ -81,7 +81,7 @@ namespace WizardTesting
             {
                 UpdateIfLoaded(gameTime, world, Creatures[i]);
 
-                if (Creatures[i].IsDead)
+                if (Creatures[i].IsDestroyed)
                 {
                     Creatures.RemoveAt(i);
                     //i--;

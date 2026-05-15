@@ -34,7 +34,7 @@ namespace WizardTesting
                 totalSpawns++;
                 if (totalSpawns >= maxSpawns)
                 {
-                    isDead = true;
+                    isDestroyed = true;
                 }
             }
         }

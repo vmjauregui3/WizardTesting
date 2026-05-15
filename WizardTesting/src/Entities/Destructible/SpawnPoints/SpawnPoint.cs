@@ -17,7 +17,7 @@ namespace WizardTesting
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y), 1f, Vector2.One, 0);
 
             SpawnTimer = new MTimer(2500);
-            isDead = false;
+            isDestroyed = false;
             hitDistance = 25.0f;
             health = new VariableStat(100);
         }
@@ -36,7 +36,7 @@ namespace WizardTesting
 
         public virtual void GetHit()
         {
-            isDead = true;
+            isDestroyed = true;
         }
 
         public virtual void SpawnMob()
