@@ -8,16 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class Projectile
+    public class Projectile : Destructible
     {
         // Projectiles are objects that trasmit the agency of Creatures between Player's authority.
 
-        // Projectiles contain a sprite that represents them visiually and contains their game location.
-        public AnimatedSprite Sprite;
-
         // All game objects have a direction and speed.
         public Vector2 Direction;
-        public float Speed;
         public float Damage;
 
         // Variable that determines when the projectile gets destroyed.
@@ -40,7 +36,7 @@ namespace WizardTesting
 
         // Constructor requires components for the Sprite, the owner information, and the target information (which is currently static).
         // TODO: Modify projectiles to allow them moving targets.
-        public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage)
+        public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
             Sprite.Scale = spriteScale;
@@ -50,7 +46,9 @@ namespace WizardTesting
             done = false;
             spell = ownerSpell;
 
-            Speed = speed;
+            //Speed = speed;
+            MoveSpeed = new Stat(speed);
+
             Damage = damage;
 
             Timer = new MTimer(duration);
@@ -67,7 +65,8 @@ namespace WizardTesting
         // Default Projectile moves linearly toward target at a constant speed and is destroyed upon impact or after life duration.
         public virtual void Update(GameTime gameTime, List<Destructible> destructibles)
         {
-            Sprite.Position += Direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Velocity = Direction * MoveSpeed.Value;
+            Sprite.Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             Timer.UpdateTimer(gameTime);
             if(Timer.Test())
@@ -80,12 +79,6 @@ namespace WizardTesting
                 done = true;
                 spell.GainExp(1);
             }
-        }
-
-        // Draws the Projectile's Sprite
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            Sprite.Draw(spriteBatch);
         }
 
         // Checks whether the Projectile hit a creature.
