@@ -62,7 +62,7 @@ namespace WizardTesting
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
             //MoveSpeed = new Stat(moveSpeed);
-            MoveSpeed = new Stat(1000f);
+            MoveSpeed = new Stat(200f);
 
             this.level = level;
             health = new VariableStat(healthMax);

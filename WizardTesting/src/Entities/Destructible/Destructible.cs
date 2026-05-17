@@ -24,17 +24,15 @@ namespace WizardTesting
 
         public void Move(Vector2 direction, float time)
         {
-            float minSpeed = 100;
-            float maxSpeed = 200;
             Acceleration = direction * MoveSpeed.Value - Velocity * 0.5f;
             Velocity += Acceleration * time;
-            if (Velocity.Length() < minSpeed && Acceleration.Length() < 100)
+            if (Acceleration.Length() < MoveSpeed.Value*0.45f)
             {
                 Velocity = Vector2.Zero;
             }
-            if (Velocity.Length() > maxSpeed)
+            if (Velocity.Length() > MoveSpeed.Value)
             {
-                Velocity = Vector2.Normalize(Velocity) * maxSpeed;
+                Velocity = Vector2.Normalize(Velocity) * MoveSpeed.Value;
             }
             //Sprite.Position += Velocity*time + 0.5f*Acceleration*time*time;
             Sprite.Position += Velocity * time;
