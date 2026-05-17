@@ -27,7 +27,7 @@ namespace WizardTesting
         public Wizard(User user, Vector2 position) : base(user.Id)
         {
             this.user = user;
-            Velocity = Vector2.Zero;
+            Direction = Vector2.Zero;
             Scale = 1.0f;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4,2), 100);
             //hitDistance = 35f;
@@ -56,7 +56,7 @@ namespace WizardTesting
         public Wizard(User user, Vector2 position, float scale, float moveSpeed, int level, int healthMax, int manaMax, int manaRegenMax) : base(user.Id)
         {
             this.user = user;
-            Velocity = Vector2.Zero;
+            Direction = Vector2.Zero;
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
             MoveSpeed = new Stat(moveSpeed);
@@ -96,22 +96,22 @@ namespace WizardTesting
             Camera.Instance.FollowSprite(Sprite);
         }
 
-        public void ControlMovement(GameTime gameTime)
+        public void ControlMovement()
         {
             if (InputManager.Instance.KeyDown(Keys.W))
             {
-                Velocity.Y = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Direction.Y = -1; 
             }
             else if (InputManager.Instance.KeyDown(Keys.S))
             { 
-                Velocity.Y = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                Direction.Y = 1; 
             }
             else
-            { Velocity.Y = 0; }
+            { Direction.Y = 0; }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
-                Velocity.X = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Direction.X = -1;
                 if (Sprite.CurrentFrame.Y == 0)
                 { 
                     Sprite.CurrentFrame.Y = 1; 
@@ -119,14 +119,14 @@ namespace WizardTesting
             }
             else if (InputManager.Instance.KeyDown(Keys.D))
             {
-                Velocity.X = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Direction.X = 1;
                 if (Sprite.CurrentFrame.Y == 1)
                 { 
                     Sprite.CurrentFrame.Y = 0; 
                 }
             }
             else
-            { Velocity.X = 0; }
+            { Direction.X = 0; }
         }
 
         public void ControlCasting()
@@ -218,12 +218,11 @@ namespace WizardTesting
                 spell.Update(gameTime);
             }
 
-            ControlMovement(gameTime);
+            ControlMovement();
 
-            if (Velocity.Equals(Vector2.Zero))
+            if (Direction.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }
 
-            Sprite.Position += Velocity;
             base.Update(gameTime);
         }
     }

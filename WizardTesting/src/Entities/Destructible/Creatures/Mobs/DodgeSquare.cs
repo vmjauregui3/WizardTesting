@@ -57,10 +57,7 @@ namespace WizardTesting
                 }
             }
             Vector2 toTarget = Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position);
-            Vector2 moveDirection = Vector2.Normalize(dodgeVector * dodgeUrgency + toTarget * (1 - dodgeUrgency));
-
-
-            Sprite.Position += moveDirection * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Direction = Vector2.Normalize(dodgeVector * dodgeUrgency + toTarget * (1 - dodgeUrgency));
 
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)
             {

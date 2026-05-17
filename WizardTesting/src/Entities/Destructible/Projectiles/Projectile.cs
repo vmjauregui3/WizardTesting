@@ -67,8 +67,8 @@ namespace WizardTesting
         // Default Projectile moves linearly toward target at a constant speed and is destroyed upon impact or after life duration.
         public virtual void Update(GameTime gameTime, List<Destructible> destructibles)
         {
-            Velocity = Direction * MoveSpeed.Value;
-            Sprite.Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            base.Direction = Direction * MoveSpeed.Value;
+            Sprite.Position += base.Direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             Timer.UpdateTimer(gameTime);
             if(Timer.Test())

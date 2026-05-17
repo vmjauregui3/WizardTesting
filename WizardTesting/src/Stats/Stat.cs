@@ -6,7 +6,11 @@ namespace WizardTesting
 {
     public class Stat
     {
-        public float BaseValue;
+        protected float baseValue;
+        public float BaseValue
+        {
+            get { return baseValue; }
+        }
         protected List<float> flatModifiers;
         protected List<float> percentAddModifiers;
         protected List<float> percentMultiplyModifiers;
@@ -19,8 +23,8 @@ namespace WizardTesting
 
         public Stat(float baseValue)
         {
-            BaseValue = baseValue;
-            value = BaseValue;
+            this.baseValue = baseValue;
+            value = this.baseValue;
             flatModifiers = new List<float>();
             percentAddModifiers = new List<float>();
             percentMultiplyModifiers = new List<float>();
@@ -67,7 +71,7 @@ namespace WizardTesting
 
         protected float CalculateFinalValue()
         {
-            float finalValue = BaseValue;
+            float finalValue = baseValue;
             float sumPercentAdd = 0;
 
             foreach (float mod in flatModifiers)
