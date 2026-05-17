@@ -19,26 +19,7 @@ namespace WizardTesting
 
         // All game objects have a direction and speed.
         public Vector2 Velocity;
-        public Vector2 Acceleration;
         public Stat MoveSpeed;
-
-        public void Move(Vector2 direction, float time)
-        {
-            float minSpeed = 100;
-            float maxSpeed = 200;
-            Acceleration = direction * MoveSpeed.Value - Velocity * 0.5f;
-            Velocity += Acceleration * time;
-            if (Velocity.Length() < minSpeed && Acceleration.Length() < 100)
-            {
-                Velocity = Vector2.Zero;
-            }
-            if (Velocity.Length() > maxSpeed)
-            {
-                Velocity = Vector2.Normalize(Velocity) * maxSpeed;
-            }
-            //Sprite.Position += Velocity*time + 0.5f*Acceleration*time*time;
-            Sprite.Position += Velocity * time;
-        }
 
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
