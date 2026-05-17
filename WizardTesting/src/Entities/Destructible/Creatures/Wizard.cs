@@ -22,6 +22,8 @@ namespace WizardTesting
             get { return user; }
         }
 
+        public Vector2 MoveDirection;
+
         //private InstantProjectileSpell lightBeam; Removed for testing
 
         public Wizard(User user, Vector2 position) : base(user.Id)
@@ -59,7 +61,8 @@ namespace WizardTesting
             Velocity = Vector2.Zero;
             Scale = scale;
             Sprite = new AnimatedSprite("Sprites/BaseWizard", new Vector2(position.X, position.Y), Scale, new Vector2(4, 2), 100);
-            MoveSpeed = new Stat(moveSpeed);
+            //MoveSpeed = new Stat(moveSpeed);
+            MoveSpeed = new Stat(1000f);
 
             this.level = level;
             health = new VariableStat(healthMax);
@@ -100,33 +103,39 @@ namespace WizardTesting
         {
             if (InputManager.Instance.KeyDown(Keys.W))
             {
-                Velocity.Y = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                //Velocity.Y = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                MoveDirection.Y = -1;
             }
             else if (InputManager.Instance.KeyDown(Keys.S))
             { 
-                Velocity.Y = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds; 
+                //Velocity.Y = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                MoveDirection.Y = 1;
             }
             else
-            { Velocity.Y = 0; }
+            { MoveDirection.Y = 0; }
+            //{ Velocity.Y = 0; }
 
             if (InputManager.Instance.KeyDown(Keys.A))
             {
-                Velocity.X = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //Velocity.X = -MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                MoveDirection.X = -1;
                 if (Sprite.CurrentFrame.Y == 0)
-                { 
-                    Sprite.CurrentFrame.Y = 1; 
+                {
+                    Sprite.CurrentFrame.Y = 1;
                 }
             }
             else if (InputManager.Instance.KeyDown(Keys.D))
             {
-                Velocity.X = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //Velocity.X = MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                MoveDirection.X = 1;
                 if (Sprite.CurrentFrame.Y == 1)
-                { 
-                    Sprite.CurrentFrame.Y = 0; 
+                {
+                    Sprite.CurrentFrame.Y = 0;
                 }
             }
             else
-            { Velocity.X = 0; }
+            { MoveDirection.X = 0; }
+            //{ Velocity.X = 0; }
         }
 
         public void ControlCasting()
@@ -223,7 +232,8 @@ namespace WizardTesting
             if (Velocity.Equals(Vector2.Zero))
             { Sprite.IsActive = false; }
 
-            Sprite.Position += Velocity;
+            //Sprite.Position += Velocity;
+            Move(MoveDirection, (float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
     }
