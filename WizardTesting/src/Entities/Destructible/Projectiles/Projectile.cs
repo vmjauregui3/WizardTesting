@@ -13,7 +13,6 @@ namespace WizardTesting
         // Projectiles are objects that trasmit the agency of Creatures between Player's authority.
 
         // All game objects have a direction and speed.
-        public Vector2 Direction;
         public float Damage;
 
         // Variable that determines when the projectile gets destroyed.
@@ -40,8 +39,8 @@ namespace WizardTesting
         // public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
         public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
         {
-            Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
-            Sprite.Scale = spriteScale;
+            Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y), spriteScale, new Vector2(1, 1), 0);
+            Sprite.IsActive = true;
             // Rotates Sprite toward target.
             Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
 
@@ -67,8 +66,7 @@ namespace WizardTesting
         // Default Projectile moves linearly toward target at a constant speed and is destroyed upon impact or after life duration.
         public virtual void Update(GameTime gameTime, List<Destructible> destructibles)
         {
-            base.Direction = Direction * MoveSpeed.Value;
-            Sprite.Position += base.Direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            base.Update(gameTime);
 
             Timer.UpdateTimer(gameTime);
             if(Timer.Test())
