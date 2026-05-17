@@ -8,55 +8,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WizardTesting
 {
-    public class Projectile : Destructible
+    public class Projectile : Impermanent
     {
         // Projectiles are objects that trasmit the agency of Creatures between Player's authority.
 
         // All game objects have a direction and speed.
         public float Damage;
 
-        // Variable that determines when the projectile gets destroyed.
-        protected bool done;
-        public bool Done
-        {
-            get { return done; }
-        }
-
-        protected Spell spell;
-        public Spell Spell
-        {
-            get { return spell; }
-        }
-
-        // Timer tracks how long the projectile can exist before being destroyed.
-        public MTimer Timer;
-
         // Constructor requires components for the Sprite, the owner information, and the target information (which is currently static).
         // TODO: Modify projectiles to allow them moving targets.
 
-        // public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
-        public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
+        public Projectile(string path, Vector2 position, float scale, Vector2 frameCount, int switchFrame, Spell ownerSpell, int duration, Vector2 direction, float speed, float damage) : base(path, position, scale, frameCount, switchFrame, ownerSpell, duration)
         {
-            Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y), spriteScale, new Vector2(1, 1), 0);
-            Sprite.IsActive = true;
-            // Rotates Sprite toward target.
-            Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, target);
-
-            done = false;
-            spell = ownerSpell;
-
+            Direction = direction;
             MoveSpeed = new Stat(speed);
 
+            // Rotates Sprite to move in Direction.
+            Sprite.Rotation = Pathing.RotateTowards(Vector2.Zero, direction);
+
             Damage = damage;
-
-            Timer = new MTimer(duration);
-
-            //Direction = Vector2.Normalize(target - position);
-        }
-
-        public void SetIsDone()
-        {
-            done = true;
         }
 
         // Updates the Projectile's Sprite and Timer.
@@ -64,12 +34,6 @@ namespace WizardTesting
         public virtual void Update(GameTime gameTime, List<Destructible> destructibles)
         {
             base.Update(gameTime);
-
-            Timer.UpdateTimer(gameTime);
-            if(Timer.Test())
-            {
-                done = true;
-            }
 
             if (HitSomething(destructibles))
             {
@@ -79,7 +43,6 @@ namespace WizardTesting
         }
 
         // Checks whether the Projectile hit a creature.
-        // TODO: Modify projectile to check whether it hits SpawnPoints.
         public virtual bool HitSomething(List<Destructible> destructibles)
         {
             foreach (Destructible destructible in destructibles)
