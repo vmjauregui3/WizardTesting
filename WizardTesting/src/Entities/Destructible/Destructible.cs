@@ -18,8 +18,19 @@ namespace WizardTesting
         public AnimatedSprite Sprite;
 
         // All game objects have a direction and speed.
-        public Vector2 Velocity;
+        public Vector2 Direction;
         public Stat MoveSpeed;
+
+        public void MoveToward(Vector2 direction, float time)
+        {
+            Direction = direction;
+            Move(time);
+        }
+
+        public void Move(float time)
+        {
+            Sprite.Position += Direction * MoveSpeed.Value * time;
+        }
 
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
@@ -107,12 +118,14 @@ namespace WizardTesting
         public virtual void Update(GameTime gameTime)
         {
             Sprite.Update(gameTime);
+            Move((float)gameTime.ElapsedGameTime.TotalSeconds);
         }
 
         // Updates the Sprite.
         public virtual void Update(GameTime gameTime, World world)
         {
             Sprite.Update(gameTime);
+            Move((float)gameTime.ElapsedGameTime.TotalSeconds);
         }
 
         // Draws the Sprite.

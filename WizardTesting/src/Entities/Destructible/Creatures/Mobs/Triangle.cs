@@ -49,7 +49,7 @@ namespace WizardTesting
 
             if (!Owner.IsDestroyed)
             {
-                Sprite.Position += Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Direction = Pathing.OrbitToward(Sprite.Position, Owner.Sprite.Position, orbitDistance, orbitAngle);
                 //Sprite.Rotation = Pathing.RotateTowards(Sprite.Position, Pathing.OrbitToward(Sprite.Position, wizard.Sprite.Position, orbitDistance, orbitAngle + 0.2f) * orbitDistance);
                 Sprite.Rotation = orbitAngle + 0.75f * MathF.PI;
             }

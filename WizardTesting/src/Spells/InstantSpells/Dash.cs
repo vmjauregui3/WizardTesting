@@ -21,9 +21,9 @@ namespace WizardTesting
 
         public override void StartCasting()
         {
-            if (!owner.Velocity.Equals(Vector2.Zero))
+            if (!owner.Direction.Equals(Vector2.Zero))
             {
-                direction = Vector2.Normalize(owner.Velocity);
+                direction = Vector2.Normalize(owner.Direction);
                 base.StartCasting();
             }
         }

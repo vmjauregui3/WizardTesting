@@ -39,8 +39,11 @@ namespace WizardTesting
             Creature targetCreature = world.User.Wizard;
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) > orbitDistance)
             {
-                Sprite.Position += Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position) * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                Direction = Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position);
+            }
+            else
+            {
+                Direction = Vector2.Zero;
             }
 
             if (Pathing.GetDistance(Sprite.Position, targetCreature.Sprite.Position) < targetCreature.HitDistance)

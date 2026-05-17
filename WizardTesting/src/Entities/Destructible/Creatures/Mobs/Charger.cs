@@ -40,6 +40,7 @@ namespace WizardTesting
                 IsCasting = true;
                 CastTimer.ResetToZero();
                 Sprite.IsActive = false;
+                MoveSpeed.AddModifier(5, StatModifierType.PercentMultiply);
             }
             if (!IsCasting)
             {
@@ -47,22 +48,24 @@ namespace WizardTesting
                 {
                     Sprite.IsActive = false;
                     dashDirection = Pathing.DirectionToward(Sprite.Position, targetCreature.Sprite.Position);
+                    Direction = dashDirection;
                     Sprite.Rotation = Pathing.RotateTowards(Vector2.Zero, dashDirection);
-                    Sprite.Position += dashDirection * MoveSpeed.Value * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     CastTimer.ResetToZero();
                 }
                 else
                 {
                     Sprite.IsActive = true;
+                    Direction = Vector2.Zero;
                 }
             }
             else
             {
-                Sprite.Position += dashDirection * MoveSpeed.Value * 5 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Direction = dashDirection;
                 if (CastTimer.Test())
                 {
                     IsCasting = false;
                     CastTimer.ResetToZero();
+                    MoveSpeed.RemoveModifier(5, StatModifierType.PercentMultiply);
                 }
             }
 
