@@ -22,22 +22,6 @@ namespace WizardTesting
         public Vector2 Acceleration;
         public Stat MoveSpeed;
 
-        public void Move(Vector2 direction, float time)
-        {
-            Acceleration = direction * MoveSpeed.Value - Velocity * 0.5f;
-            Velocity += Acceleration * time;
-            if (Acceleration.Length() < MoveSpeed.Value*0.45f)
-            {
-                Velocity = Vector2.Zero;
-            }
-            if (Velocity.Length() > MoveSpeed.Value)
-            {
-                Velocity = Vector2.Normalize(Velocity) * MoveSpeed.Value;
-            }
-            //Sprite.Position += Velocity*time + 0.5f*Acceleration*time*time;
-            Sprite.Position += Velocity * time;
-        }
-
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
         public VariableStat Health
@@ -114,6 +98,52 @@ namespace WizardTesting
                 health.SetValue(0);
             }
             CheckIfDead();
+        }
+
+        public void Move(Vector2 direction, float time)
+        {
+            //Acceleration = direction * MoveSpeed.Value - Velocity * 0.5f;
+            AccelerateBase(direction);
+            
+            
+            
+            /*
+            if (Velocity.Length() > MoveSpeed.Value)
+            {
+                //Velocity = Vector2.Normalize(Velocity) * MoveSpeed.Value;
+                Acceleration = -Velocity * 0.5f;
+            }
+            */
+            Velocity += Acceleration * time;
+
+            //Sprite.Position += Velocity*time + 0.5f*Acceleration*time*time;
+            Sprite.Position += Velocity * time;
+        }
+
+        public void AccelerateBase(Vector2 direction)
+        {
+            
+            if (Velocity.Length() > MoveSpeed.Value)
+            {
+                Acceleration += -Velocity * 0.5f;
+            }
+            else
+            {
+                Acceleration = direction * MoveSpeed.Value - Velocity * 0.5f;
+            }
+            if (Acceleration.Length() < MoveSpeed.Value * 0.45f && Velocity.Length() < MoveSpeed.Value * 0.25f)
+            {
+                Velocity = Vector2.Zero;
+            }
+            if (direction.Equals(Vector2.Zero))
+            {
+                Acceleration = -Velocity * 10;
+            }
+        }
+
+        public void Accelerate(Vector2 acceleration)
+        {
+            Acceleration += acceleration;
         }
 
         public virtual void TranslatePosition(Vector2 translation)
