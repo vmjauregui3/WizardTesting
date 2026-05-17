@@ -52,7 +52,7 @@ namespace WizardTesting
                         {
                             dodgeVector = new Vector2(world.Projectiles[i].Direction.Y, -world.Projectiles[i].Direction.X); // CW
                         }
-                        dodgeUrgency = dodgeUrgency / ((Pathing.GetDistance(Sprite.Position, world.Projectiles[i].Sprite.Position)/world.Projectiles[i].Speed) + dodgeUrgency);
+                        dodgeUrgency = dodgeUrgency / ((Pathing.GetDistance(Sprite.Position, world.Projectiles[i].Sprite.Position)/world.Projectiles[i].MoveSpeed.Value) + dodgeUrgency);
                     }
                 }
             }
