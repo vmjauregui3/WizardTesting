@@ -22,8 +22,6 @@ namespace WizardTesting
             get { return done; }
         }
 
-        // Owner tracks which Creature that produced the projectile.
-        // TODO: Change the Owner to a new class that defines all game objects with agency.
         protected Spell spell;
         public Spell Spell
         {
@@ -47,7 +45,6 @@ namespace WizardTesting
             done = false;
             spell = ownerSpell;
 
-            //Speed = speed;
             MoveSpeed = new Stat(speed);
 
             Damage = damage;
