@@ -36,8 +36,6 @@ namespace WizardTesting
 
         // Constructor requires components for the Sprite, the owner information, and the target information (which is currently static).
         // TODO: Modify projectiles to allow them moving targets.
-
-        // public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
         public Projectile(string path, float spriteScale, Vector2 position, Spell ownerSpell, Vector2 target, int duration, float speed, float damage) : base(ownerSpell.Owner.OwnerId)
         {
             Sprite = new AnimatedSprite(path, new Vector2(position.X, position.Y));
@@ -55,7 +53,7 @@ namespace WizardTesting
 
             Timer = new MTimer(duration);
 
-            //Direction = Vector2.Normalize(target - position);
+            Direction = Vector2.Normalize(target - position);
         }
 
         public void SetIsDone()

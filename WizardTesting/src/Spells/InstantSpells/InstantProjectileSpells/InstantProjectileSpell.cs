@@ -55,17 +55,7 @@ namespace WizardTesting
 
         public override void CastEffect()
         {
-            Projectile projectile = new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, Target, Duration, 0.0f, Damage);
-            Vector2 direction = Vector2.Normalize(Target - projectile.Sprite.Position);
-            AccelerateEntity(projectile, direction);
-            GameCommands.PassProjectile(projectile);
-            
-        }
-
-        public void AccelerateEntity(Projectile projectile, Vector2 direction)
-        {
-            projectile.MoveSpeed.AddModifier(Speed, StatModifierType.Flat);
-            projectile.Direction = direction;
+            GameCommands.PassProjectile(new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, Target, Duration, Speed, Damage));   
         }
     }
 }
