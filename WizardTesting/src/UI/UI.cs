@@ -17,6 +17,8 @@ namespace WizardTesting
         private StatDisplayBar healthBar;
         private StatDisplayBar manaBar;
 
+        private SpellQuickbarIcon spellQuickbarIcon;
+
         private bool showingStatBars;
         private List<StatDisplayBar> statBars;
 
@@ -29,7 +31,7 @@ namespace WizardTesting
         // Contains the representation of the cursor on the screen and gameworld for user visibility and game referencing.
         public Sprite Cursor;
 
-        public UI()
+        public UI(Wizard wizard)
         {
             // Creates a representation of the cursor on the screen and gameworld for user visibility and game referencing where the mouse is.
             Cursor = new Sprite("Sprites/Cursor", new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), 1.0f, Vector2.Zero);
@@ -47,6 +49,9 @@ namespace WizardTesting
             statBars = new List<StatDisplayBar>();
 
             tempButton = new Button("Sprites/ButtonBlank", Vector2.Zero, new Vector2(100, 50), "Fonts/ComicSansMS16", "TEST", null, null);
+
+            Vector2 SpellQuickBarOffset = new Vector2((int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width/2-50, (int)GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - 60);
+            spellQuickbarIcon = new SpellQuickbarIcon("Sprites/ButtonBlank", SpellQuickBarOffset, new Vector2(100, 50), wizard.Spells[0], SpellQuickBarOffset);
         }
 
         public void ShowStatBars(List<Destructible> destructibles)
@@ -76,6 +81,7 @@ namespace WizardTesting
             healthBar.Update(user.Wizard.Health, screenOrigin);
             manaBar.Update(user.Wizard.Mana, screenOrigin);
             tempButton.Update();
+            spellQuickbarIcon.Update(screenOrigin);
             if (showingStatBars)
             {
                 ShowStatBars(world.AllDestructibles);
@@ -95,6 +101,7 @@ namespace WizardTesting
             }
 
             tempButton.Draw(spriteBatch);
+            spellQuickbarIcon.Draw(spriteBatch);
 
             Cursor.Draw(spriteBatch);
         }

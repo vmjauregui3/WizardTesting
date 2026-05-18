@@ -12,14 +12,15 @@ namespace WizardTesting
     {
         protected bool isHovered, isPressed;
         protected string text;
+        protected Vector2 stringDimensions;
+        protected Vector2 stringPosition;
 
         protected Color color, hoverColor, pressedColor;
 
         protected SpriteFont font;
 
-        public object info;
-
         PassObject ButtonClicked;
+        public object info;
 
         public Button(string path, Vector2 position, Vector2 dimensions, string fontPath, string text, PassObject ButtonClicked, object info)
             : base(path, position, dimensions, Vector2.Zero)
@@ -35,6 +36,9 @@ namespace WizardTesting
 
             isPressed = false;
             hoverColor = new Color(200, 230, 255);
+
+            stringDimensions = font.MeasureString(text);
+            stringPosition = Position + new Vector2((Dimensions.X - stringDimensions.X) / 2, (Dimensions.Y - stringDimensions.Y) / 2);
         }
 
         public override void Update()
@@ -94,8 +98,7 @@ namespace WizardTesting
         {
             base.Draw(spriteBatch);
 
-            Vector2 stringDimensions = font.MeasureString(text);
-            spriteBatch.DrawString(font, text, Position + new Vector2(stringDimensions.X / 2, stringDimensions.Y / 2), Color.Black);
+            spriteBatch.DrawString(font, text, stringPosition, Color.Black);
         }
     }
 }

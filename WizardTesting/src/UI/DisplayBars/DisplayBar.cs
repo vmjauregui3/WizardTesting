@@ -34,7 +34,6 @@ namespace WizardTesting
             };
         }
 
-
         public virtual void Update(float currentVal, float maxVal, Vector2 reference)
         {
             bar.Dimensions = new Vector2((currentVal / maxVal) * (barBack.Dimensions.X - border * 2), bar.Dimensions.Y);
