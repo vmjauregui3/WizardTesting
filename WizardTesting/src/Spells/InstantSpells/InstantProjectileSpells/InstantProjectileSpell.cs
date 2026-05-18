@@ -47,25 +47,12 @@ namespace WizardTesting
             this.damage = new Stat(damage);
         }
 
-        public override void QuickCast(Vector2 target)
-        {
-            Target = target;
-            base.QuickCast(target);
-        }
-
         public override void CastEffect()
         {
-            Projectile projectile = new Projectile(path, spriteScale, new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y), this, Target, Duration, 0.0f, Damage);
-            Vector2 direction = Vector2.Normalize(Target - projectile.Sprite.Position);
-            AccelerateEntity(projectile, direction);
+            Vector2 position = new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y);
+            Vector2 direction = Vector2.Normalize(owner.SpellTarget - position);
+            Projectile projectile = new Projectile(path, position, spriteScale, new Vector2(1, 1), 0, this, Duration, direction, Speed, Damage);
             GameCommands.PassProjectile(projectile);
-            
-        }
-
-        public void AccelerateEntity(Projectile projectile, Vector2 direction)
-        {
-            projectile.MoveSpeed.AddModifier(Speed, StatModifierType.Flat);
-            projectile.Direction = direction;
         }
     }
 }

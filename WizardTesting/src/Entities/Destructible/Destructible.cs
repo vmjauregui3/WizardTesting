@@ -21,17 +21,6 @@ namespace WizardTesting
         public Vector2 Direction;
         public Stat MoveSpeed;
 
-        public void MoveToward(Vector2 direction, float time)
-        {
-            Direction = direction;
-            Move(time);
-        }
-
-        public void Move(float time)
-        {
-            Sprite.Position += Direction * MoveSpeed.Value * time;
-        }
-
         // Objects have health which determines when they get destroyed.
         protected VariableStat health;
         public VariableStat Health
@@ -113,6 +102,22 @@ namespace WizardTesting
         public virtual void TranslatePosition(Vector2 translation)
         {
             Sprite.Position += translation;
+        }
+
+        public void MoveToward(Vector2 direction, float time)
+        {
+            Direction = direction;
+            Move(time);
+        }
+
+        public void Move(float time)
+        {
+            Sprite.Position += Direction * MoveSpeed.Value * time;
+        }
+
+        public void SetRotation(float rotation)
+        {
+            Sprite.Rotation = rotation;
         }
 
         public virtual void Update(GameTime gameTime)

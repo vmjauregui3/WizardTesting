@@ -19,10 +19,11 @@ namespace WizardTesting
 
         public override void Update(GameTime gameTime, World world)
         {
+            SpellTarget = world.User.Wizard.Sprite.Position;
             CastTimer.UpdateTimer(gameTime);
             if (CastTimer.Test())
             {
-                spell.QuickCast(world.User.Wizard.Sprite.Position);
+                spell.StartCasting();
                 CastTimer.ResetToZero();
             }
 
