@@ -94,11 +94,6 @@ namespace WizardTesting
             castingTimer.ResetToZero();
         }
 
-        public virtual void QuickCast(Vector2 target)
-        {
-            StartCasting();
-        }
-
         public virtual void CastEffect()
         {
 

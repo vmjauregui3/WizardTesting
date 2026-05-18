@@ -35,6 +35,8 @@ namespace WizardTesting
         protected Spell primarySpell;
         protected Spell secondarySpell;
 
+        public Vector2 SpellTarget;
+
         private float[] attributeMods;
 
         public Creature(int ownerId) : base(ownerId)

@@ -13,7 +13,7 @@ namespace WizardTesting
 {
     public class Wizard : Creature
     {
-        private Vector2 mousePosition;
+        //private Vector2 mousePosition;
         public float Scale;
 
         private User user;
@@ -69,7 +69,6 @@ namespace WizardTesting
             isLoaded = true;
         }
 
-        
         public void LoadSpells(XElement data)
         {
             List<XElement> spell = (from t in data.Elements() select t).ToList<XElement>();
@@ -150,11 +149,11 @@ namespace WizardTesting
 
             if (MCursor.Instance.LeftClick() && HasMana(primarySpell.ManaCost))
             {
-                primarySpell.QuickCast(mousePosition);
+                primarySpell.StartCasting();
             }
             else if (MCursor.Instance.RightClick() && HasMana(secondarySpell.ManaCost))
             {
-                secondarySpell.QuickCast(mousePosition);
+                secondarySpell.StartCasting();
             }
 
             if (InputManager.Instance.KeyPressed(Keys.H))
@@ -185,7 +184,8 @@ namespace WizardTesting
 
         public override void Update(GameTime gameTime)
         {
-            mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
+            //mousePosition = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
+            SpellTarget = Vector2.Transform(new Vector2(MCursor.Instance.newMousePos.X, MCursor.Instance.newMousePos.Y), Matrix.Invert(Camera.Instance.Transform));
 
             Sprite.IsActive = true;
             if (!IsCasting)
@@ -203,15 +203,6 @@ namespace WizardTesting
                     }
                 }
             }
-
-
-            /* Removed for testing
-            if (InputManager.Instance.KeyDown(Keys.Space) && HasMana(lightBeam.ManaCost))
-            {
-                isMobile = false;
-                lightBeam.CastSpell(mousePosition);
-            }
-            */
 
             foreach (Spell spell in Spells)
             {
