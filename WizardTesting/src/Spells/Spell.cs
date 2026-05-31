@@ -53,6 +53,9 @@ namespace WizardTesting
         protected MTimer castingTimer;
 
         public SpellType SpellType;
+        public List<SpellCastEffect> SpellCastEffects;
+
+        protected Action castEffect;
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
