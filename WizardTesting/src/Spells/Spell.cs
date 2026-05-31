@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -75,6 +76,42 @@ namespace WizardTesting
             this.exp = exp;
             onCooldown = false;
             isCasting = false;
+        }
+
+        public static XElement SaveSpellData(List<Spell> spellList)
+        {
+            XElement spells = new XElement("Spells");
+            for (int i = 0; i < spellList.Count; i++)
+            {
+                if(spellList[i].SpellType == SpellType.Instant)
+                {
+                    spells.Add(new XElement(spellList[i].GetType().Name,
+                            new XElement("SpellType", SpellType.Instant),
+                            new XElement("level", spellList[i].Level),
+                            new XElement("exp", spellList[i].Exp)
+                        )
+                    );
+                }
+                else if (spellList[i].SpellType == SpellType.Duration)
+                {
+                    spells.Add(new XElement(spellList[i].GetType().Name,
+                            new XElement("SpellType", SpellType.Duration),
+                            new XElement("level", spellList[i].Level),
+                            new XElement("exp", spellList[i].Exp)
+                        )
+                    );
+                }
+                else if (spellList[i].SpellType == SpellType.Upkeep)
+                {
+                    spells.Add(new XElement(spellList[i].GetType().Name,
+                            new XElement("SpellType", SpellType.Upkeep),
+                            new XElement("level", spellList[i].Level),
+                            new XElement("exp", spellList[i].Exp)
+                        )
+                    );
+                }
+            }
+            return spells;
         }
 
         public virtual void StartCasting()

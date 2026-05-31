@@ -138,18 +138,7 @@ namespace WizardTesting
                     )
                 )
             );
-            xmlPlayer.Element("Root").Element("Wizard").Add(new XElement("Spells"));
-            for (int i = 0; i < User.Wizard.Spells.Count; i++)
-            {
-                xmlPlayer.Element("Root").Element("Wizard").Element("Spells").Add(      // new XAttribute("id", i),
-                    new XElement(User.Wizard.Spells[i].GetType().Name,
-                        new XElement("SpellType", User.Wizard.Spells[i].SpellType),
-                        new XElement("level", User.Wizard.Spells[i].Level),
-                        new XElement("exp", User.Wizard.Spells[i].Exp)
-                    )
-                );
-            }
-            //xmlPlayer.Element("Root").Add(new XElement("Spells", User.Wizard.Spells.Select(i => new XElement("Spell", new XAttribute("id", i)))));
+            xmlPlayer.Element("Root").Element("Wizard").Add(Spell.SaveSpellData(User.Wizard.Spells));
 
             xmlPlayer.Save("XML\\Players\\Users\\User" + username + ".xml");
         }
