@@ -4,10 +4,10 @@ using System.Text;
 
 namespace WizardTesting
 {
-    public enum SpellCastEffect
+    public enum SpellCastEffectType
     {
         Projectile,
-        Buff,
+        ModifyStat,
         Heal,
         Translate,
         UI

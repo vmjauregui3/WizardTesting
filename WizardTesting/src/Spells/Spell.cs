@@ -31,7 +31,6 @@ namespace WizardTesting
             get { return (int)Math.Round(manaCost.Value, 4); }
         }
 
-
         protected Creature owner;
         public Creature Owner
         {
@@ -53,11 +52,13 @@ namespace WizardTesting
         protected MTimer castingTimer;
 
         public SpellType SpellType;
-        public List<SpellCastEffect> SpellCastEffects;
+        public SpellCastEffectType SpellCastEffectType;
 
         protected Action castEffect;
         protected Action upkeepEffect;
         protected Action endEffect;
+
+        public Dictionary<string, string> SpellParameters;
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
@@ -94,7 +95,7 @@ namespace WizardTesting
             XElement spells = new XElement("Spells");
             for (int i = 0; i < spellList.Count; i++)
             {
-                if(spellList[i].SpellType == SpellType.Instant)
+                if (spellList[i].SpellType == SpellType.Instant)
                 {
                     spells.Add(new XElement(spellList[i].GetType().Name,
                             new XElement("SpellType", SpellType.Instant),
@@ -114,12 +115,32 @@ namespace WizardTesting
                 }
                 else if (spellList[i].SpellType == SpellType.Upkeep)
                 {
-                    spells.Add(new XElement(spellList[i].GetType().Name,
-                            new XElement("SpellType", SpellType.Upkeep),
-                            new XElement("level", spellList[i].Level),
-                            new XElement("exp", spellList[i].Exp)
-                        )
-                    );
+                    if (spellList[i].SpellCastEffectType == SpellCastEffectType.ModifyStat)
+                    {
+                        XElement spellParams = new XElement("SpellParameters");
+                        foreach (KeyValuePair<string, string> param in spellList[i].SpellParameters)
+                        {
+                            spellParams.Add(new XElement(param.Key, param.Value));
+                        }
+                        spells.Add(new XElement(spellList[i].GetType().Name,
+                                new XElement("SpellType", SpellType.Upkeep),
+                                new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
+                                new XElement("level", spellList[i].Level),
+                                new XElement("exp", spellList[i].Exp),
+                                spellParams
+                            )
+                        );
+                    }
+                    else
+                    {
+                        spells.Add(new XElement(spellList[i].GetType().Name,
+                                new XElement("SpellType", SpellType.Upkeep),
+                                new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
+                                new XElement("level", spellList[i].Level),
+                                new XElement("exp", spellList[i].Exp)
+                            )
+                        );
+                    }
                 }
             }
             return spells;
@@ -190,6 +211,20 @@ namespace WizardTesting
         public void GainExp(int exp)
         {
             this.exp += exp;
+        }
+
+        // Below is the growing list of Spell Effects
+        protected Stat statToModify;
+        protected Stat statModifier;
+        protected StatModifierType statModifierType;
+
+        protected void AddStatModifier()
+        {
+            statToModify.AddModifier(statModifier.Value, statModifierType);
+        }
+        protected void RemoveStatModifier()
+        {
+            statToModify.RemoveModifier(statModifier.Value, statModifierType);
         }
     }
 }
