@@ -12,29 +12,20 @@ namespace WizardTesting
         public Regeneration(Creature owner) : base(owner, 200, 5000, 1000, 50)
         {
             healValue = new Stat(50);
+            castEffect = heal;
+            upkeepEffect = heal;
         }
 
         public Regeneration(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
         {
             healValue = new Stat(50);
+            castEffect = heal;
+            upkeepEffect = heal;
         }
 
-        public override void CastEffect()
+        protected void heal()
         {
             owner.AddHealth(healValue.Value);
-            base.CastEffect();
         }
-
-        public override void UpkeepEffect()
-        {
-            owner.AddHealth(healValue.Value);
-            base.UpkeepEffect();
-        }
-
-        public override void EndEffect()
-        {
-            base.EndEffect();
-        }
-
     }
 }

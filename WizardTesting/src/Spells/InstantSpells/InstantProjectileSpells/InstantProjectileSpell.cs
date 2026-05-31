@@ -36,6 +36,7 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
+            castEffect = CreateProjectile;
         }
 
         public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int damage, int level, int exp) : base(owner, manaCost, 50, 50, level, exp)
@@ -45,9 +46,10 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
+            castEffect = CreateProjectile;
         }
 
-        public override void CastEffect()
+        protected void CreateProjectile()
         {
             Vector2 position = new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y);
             Vector2 direction = Vector2.Normalize(owner.SpellTarget - position);

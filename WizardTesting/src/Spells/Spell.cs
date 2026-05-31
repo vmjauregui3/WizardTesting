@@ -56,6 +56,8 @@ namespace WizardTesting
         public List<SpellCastEffect> SpellCastEffects;
 
         protected Action castEffect;
+        protected Action upkeepEffect;
+        protected Action endEffect;
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {
@@ -67,6 +69,9 @@ namespace WizardTesting
             onCooldown = false;
             isCasting = false;
             exp = 0;
+            castEffect = DoNothing;
+            upkeepEffect = DoNothing;
+            endEffect = DoNothing;
         }
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp)
@@ -79,6 +84,9 @@ namespace WizardTesting
             this.exp = exp;
             onCooldown = false;
             isCasting = false;
+            castEffect = DoNothing;
+            upkeepEffect = DoNothing;
+            endEffect = DoNothing;
         }
 
         public static XElement SaveSpellData(List<Spell> spellList)
@@ -136,17 +144,22 @@ namespace WizardTesting
 
         public virtual void CastEffect()
         {
-
+            castEffect();
         }
 
         public virtual void UpkeepEffect()
         {
-            
+            upkeepEffect();
         }
 
         public virtual void EndEffect()
         {
+            endEffect();
+        }
 
+        public void DoNothing()
+        {
+            // Used for spells that don't have upkeep or end effects, but need to use the Action delegate.
         }
 
         public virtual void Update(GameTime gameTime)

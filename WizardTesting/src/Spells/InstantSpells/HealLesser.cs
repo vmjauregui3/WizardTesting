@@ -12,14 +12,16 @@ namespace WizardTesting
         public HealLesser(Creature owner) : base(owner, 100, 1000, 1000)
         {
             healValue = new Stat(50f);
+            castEffect = heal;
         }
 
         public HealLesser(Creature owner, int level, int exp) : base(owner, 100, 1000, 1000, level, exp)
         {
             healValue = new Stat(50f);
+            castEffect = heal;
         }
 
-        public override void CastEffect()
+        protected void heal()
         {
             owner.AddHealth(healValue.Value);
         }

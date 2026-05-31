@@ -12,11 +12,13 @@ namespace WizardTesting
         public Dash(Creature owner) : base(owner, 100, 5000, 10)
         {
             distance = new Stat(150f);
+            castEffect = TranslateTarget;
         }
 
         public Dash(Creature owner, int level, int exp) : base(owner, 100, 5000, 10, level, exp)
         {
             distance = new Stat(150f);
+            castEffect = TranslateTarget;
         }
 
         public override void StartCasting()
@@ -28,7 +30,7 @@ namespace WizardTesting
             }
         }
 
-        public override void CastEffect()
+        protected void TranslateTarget()
         {
             owner.TranslatePosition(distance.Value * direction);
         }
