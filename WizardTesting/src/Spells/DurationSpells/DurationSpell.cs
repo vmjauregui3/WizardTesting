@@ -15,12 +15,14 @@ namespace WizardTesting
         {
             isActive = false;
             activeTimer = new MTimer(duration);
+            SpellType = SpellType.Duration;
         }
 
         public DurationSpell(Creature owner, int manaCost, int cooldown, int castTime, int duration, int level, int exp) : base(owner, manaCost, cooldown, castTime, level, exp)
         {
             isActive = false;
             activeTimer = new MTimer(duration);
+            SpellType = SpellType.Duration;
         }
 
         public override void StartCasting()

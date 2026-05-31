@@ -143,6 +143,7 @@ namespace WizardTesting
             {
                 xmlPlayer.Element("Root").Element("Wizard").Element("Spells").Add(      // new XAttribute("id", i),
                     new XElement(User.Wizard.Spells[i].GetType().Name,
+                        new XElement("SpellType", User.Wizard.Spells[i].SpellType),
                         new XElement("level", User.Wizard.Spells[i].Level),
                         new XElement("exp", User.Wizard.Spells[i].Exp)
                     )

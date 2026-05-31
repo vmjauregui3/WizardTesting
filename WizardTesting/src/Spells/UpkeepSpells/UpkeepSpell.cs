@@ -23,12 +23,14 @@ namespace WizardTesting
         {
             this.upkeepCost = new Stat(upkeepCost);
             needsUpkeep = false;
+            SpellType = SpellType.Upkeep;
         }
 
         public UpkeepSpell(Creature owner, int manaCost, int cooldown, int castTime, int upkeepCost, int level, int exp) : base(owner, manaCost, cooldown, castTime, level, exp)
         {
             this.upkeepCost = new Stat(upkeepCost);
             needsUpkeep = false;
+            SpellType = SpellType.Upkeep;
         }
 
         public override void StartCasting()

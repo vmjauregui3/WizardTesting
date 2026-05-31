@@ -51,7 +51,7 @@ namespace WizardTesting
         }
         protected MTimer castingTimer;
 
-
+        public SpellType SpellType;
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
         {

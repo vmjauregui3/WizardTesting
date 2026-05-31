@@ -12,22 +12,56 @@
       <y>522</y>
     </Position>
     <Spells>
-      <FireBolt>
-        <level>1</level>
-        <exp>18</exp>
-      </FireBolt>
-      <EarthShard>
-        <level>1</level>
-        <exp>0</exp>
-      </EarthShard>
-      <IceSpike>
-        <level>1</level>
-        <exp>0</exp>
-      </IceSpike>
-      <WindSlash>
-        <level>1</level>
-        <exp>0</exp>
-      </WindSlash>
+			<FireBolt>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>18</exp>
+			</FireBolt>
+			<EarthShard>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</EarthShard>
+			<IceSpike>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</IceSpike>
+			<WindSlash>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</WindSlash>
+			<HealLesser>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</HealLesser>
+			<BuffSpeed>
+				<SpellType>Duration</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</BuffSpeed>
+			<Dash>
+				<SpellType>Instant</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</Dash>
+			<SpeedBoost>
+				<SpellType>Upkeep</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</SpeedBoost>
+			<Regeneration>
+				<SpellType>Upkeep</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</Regeneration>
+			<ShowStats>
+				<SpellType>Upkeep</SpellType>
+				<level>1</level>
+				<exp>0</exp>
+			</ShowStats>
     </Spells>
   </Wizard>
 </Root>
