@@ -28,7 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="XML\Players\Users\UserGary.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
