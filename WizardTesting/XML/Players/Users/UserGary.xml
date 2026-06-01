@@ -1,67 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <Wizard>
-    <level>1</level>
-    <healthMax>1000</healthMax>
-    <manaMax>1000</manaMax>
-    <manaRegenMax>5</manaRegenMax>
-    <Scale>1.5</Scale>
-    <MoveSpeed>200</MoveSpeed>
-    <Position>
-      <x>608</x>
-      <y>522</y>
-    </Position>
-    <Spells>
+	<Wizard>
+		<level>1</level>
+		<healthMax>1000</healthMax>
+		<manaMax>1000</manaMax>
+		<manaRegenMax>1000</manaRegenMax>
+		<Scale>1.5</Scale>
+		<MoveSpeed>200</MoveSpeed>
+		<Position>
+			<x>96</x>
+			<y>179</y>
+		</Position>
+		<Spells>
 			<FireBolt>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>18</exp>
+				<manaCost>50</manaCost>
+				<cooldown>50</cooldown>
+				<castTime>50</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>CreateProjectile</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</FireBolt>
 			<EarthShard>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>40</manaCost>
+				<cooldown>50</cooldown>
+				<castTime>50</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>CreateProjectile</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</EarthShard>
 			<IceSpike>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>60</manaCost>
+				<cooldown>50</cooldown>
+				<castTime>50</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>CreateProjectile</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</IceSpike>
 			<WindSlash>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>30</manaCost>
+				<cooldown>50</cooldown>
+				<castTime>50</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>CreateProjectile</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</WindSlash>
 			<HealLesser>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>100</manaCost>
+				<cooldown>1000</cooldown>
+				<castTime>1000</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>heal</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</HealLesser>
 			<BuffSpeed>
-				<SpellType>Duration</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>100</manaCost>
+				<cooldown>1000</cooldown>
+				<castTime>50</castTime>
+				<SpellType>Duration</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>AddStatBoost</SpellEffect>
+				<SpellTypeParameters>
+					<duration>1000</duration>
+				</SpellTypeParameters>
+				<SpellParameters />
 			</BuffSpeed>
 			<Dash>
-				<SpellType>Instant</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>100</manaCost>
+				<cooldown>5000</cooldown>
+				<castTime>10</castTime>
+				<SpellType>Instant</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>TranslateTarget</SpellEffect>
+				<SpellTypeParameters />
+				<SpellParameters />
 			</Dash>
 			<SpeedBoost>
-				<SpellType>Upkeep</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>200</manaCost>
+				<cooldown>5000</cooldown>
+				<castTime>100</castTime>
+				<SpellType>Upkeep</SpellType>
+				<SpellCastEffectType>ModifyStat</SpellCastEffectType>
+				<SpellEffect>AddStatModifier</SpellEffect>
+				<SpellTypeParameters>
+					<upkeepCost>50</upkeepCost>
+					<upkeepTimer>1000</upkeepTimer>
+				</SpellTypeParameters>
+				<SpellParameters>
+					<target>owner</target>
+					<statToModify>MoveSpeed</statToModify>
+					<statModifier>2</statModifier>
+					<statModifierType>PercentMultiply</statModifierType>
+				</SpellParameters>
 			</SpeedBoost>
 			<Regeneration>
-				<SpellType>Upkeep</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>200</manaCost>
+				<cooldown>5000</cooldown>
+				<castTime>100</castTime>
+				<SpellType>Upkeep</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>heal</SpellEffect>
+				<SpellTypeParameters>
+					<upkeepCost>50</upkeepCost>
+					<upkeepTimer>1000</upkeepTimer>
+				</SpellTypeParameters>
+				<SpellParameters />
 			</Regeneration>
 			<ShowStats>
-				<SpellType>Upkeep</SpellType>
 				<level>1</level>
 				<exp>0</exp>
+				<manaCost>200</manaCost>
+				<cooldown>5000</cooldown>
+				<castTime>100</castTime>
+				<SpellType>Upkeep</SpellType>
+				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellEffect>ToggleStatBars</SpellEffect>
+				<SpellTypeParameters>
+					<upkeepCost>50</upkeepCost>
+					<upkeepTimer>1000</upkeepTimer>
+				</SpellTypeParameters>
+				<SpellParameters />
 			</ShowStats>
-    </Spells>
-  </Wizard>
+		</Spells>
+	</Wizard>
 </Root>
