@@ -71,13 +71,15 @@ namespace WizardTesting
 
         public void LoadSpells(XElement data)
         {
+            Spell.LoadSpellData(this, data);
+            /*
             List<XElement> spell = (from t in data.Elements() select t).ToList<XElement>();
             for (int i = 0; i < spell.Count; i++)
             {
-                String WT = "WizardTesting.";
+                string WT = "WizardTesting.";
                 if (Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)).IsSubclassOf(typeof(Spell)))
                 {
-                    Object[] parameters = { this,
+                    object[] parameters = { this,
                     Convert.ToInt32(spell[i].Element("level").Value),
                     Convert.ToInt32(spell[i].Element("exp").Value)
                     };
@@ -85,6 +87,7 @@ namespace WizardTesting
                     Spells.Add((Spell)Activator.CreateInstance(Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture)), parameters));
                 }
             }
+            */
             primarySpell = Spells[0];
             secondarySpell = Spells[0];
         }

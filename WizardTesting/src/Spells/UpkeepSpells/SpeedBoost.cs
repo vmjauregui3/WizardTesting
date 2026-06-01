@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -38,6 +39,41 @@ namespace WizardTesting
                 ["statModifier"] = statModifier.Value.ToString(),
                 ["statModifierType"] = statModifierType.ToString()
             };
+        }
+        public SpeedBoost(Creature owner, int level, int exp, Dictionary<string, string> parameters) : base(owner, 200, 5000, 100, 50, level, exp)
+        {
+            SpellParameters = parameters;
+            foreach (KeyValuePair<string, string> param in SpellParameters)
+            {
+                if (param.Key == "target")
+                {
+                    if (param.Value == "owner")
+                    {
+                        TargetDestructible = owner;
+                    }
+                }
+                else if (param.Key == "statToModify")
+                {
+                    if (param.Value == "MoveSpeed")
+                    {
+                        statToModify = TargetDestructible.MoveSpeed;
+                    }
+                }
+                else if (param.Key == "statModifier")
+                {
+                    statModifier = new Stat(Convert.ToInt32(param.Value));
+                }
+                else if (param.Key == "statModifierType")
+                {
+                    statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), param.Value);
+                }
+            }
+            //statModifier = new Stat(2f);
+            //statToModify = owner.MoveSpeed;
+            //statModifierType = StatModifierType.PercentMultiply;
+            castEffect = AddStatModifier;
+            endEffect = RemoveStatModifier;
+            SpellCastEffectType = SpellCastEffectType.ModifyStat;
         }
     }
 }
