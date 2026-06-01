@@ -68,9 +68,6 @@ namespace WizardTesting
                     statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), param.Value);
                 }
             }
-            //statModifier = new Stat(2f);
-            //statToModify = owner.MoveSpeed;
-            //statModifierType = StatModifierType.PercentMultiply;
             castEffect = AddStatModifier;
             endEffect = RemoveStatModifier;
             SpellCastEffectType = SpellCastEffectType.ModifyStat;

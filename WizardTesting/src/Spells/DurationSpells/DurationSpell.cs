@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -23,6 +24,15 @@ namespace WizardTesting
             isActive = false;
             activeTimer = new MTimer(duration);
             SpellType = SpellType.Duration;
+        }
+
+        protected override XElement GetSpellTypeParameters()
+        {
+            XElement spellTypeParams = new XElement("SpellTypeParameters",
+                new XElement("duration", activeTimer.MSec)
+            );
+
+            return spellTypeParams;
         }
 
         public override void StartCasting()

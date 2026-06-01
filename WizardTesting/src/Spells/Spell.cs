@@ -75,6 +75,7 @@ namespace WizardTesting
             castEffect = DoNothing;
             upkeepEffect = DoNothing;
             endEffect = DoNothing;
+            SpellParameters = new Dictionary<string, string>();
         }
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp)
@@ -90,6 +91,7 @@ namespace WizardTesting
             castEffect = DoNothing;
             upkeepEffect = DoNothing;
             endEffect = DoNothing;
+            SpellParameters = new Dictionary<string, string>();
         }
 
         public static void LoadSpellData(Creature owner, XElement spellData)
@@ -149,59 +151,52 @@ namespace WizardTesting
             XElement spells = new XElement("Spells");
             for (int i = 0; i < spellList.Count; i++)
             {
+                XElement spellTypeParams = spellList[i].GetSpellTypeParameters();
                 if (spellList[i].SpellType == SpellType.Instant)
                 {
-                    spells.Add(new XElement(spellList[i].GetType().Name,
-                            new XElement("SpellType", SpellType.Instant),
-                            new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
-                            new XElement("level", spellList[i].Level),
-                            new XElement("exp", spellList[i].Exp)
-                        )
-                    );
+
                 }
                 else if (spellList[i].SpellType == SpellType.Duration)
                 {
-                    spells.Add(new XElement(spellList[i].GetType().Name,
-                            new XElement("SpellType", SpellType.Duration),
-                            new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
-                            new XElement("level", spellList[i].Level),
-                            new XElement("exp", spellList[i].Exp)
-                        )
-                    );
+
                 }
                 else if (spellList[i].SpellType == SpellType.Upkeep)
                 {
                     if (spellList[i].SpellCastEffectType == SpellCastEffectType.ModifyStat)
                     {
-                        XElement spellParams = new XElement("SpellParameters");
-                        foreach (KeyValuePair<string, string> param in spellList[i].SpellParameters)
-                        {
-                            spellParams.Add(new XElement(param.Key, param.Value));
-                        }
-                        spells.Add(new XElement(spellList[i].GetType().Name,
-                                new XElement("SpellType", SpellType.Upkeep),
-                                new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
-                                new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
-                                new XElement("level", spellList[i].Level),
-                                new XElement("exp", spellList[i].Exp),
-                                spellParams
-                            )
-                        );
+
                     }
                     else
                     {
-                        spells.Add(new XElement(spellList[i].GetType().Name,
-                                new XElement("SpellType", SpellType.Upkeep),
-                                new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
-                                new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
-                                new XElement("level", spellList[i].Level),
-                                new XElement("exp", spellList[i].Exp)
-                            )
-                        );
+
                     }
                 }
+                XElement spellParams = new XElement("SpellParameters");
+                foreach (KeyValuePair<string, string> param in spellList[i].SpellParameters)
+                {
+                    spellParams.Add(new XElement(param.Key, param.Value));
+                }
+                spells.Add(new XElement(spellList[i].GetType().Name,
+                        new XElement("level", spellList[i].Level),
+                        new XElement("exp", spellList[i].Exp),
+                        new XElement("manaCost", spellList[i].manaCost.BaseValue),
+                        new XElement("cooldown", spellList[i].cooldownTimer.MSec),
+                        new XElement("castTime", spellList[i].castingTimer.MSec),
+                        new XElement("SpellType", spellList[i].SpellType),
+                        new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
+                        new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
+                        spellTypeParams,
+                        spellParams
+                    )
+                );
             }
             return spells;
+        }
+
+        protected virtual XElement GetSpellTypeParameters()
+        {
+            XElement spellTypeParams = new XElement("SpellTypeParameters");
+            return spellTypeParams;
         }
 
         public virtual void StartCasting()

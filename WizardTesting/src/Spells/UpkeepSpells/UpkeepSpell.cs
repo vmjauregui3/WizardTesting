@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -31,6 +32,16 @@ namespace WizardTesting
             this.upkeepCost = new Stat(upkeepCost);
             needsUpkeep = false;
             SpellType = SpellType.Upkeep;
+        }
+
+        protected override XElement GetSpellTypeParameters()
+        {
+            XElement spellTypeParams = new XElement("SpellTypeParameters",
+                new XElement("upkeepCost", upkeepCost.Value),
+                new XElement("upkeepTimer", upkeepTimer.MSec)
+            );
+
+            return spellTypeParams;
         }
 
         public override void StartCasting()
