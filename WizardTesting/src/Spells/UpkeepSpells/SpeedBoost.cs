@@ -43,6 +43,7 @@ namespace WizardTesting
         }
         public SpeedBoost(Creature owner, XElement spellData) : base(owner, spellData)
         {
+            /*
             SpellParameters = spellData.Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
             if (SpellParameters.ContainsKey("target"))
             {
@@ -69,6 +70,7 @@ namespace WizardTesting
             castEffect = AddStatModifier;
             endEffect = RemoveStatModifier;
             SpellCastEffectType = SpellCastEffectType.ModifyStat;
+            */
         }
     }
 }

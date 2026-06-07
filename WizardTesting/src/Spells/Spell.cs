@@ -102,6 +102,7 @@ namespace WizardTesting
             castingTimer = new MTimer(Convert.ToInt32(spellData.Element("castTime").Value));
             level = Convert.ToInt32(spellData.Element("level").Value);
             exp = Convert.ToInt32(spellData.Element("exp").Value);
+            LoadCastEffects(spellData);
         }
 
         public static void LoadSpellData(Creature owner, XElement spellData)
@@ -282,6 +283,41 @@ namespace WizardTesting
         protected void RemoveStatModifier()
         {
             statToModify.RemoveModifier(statModifier.Value, statModifierType);
+        }
+
+        protected void LoadCastEffects(XElement spellData)
+        {
+            SpellParameters = spellData.Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
+            if (SpellParameters.ContainsKey("target"))
+            {
+                if (SpellParameters["target"] == "owner")
+                {
+                    TargetDestructible = owner;
+                }
+            }
+            if (SpellParameters.ContainsKey("statToModify"))
+            {
+                if (SpellParameters["statToModify"] == "MoveSpeed")
+                {
+                    statToModify = TargetDestructible.MoveSpeed;
+                }
+            }
+            if (SpellParameters.ContainsKey("statModifier"))
+            {
+                statModifier = new Stat(Convert.ToInt32(SpellParameters["statModifier"]));
+            }
+            if (SpellParameters.ContainsKey("statModifierType"))
+            {
+                statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), SpellParameters["statModifierType"]);
+            }
+
+            SpellCastEffectType spellCastEffectType = (SpellCastEffectType)Enum.Parse(typeof(SpellCastEffectType), spellData.Element("SpellCastEffectType").Value);
+            if (spellCastEffectType == SpellCastEffectType.ModifyStat)
+            {
+                castEffect = AddStatModifier;
+                endEffect = RemoveStatModifier;
+                SpellCastEffectType = SpellCastEffectType.ModifyStat;
+            }
         }
     }
 }

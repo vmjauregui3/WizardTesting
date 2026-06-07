@@ -21,6 +21,13 @@ namespace WizardTesting
             get { return needsUpkeep; }
         }
         protected MTimer upkeepTimer = new MTimer(1000);
+
+        protected UpkeepSpell()
+        {
+            needsUpkeep = false;
+            SpellType = SpellType.Upkeep;
+        }
+
         public UpkeepSpell(Creature owner, int manaCost, int cooldown, int castTime, int upkeepCost) : base(owner, manaCost, cooldown, castTime)
         {
             this.upkeepCost = new Stat(upkeepCost);
