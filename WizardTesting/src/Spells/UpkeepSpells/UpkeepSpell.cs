@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
@@ -36,6 +37,15 @@ namespace WizardTesting
 
         public UpkeepSpell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp) : base(owner, manaCost, cooldown, castTime, level, exp)
         {
+            needsUpkeep = false;
+            SpellType = SpellType.Upkeep;
+        }
+
+        public UpkeepSpell(Creature owner, XElement spellData) : base(owner, spellData)
+        {
+            SpellTypeParameters = spellData.Element("SpellTypeParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
+            upkeepCost = new Stat(Convert.ToInt32(SpellTypeParameters["upkeepCost"]));
+            upkeepTimer = new MTimer(Convert.ToInt32(SpellTypeParameters["upkeepTimer"]));
             needsUpkeep = false;
             SpellType = SpellType.Upkeep;
         }

@@ -63,16 +63,10 @@ namespace WizardTesting
         public Dictionary<string, string> SpellTypeParameters;
         public Dictionary<string, string> SpellParameters;
 
-        public Spell(Creature owner, int manaCost, int cooldown, int castTime)
+        protected Spell()
         {
-            this.owner = owner;
-            this.manaCost = new Stat(manaCost);
-            cooldownTimer = new MTimer(cooldown);
-            castingTimer = new MTimer(castTime);
-            level = 1;
             onCooldown = false;
             isCasting = false;
-            exp = 0;
             castEffect = DoNothing;
             upkeepEffect = DoNothing;
             endEffect = DoNothing;
@@ -80,7 +74,17 @@ namespace WizardTesting
             SpellParameters = new Dictionary<string, string>();
         }
 
-        public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp)
+        public Spell(Creature owner, int manaCost, int cooldown, int castTime) : this()
+        {
+            this.owner = owner;
+            this.manaCost = new Stat(manaCost);
+            cooldownTimer = new MTimer(cooldown);
+            castingTimer = new MTimer(castTime);
+            level = 1;
+            exp = 0;
+        }
+
+        public Spell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp) : this()
         {
             this.owner = owner;
             this.manaCost = new Stat(manaCost);
@@ -88,13 +92,16 @@ namespace WizardTesting
             castingTimer = new MTimer(castTime);
             this.level = level;
             this.exp = exp;
-            onCooldown = false;
-            isCasting = false;
-            castEffect = DoNothing;
-            upkeepEffect = DoNothing;
-            endEffect = DoNothing;
-            SpellTypeParameters = new Dictionary<string, string>();
-            SpellParameters = new Dictionary<string, string>();
+        }
+
+        public Spell(Creature owner, XElement spellData) : this()
+        {
+            this.owner = owner;
+            manaCost = new Stat(Convert.ToInt32(spellData.Element("manaCost").Value));
+            cooldownTimer = new MTimer(Convert.ToInt32(spellData.Element("cooldown").Value));
+            castingTimer = new MTimer(Convert.ToInt32(spellData.Element("castTime").Value));
+            level = Convert.ToInt32(spellData.Element("level").Value);
+            exp = Convert.ToInt32(spellData.Element("exp").Value);
         }
 
         public static void LoadSpellData(Creature owner, XElement spellData)
@@ -110,30 +117,11 @@ namespace WizardTesting
                 {
                     if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.ModifyStat)
                     {
-                        Dictionary<string, string> spellTypeParameters = new Dictionary<string, string>();
-
-                        List<XElement> spellTypeParams = (from p in spell[i].Element("SpellTypeParameters").Elements() select p).ToList<XElement>();
-                        for (int j = 0; j < spellTypeParams.Count; j++)
-                        {
-                            spellTypeParameters.Add(spellTypeParams[j].Name.ToString(), spell[i].Element("SpellTypeParameters").Element(spellTypeParams[j].Name.ToString()).Value);
-                        }
-
-                        Dictionary<string, string> spellParameters = new Dictionary<string, string>();
-                        
-                        List<XElement> spellParams = (from p in spell[i].Element("SpellParameters").Elements() select p).ToList<XElement>();
-                        for (int j = 0; j < spellParams.Count; j++)
-                        {
-                            spellParameters.Add(spellParams[j].Name.ToString(), spell[i].Element("SpellParameters").Element(spellParams[j].Name.ToString()).Value);
-                        }
+                        Dictionary<string, string> spellTypeParameters = spell[i].Element("SpellTypeParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
+                        Dictionary<string, string> spellParameters = spell[i].Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
 
                         object[] parameters = { owner,
-                            Convert.ToInt32(spell[i].Element("manaCost").Value),
-                            Convert.ToInt32(spell[i].Element("cooldown").Value),
-                            Convert.ToInt32(spell[i].Element("castTime").Value),
-                            Convert.ToInt32(spell[i].Element("level").Value),
-                            Convert.ToInt32(spell[i].Element("exp").Value),
-                            spellTypeParameters,
-                            spellParameters
+                            spell[i]
                         };
 
                         owner.Spells.Add((Spell)Activator.CreateInstance(type, parameters));
