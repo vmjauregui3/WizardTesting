@@ -60,6 +60,7 @@ namespace WizardTesting
         protected Action upkeepEffect;
         protected Action endEffect;
 
+        public Dictionary<string, string> SpellTypeParameters;
         public Dictionary<string, string> SpellParameters;
 
         public Spell(Creature owner, int manaCost, int cooldown, int castTime)
@@ -75,6 +76,7 @@ namespace WizardTesting
             castEffect = DoNothing;
             upkeepEffect = DoNothing;
             endEffect = DoNothing;
+            SpellTypeParameters = new Dictionary<string, string>();
             SpellParameters = new Dictionary<string, string>();
         }
 
@@ -91,6 +93,7 @@ namespace WizardTesting
             castEffect = DoNothing;
             upkeepEffect = DoNothing;
             endEffect = DoNothing;
+            SpellTypeParameters = new Dictionary<string, string>();
             SpellParameters = new Dictionary<string, string>();
         }
 
@@ -107,6 +110,14 @@ namespace WizardTesting
                 {
                     if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.ModifyStat)
                     {
+                        Dictionary<string, string> spellTypeParameters = new Dictionary<string, string>();
+
+                        List<XElement> spellTypeParams = (from p in spell[i].Element("SpellTypeParameters").Elements() select p).ToList<XElement>();
+                        for (int j = 0; j < spellTypeParams.Count; j++)
+                        {
+                            spellTypeParameters.Add(spellTypeParams[j].Name.ToString(), spell[i].Element("SpellTypeParameters").Element(spellTypeParams[j].Name.ToString()).Value);
+                        }
+
                         Dictionary<string, string> spellParameters = new Dictionary<string, string>();
                         
                         List<XElement> spellParams = (from p in spell[i].Element("SpellParameters").Elements() select p).ToList<XElement>();
@@ -116,8 +127,12 @@ namespace WizardTesting
                         }
 
                         object[] parameters = { owner,
+                            Convert.ToInt32(spell[i].Element("manaCost").Value),
+                            Convert.ToInt32(spell[i].Element("cooldown").Value),
+                            Convert.ToInt32(spell[i].Element("castTime").Value),
                             Convert.ToInt32(spell[i].Element("level").Value),
                             Convert.ToInt32(spell[i].Element("exp").Value),
+                            spellTypeParameters,
                             spellParameters
                         };
 

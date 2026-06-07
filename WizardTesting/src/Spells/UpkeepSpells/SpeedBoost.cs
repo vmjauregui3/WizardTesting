@@ -40,9 +40,21 @@ namespace WizardTesting
                 ["statModifierType"] = statModifierType.ToString()
             };
         }
-        public SpeedBoost(Creature owner, int level, int exp, Dictionary<string, string> parameters) : base(owner, 200, 5000, 100, 50, level, exp)
+        public SpeedBoost(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp, Dictionary<string, string> spellTypeParameters, Dictionary<string, string> spellParameters) : base(owner, manaCost, cooldown, castTime, level, exp)
         {
-            SpellParameters = parameters;
+            SpellTypeParameters = spellTypeParameters;
+            foreach (KeyValuePair<string, string> param in spellTypeParameters)
+            {
+                if (param.Key == "upkeepCost")
+                {
+                    upkeepCost = new Stat(Convert.ToInt32(param.Value));
+                }
+                else if (param.Key == "upkeepTimer")
+                {
+                    upkeepTimer = new MTimer(Convert.ToInt32(param.Value));
+                }
+            }
+            SpellParameters = spellParameters;
             foreach (KeyValuePair<string, string> param in SpellParameters)
             {
                 if (param.Key == "target")

@@ -34,6 +34,12 @@ namespace WizardTesting
             SpellType = SpellType.Upkeep;
         }
 
+        public UpkeepSpell(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp) : base(owner, manaCost, cooldown, castTime, level, exp)
+        {
+            needsUpkeep = false;
+            SpellType = SpellType.Upkeep;
+        }
+
         protected override XElement GetSpellTypeParameters()
         {
             XElement spellTypeParams = new XElement("SpellTypeParameters",
