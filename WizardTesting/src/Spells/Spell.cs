@@ -125,6 +125,10 @@ namespace WizardTesting
                     {
                         owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
                     }
+                    else if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.UI)
+                    {
+                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
+                    }
                     else if (spellType == SpellType.Instant && spellCastEffectType == SpellCastEffectType.Heal)
                     {
                         owner.Spells.Add(new InstantSpell(owner, spell[i]));
@@ -335,6 +339,9 @@ namespace WizardTesting
                 case "HealTargetDestructible":
                     castEffect = HealTargetDestructible;
                     break;
+                case "ToggleStatBars":
+                    castEffect = owner.GiveSpellPermission("ToggleStatBars");
+                    break;
             }
 
             switch (spellData.Element("SpellUpkeepEffect").Value)
@@ -348,6 +355,9 @@ namespace WizardTesting
             {
                 case "RemoveStatModifier":
                     endEffect = RemoveStatModifier;
+                    break;
+                case "ToggleStatBars":
+                    endEffect = owner.GiveSpellPermission("ToggleStatBars");
                     break;
             }
         }

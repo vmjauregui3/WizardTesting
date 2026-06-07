@@ -8,8 +8,8 @@
 		<Scale>1.5</Scale>
 		<MoveSpeed>200</MoveSpeed>
 		<Position>
-			<x>124</x>
-			<y>221</y>
+			<x>58</x>
+			<y>124</y>
 		</Position>
 		<Spells>
 			<FireBolt>
@@ -72,21 +72,24 @@
 				<SpellTypeParameters />
 				<SpellParameters />
 			</WindSlash>
-			<HealLesser>
-				<name />
+			<InstantSpell>
+				<name>HealLesser</name>
 				<level>1</level>
 				<exp>0</exp>
 				<manaCost>100</manaCost>
 				<cooldown>1000</cooldown>
 				<castTime>1000</castTime>
 				<SpellType>Instant</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
-				<SpellCastEffect>heal</SpellCastEffect>
+				<SpellCastEffectType>Heal</SpellCastEffectType>
+				<SpellCastEffect>HealTargetDestructible</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
 				<SpellTypeParameters />
-				<SpellParameters />
-			</HealLesser>
+				<SpellParameters>
+					<target>owner</target>
+					<spellValuePrimary>50</spellValuePrimary>
+				</SpellParameters>
+			</InstantSpell>
 			<DurationSpell>
 				<name>BuffSpeed</name>
 				<level>1</level>
@@ -105,7 +108,7 @@
 				<SpellParameters>
 					<target>owner</target>
 					<statToModify>MoveSpeed</statToModify>
-					<statModifier>2</statModifier>
+					<spellValuePrimary>2</spellValuePrimary>
 					<statModifierType>PercentMultiply</statModifierType>
 				</SpellParameters>
 			</DurationSpell>
@@ -143,7 +146,7 @@
 				<SpellParameters>
 					<target>owner</target>
 					<statToModify>MoveSpeed</statToModify>
-					<statModifier>2</statModifier>
+					<spellValuePrimary>2</spellValuePrimary>
 					<statModifierType>PercentMultiply</statModifierType>
 				</SpellParameters>
 			</UpkeepSpell>
@@ -165,18 +168,18 @@
 				</SpellTypeParameters>
 				<SpellParameters>
 					<target>owner</target>
-					<statModifier>50</statModifier>
+					<spellValuePrimary>50</spellValuePrimary>
 				</SpellParameters>
 			</UpkeepSpell>
-			<ShowStats>
-				<name />
+			<UpkeepSpell>
+				<name>ShowStats</name>
 				<level>1</level>
 				<exp>0</exp>
 				<manaCost>200</manaCost>
 				<cooldown>5000</cooldown>
 				<castTime>100</castTime>
 				<SpellType>Upkeep</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
+				<SpellCastEffectType>UI</SpellCastEffectType>
 				<SpellCastEffect>ToggleStatBars</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>ToggleStatBars</SpellEndEffect>
@@ -185,7 +188,7 @@
 					<upkeepTimer>1000</upkeepTimer>
 				</SpellTypeParameters>
 				<SpellParameters />
-			</ShowStats>
+			</UpkeepSpell>
 		</Spells>
 	</Wizard>
 </Root>

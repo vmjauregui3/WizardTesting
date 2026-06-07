@@ -37,6 +37,7 @@ namespace WizardTesting
 
             Timer = new MTimer(duration);
         }
+
         public void SetIsDone()
         {
             done = true;

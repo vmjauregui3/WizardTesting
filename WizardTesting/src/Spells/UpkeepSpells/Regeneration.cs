@@ -6,9 +6,6 @@ namespace WizardTesting
 {
     public class Regeneration : UpkeepSpell
     {
-
-        private Stat healValue;
-
         public Regeneration(Creature owner) : base(owner, 200, 5000, 1000, 50)
         {
             spellValuePrimary = new Stat(50);

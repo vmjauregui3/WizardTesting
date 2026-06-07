@@ -98,6 +98,18 @@ namespace WizardTesting
             Camera.Instance.FollowSprite(Sprite);
         }
 
+        public override Action GiveSpellPermission(string methodName)
+        {
+            Action methodToGive = DoNothing;
+            switch (methodName)
+            {
+                case "ToggleStatBars":
+                    methodToGive = User.UI.ToggleStatBars;
+                    break;
+            }
+            return methodToGive;
+        }
+
         public void ControlMovement()
         {
             if (InputManager.Instance.KeyDown(Keys.W))

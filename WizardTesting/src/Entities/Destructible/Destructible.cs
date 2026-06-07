@@ -66,6 +66,16 @@ namespace WizardTesting
             health = new VariableStat(10);
         }
 
+        public virtual Action GiveSpellPermission(string methodName)
+        {
+            return DoNothing;
+        }
+
+        public void DoNothing()
+        {
+            // This method is used for the Action that the spell is given permission to do. It does nothing, but allows the spell to bypass the check for whether it can affect the impermanent.
+        }
+
         public void CheckIfDead()
         {
             if (health.Value <= 0)

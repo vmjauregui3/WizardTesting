@@ -6,9 +6,6 @@ namespace WizardTesting
 {
     public class BuffSpeed : DurationSpell
     {
-
-        private Stat SpeedMultiplier;
-
         public BuffSpeed(Creature owner) : base(owner, 100, 1000, 50, 1000)
         {
             spellValuePrimary = new Stat(2f);
