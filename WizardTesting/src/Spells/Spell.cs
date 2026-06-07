@@ -191,7 +191,9 @@ namespace WizardTesting
                         new XElement("castTime", spellList[i].castingTimer.MSec),
                         new XElement("SpellType", spellList[i].SpellType),
                         new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
-                        new XElement("SpellEffect", spellList[i].castEffect.Method.Name),
+                        new XElement("SpellCastEffect", spellList[i].castEffect.Method.Name),
+                        new XElement("SpellUpkeepEffect", spellList[i].upkeepEffect.Method.Name),
+                        new XElement("SpellEndEffect", spellList[i].endEffect.Method.Name),
                         spellTypeParams,
                         spellParams
                     )
@@ -319,18 +321,30 @@ namespace WizardTesting
                 statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), SpellParameters["statModifierType"]);
             }
 
-            SpellCastEffectType spellCastEffectType = (SpellCastEffectType)Enum.Parse(typeof(SpellCastEffectType), spellData.Element("SpellCastEffectType").Value);
-            if (spellCastEffectType == SpellCastEffectType.ModifyStat)
+            SpellCastEffectType = (SpellCastEffectType)Enum.Parse(typeof(SpellCastEffectType), spellData.Element("SpellCastEffectType").Value);
+
+            switch (spellData.Element("SpellCastEffect").Value)
             {
-                castEffect = AddStatModifier;
-                endEffect = RemoveStatModifier;
-                SpellCastEffectType = SpellCastEffectType.ModifyStat;
+                case "AddStatModifier":
+                    castEffect = AddStatModifier;
+                    break;
+                case "HealTargetDestructible":
+                    castEffect = HealTargetDestructible;
+                    break;
             }
-            else if (spellCastEffectType == SpellCastEffectType.Heal)
+
+            switch (spellData.Element("SpellUpkeepEffect").Value)
             {
-                castEffect = HealTargetDestructible;
-                upkeepEffect = HealTargetDestructible;
-                SpellCastEffectType = SpellCastEffectType.Heal;
+                case "HealTargetDestructible":
+                    upkeepEffect = HealTargetDestructible;
+                    break;
+            }
+
+            switch (spellData.Element("SpellEndEffect").Value)
+            {
+                case "RemoveStatModifier":
+                    endEffect = RemoveStatModifier;
+                    break;
             }
         }
     }
