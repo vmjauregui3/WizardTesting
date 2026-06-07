@@ -133,6 +133,10 @@ namespace WizardTesting
                     {
                         owner.Spells.Add(new InstantSpell(owner, spell[i]));
                     }
+                    else if (spellType == SpellType.Instant && spellCastEffectType == SpellCastEffectType.Translate)
+                    {
+                        owner.Spells.Add(new InstantSpell(owner, spell[i]));
+                    }
                     else if (spellType == SpellType.Duration)
                     {
                         owner.Spells.Add(new DurationSpell(owner, spell[i]));
@@ -284,9 +288,10 @@ namespace WizardTesting
         }
 
         // Below is the growing list of Spell Effects
-        protected Destructible TargetDestructible;
+        protected Destructible targetDestructible;
         protected Stat statToModify;
         protected Stat spellValuePrimary;
+        protected Vector2 direction;
         protected StatModifierType statModifierType;
 
         protected void AddStatModifier()
@@ -297,10 +302,15 @@ namespace WizardTesting
         {
             statToModify.RemoveModifier(spellValuePrimary.Value, statModifierType);
         }
-
         protected void HealTargetDestructible()
         {
-            TargetDestructible.AddHealth(spellValuePrimary.Value);
+            targetDestructible.AddHealth(spellValuePrimary.Value);
+        }
+        // This currently only works for the owner to dash towards the SpellTarget, but that should be updated
+        protected void TranslateTargetDestructible()
+        {
+            direction = Vector2.Normalize(owner.SpellTarget - owner.Sprite.Position);
+            targetDestructible.TranslatePosition(spellValuePrimary.Value * direction);
         }
 
         protected void LoadCastEffects(XElement spellData)
@@ -310,14 +320,14 @@ namespace WizardTesting
             {
                 if (SpellParameters["target"] == "owner")
                 {
-                    TargetDestructible = owner;
+                    targetDestructible = owner;
                 }
             }
             if (SpellParameters.ContainsKey("statToModify"))
             {
                 if (SpellParameters["statToModify"] == "MoveSpeed")
                 {
-                    statToModify = TargetDestructible.MoveSpeed;
+                    statToModify = targetDestructible.MoveSpeed;
                 }
             }
             if (SpellParameters.ContainsKey("spellValuePrimary"))
@@ -338,6 +348,9 @@ namespace WizardTesting
                     break;
                 case "HealTargetDestructible":
                     castEffect = HealTargetDestructible;
+                    break;
+                case "TranslateTargetDestructible":
+                    castEffect = TranslateTargetDestructible;
                     break;
                 case "ToggleStatBars":
                     castEffect = owner.GiveSpellPermission("ToggleStatBars");

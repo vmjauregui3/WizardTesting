@@ -8,8 +8,8 @@
 		<Scale>1.5</Scale>
 		<MoveSpeed>200</MoveSpeed>
 		<Position>
-			<x>58</x>
-			<y>124</y>
+			<x>91</x>
+			<y>148</y>
 		</Position>
 		<Spells>
 			<FireBolt>
@@ -112,21 +112,24 @@
 					<statModifierType>PercentMultiply</statModifierType>
 				</SpellParameters>
 			</DurationSpell>
-			<Dash>
-				<name />
+			<InstantSpell>
+				<name>Dash</name>
 				<level>1</level>
 				<exp>0</exp>
 				<manaCost>100</manaCost>
 				<cooldown>5000</cooldown>
 				<castTime>10</castTime>
 				<SpellType>Instant</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
-				<SpellCastEffect>TranslateTarget</SpellCastEffect>
+				<SpellCastEffectType>Translate</SpellCastEffectType>
+				<SpellCastEffect>TranslateTargetDestructible</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
 				<SpellTypeParameters />
-				<SpellParameters />
-			</Dash>
+				<SpellParameters>
+					<target>owner</target>
+					<spellValuePrimary>150</spellValuePrimary>
+				</SpellParameters>
+			</InstantSpell>
 			<UpkeepSpell>
 				<name>BuffSpeed</name>
 				<level>1</level>

@@ -9,7 +9,7 @@ namespace WizardTesting
         public HealLesser(Creature owner) : base(owner, 100, 1000, 1000)
         {
             spellValuePrimary = new Stat(50f);
-            TargetDestructible = owner;
+            targetDestructible = owner;
             castEffect = HealTargetDestructible;
             SpellCastEffectType = SpellCastEffectType.Heal;
             SpellParameters = new Dictionary<string, string>
@@ -22,7 +22,7 @@ namespace WizardTesting
         public HealLesser(Creature owner, int level, int exp) : base(owner, 100, 1000, 1000, level, exp)
         {
             spellValuePrimary = new Stat(50f);
-            TargetDestructible = owner;
+            targetDestructible = owner;
             castEffect = HealTargetDestructible;
             SpellCastEffectType = SpellCastEffectType.Heal;
             SpellParameters = new Dictionary<string, string>

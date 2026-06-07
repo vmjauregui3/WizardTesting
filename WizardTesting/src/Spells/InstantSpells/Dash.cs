@@ -7,32 +7,30 @@ namespace WizardTesting
 {
     public class Dash : InstantSpell
     {
-        private Stat distance;
-        private Vector2 direction;
         public Dash(Creature owner) : base(owner, 100, 5000, 10)
         {
-            distance = new Stat(150f);
-            castEffect = TranslateTarget;
+            spellValuePrimary = new Stat(150f);
+            targetDestructible = owner;
+            SpellCastEffectType = SpellCastEffectType.Translate;
+            castEffect = TranslateTargetDestructible;
+            SpellParameters = new Dictionary<string, string>
+            {
+                ["target"] = "owner",
+                ["spellValuePrimary"] = spellValuePrimary.Value.ToString()
+            };
         }
 
         public Dash(Creature owner, int level, int exp) : base(owner, 100, 5000, 10, level, exp)
         {
-            distance = new Stat(150f);
-            castEffect = TranslateTarget;
-        }
-
-        public override void StartCasting()
-        {
-            if (!owner.Direction.Equals(Vector2.Zero))
+            spellValuePrimary = new Stat(150f);
+            targetDestructible = owner;
+            SpellCastEffectType = SpellCastEffectType.Translate;
+            castEffect = TranslateTargetDestructible;
+            SpellParameters = new Dictionary<string, string>
             {
-                direction = Vector2.Normalize(owner.Direction);
-                base.StartCasting();
-            }
-        }
-
-        protected void TranslateTarget()
-        {
-            owner.TranslatePosition(distance.Value * direction);
+                ["target"] = "owner",
+                ["spellValuePrimary"] = spellValuePrimary.Value.ToString()
+            };
         }
     }
 }
