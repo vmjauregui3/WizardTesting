@@ -121,7 +121,11 @@ namespace WizardTesting
                     {
                         owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
                     }
-                    else if (spellType == SpellType.Duration && spellCastEffectType == SpellCastEffectType.ModifyStat)
+                    else if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.Heal)
+                    {
+                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
+                    }
+                    else if (spellType == SpellType.Duration)
                     {
                         owner.Spells.Add(new DurationSpell(owner, spell[i]));
                     }
@@ -284,6 +288,11 @@ namespace WizardTesting
             statToModify.RemoveModifier(statModifier.Value, statModifierType);
         }
 
+        protected void HealTargetDestructible()
+        {
+            TargetDestructible.AddHealth(statModifier.Value);
+        }
+
         protected void LoadCastEffects(XElement spellData)
         {
             SpellParameters = spellData.Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
@@ -316,6 +325,12 @@ namespace WizardTesting
                 castEffect = AddStatModifier;
                 endEffect = RemoveStatModifier;
                 SpellCastEffectType = SpellCastEffectType.ModifyStat;
+            }
+            else if (spellCastEffectType == SpellCastEffectType.Heal)
+            {
+                castEffect = HealTargetDestructible;
+                upkeepEffect = HealTargetDestructible;
+                SpellCastEffectType = SpellCastEffectType.Heal;
             }
         }
     }
