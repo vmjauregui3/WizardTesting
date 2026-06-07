@@ -43,42 +43,30 @@ namespace WizardTesting
         public SpeedBoost(Creature owner, int manaCost, int cooldown, int castTime, int level, int exp, Dictionary<string, string> spellTypeParameters, Dictionary<string, string> spellParameters) : base(owner, manaCost, cooldown, castTime, level, exp)
         {
             SpellTypeParameters = spellTypeParameters;
-            foreach (KeyValuePair<string, string> param in spellTypeParameters)
+            upkeepCost = new Stat(Convert.ToInt32(SpellTypeParameters["upkeepCost"]));
+            upkeepTimer = new MTimer(Convert.ToInt32(SpellTypeParameters["upkeepTimer"]));
+            SpellParameters = spellParameters;
+            if (spellParameters.ContainsKey("target"))
             {
-                if (param.Key == "upkeepCost")
+                if (spellParameters["target"] == "owner")
                 {
-                    upkeepCost = new Stat(Convert.ToInt32(param.Value));
-                }
-                else if (param.Key == "upkeepTimer")
-                {
-                    upkeepTimer = new MTimer(Convert.ToInt32(param.Value));
+                    TargetDestructible = owner;
                 }
             }
-            SpellParameters = spellParameters;
-            foreach (KeyValuePair<string, string> param in SpellParameters)
+            if (spellParameters.ContainsKey("statToModify"))
             {
-                if (param.Key == "target")
+                if (spellParameters["statToModify"] == "MoveSpeed")
                 {
-                    if (param.Value == "owner")
-                    {
-                        TargetDestructible = owner;
-                    }
+                    statToModify = TargetDestructible.MoveSpeed;
                 }
-                else if (param.Key == "statToModify")
-                {
-                    if (param.Value == "MoveSpeed")
-                    {
-                        statToModify = TargetDestructible.MoveSpeed;
-                    }
-                }
-                else if (param.Key == "statModifier")
-                {
-                    statModifier = new Stat(Convert.ToInt32(param.Value));
-                }
-                else if (param.Key == "statModifierType")
-                {
-                    statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), param.Value);
-                }
+            }
+            if (spellParameters.ContainsKey("statModifier"))
+            {
+                statModifier = new Stat(Convert.ToInt32(spellParameters["statModifier"]));
+            }
+            if (spellParameters.ContainsKey("statModifierType"))
+            {
+                statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), spellParameters["statModifierType"]);
             }
             castEffect = AddStatModifier;
             endEffect = RemoveStatModifier;
