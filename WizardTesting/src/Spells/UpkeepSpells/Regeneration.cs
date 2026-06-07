@@ -11,7 +11,7 @@ namespace WizardTesting
 
         public Regeneration(Creature owner) : base(owner, 200, 5000, 1000, 50)
         {
-            statModifier = new Stat(50);
+            spellValuePrimary = new Stat(50);
             TargetDestructible = owner;
             castEffect = HealTargetDestructible;
             upkeepEffect = HealTargetDestructible;
@@ -20,7 +20,7 @@ namespace WizardTesting
 
         public Regeneration(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
         {
-            statModifier = new Stat(50);
+            spellValuePrimary = new Stat(50);
             TargetDestructible = owner;
             castEffect = HealTargetDestructible;
             upkeepEffect = HealTargetDestructible;
@@ -28,7 +28,7 @@ namespace WizardTesting
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",
-                ["statModifier"] = statModifier.Value.ToString()
+                ["spellValuePrimary"] = spellValuePrimary.Value.ToString()
             };
         }
     }

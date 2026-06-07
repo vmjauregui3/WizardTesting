@@ -282,21 +282,21 @@ namespace WizardTesting
         // Below is the growing list of Spell Effects
         protected Destructible TargetDestructible;
         protected Stat statToModify;
-        protected Stat statModifier;
+        protected Stat spellValuePrimary;
         protected StatModifierType statModifierType;
 
         protected void AddStatModifier()
         {
-            statToModify.AddModifier(statModifier.Value, statModifierType);
+            statToModify.AddModifier(spellValuePrimary.Value, statModifierType);
         }
         protected void RemoveStatModifier()
         {
-            statToModify.RemoveModifier(statModifier.Value, statModifierType);
+            statToModify.RemoveModifier(spellValuePrimary.Value, statModifierType);
         }
 
         protected void HealTargetDestructible()
         {
-            TargetDestructible.AddHealth(statModifier.Value);
+            TargetDestructible.AddHealth(spellValuePrimary.Value);
         }
 
         protected void LoadCastEffects(XElement spellData)
@@ -316,9 +316,9 @@ namespace WizardTesting
                     statToModify = TargetDestructible.MoveSpeed;
                 }
             }
-            if (SpellParameters.ContainsKey("statModifier"))
+            if (SpellParameters.ContainsKey("spellValuePrimary"))
             {
-                statModifier = new Stat(Convert.ToInt32(SpellParameters["statModifier"]));
+                spellValuePrimary = new Stat(Convert.ToInt32(SpellParameters["spellValuePrimary"]));
             }
             if (SpellParameters.ContainsKey("statModifierType"))
             {

@@ -11,7 +11,7 @@ namespace WizardTesting
 
         public SpeedBoost(Creature owner) : base(owner, 200, 5000, 100, 50)
         {
-            statModifier = new Stat(2f);
+            spellValuePrimary = new Stat(2f);
             statToModify = owner.MoveSpeed;
             statModifierType = StatModifierType.PercentMultiply;
             castEffect = AddStatModifier;
@@ -21,14 +21,14 @@ namespace WizardTesting
             {
                 ["target"] = "owner",
                 ["statToModify"] = "MoveSpeed",
-                ["statModifier"] = statModifier.Value.ToString(),
+                ["spellValuePrimary"] = spellValuePrimary.Value.ToString(),
                 ["statModifierType"] = statModifierType.ToString()
             };
         }
 
         public SpeedBoost(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
         {
-            statModifier = new Stat(2f);
+            spellValuePrimary = new Stat(2f);
             statToModify = owner.MoveSpeed;
             statModifierType = StatModifierType.PercentMultiply;
             castEffect = AddStatModifier;
@@ -38,7 +38,7 @@ namespace WizardTesting
             {
                 ["target"] = "owner",
                 ["statToModify"] = "MoveSpeed",
-                ["statModifier"] = statModifier.Value.ToString(),
+                ["spellValuePrimary"] = spellValuePrimary.Value.ToString(),
                 ["statModifierType"] = statModifierType.ToString()
             };
         }
