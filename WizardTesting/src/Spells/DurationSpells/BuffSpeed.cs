@@ -11,27 +11,36 @@ namespace WizardTesting
 
         public BuffSpeed(Creature owner) : base(owner, 100, 1000, 50, 1000)
         {
-            SpeedMultiplier = new Stat(2f);
-            castEffect = AddStatBoost;
-            endEffect = RemoveStatBoost;
+            statModifier = new Stat(2f);
+            statToModify = owner.MoveSpeed;
+            statModifierType = StatModifierType.PercentMultiply;
+            castEffect = AddStatModifier;
+            endEffect = RemoveStatModifier;
+            SpellCastEffectType = SpellCastEffectType.ModifyStat;
+            SpellParameters = new Dictionary<string, string>
+            {
+                ["target"] = "owner",
+                ["statToModify"] = "MoveSpeed",
+                ["statModifier"] = statModifier.Value.ToString(),
+                ["statModifierType"] = statModifierType.ToString()
+            };
         }
 
         public BuffSpeed(Creature owner, int level, int exp) : base(owner, 100, 1000, 50, 1000, level, exp)
         {
-            SpeedMultiplier = new Stat(2f);
-            castEffect = AddStatBoost;
-            endEffect = RemoveStatBoost;
+            statModifier = new Stat(2f);
+            statToModify = owner.MoveSpeed;
+            statModifierType = StatModifierType.PercentMultiply;
+            castEffect = AddStatModifier;
+            endEffect = RemoveStatModifier;
+            SpellCastEffectType = SpellCastEffectType.ModifyStat;
+            SpellParameters = new Dictionary<string, string>
+            {
+                ["target"] = "owner",
+                ["statToModify"] = "MoveSpeed",
+                ["statModifier"] = statModifier.Value.ToString(),
+                ["statModifierType"] = statModifierType.ToString()
+            };
         }
-
-        protected void AddStatBoost()
-        {
-            owner.MoveSpeed.AddModifier(SpeedMultiplier.Value, StatModifierType.PercentMultiply);
-        }
-
-        protected void RemoveStatBoost()
-        {
-            owner.MoveSpeed.RemoveModifier(SpeedMultiplier.Value, StatModifierType.PercentMultiply);
-        }
-
     }
 }

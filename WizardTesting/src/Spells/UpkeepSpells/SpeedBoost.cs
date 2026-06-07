@@ -22,6 +22,7 @@ namespace WizardTesting
                 ["target"] = "owner",
                 ["statToModify"] = "MoveSpeed",
                 ["statModifier"] = statModifier.Value.ToString(),
+                ["statModifierType"] = statModifierType.ToString()
             };
         }
 

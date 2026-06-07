@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
 namespace WizardTesting
 {
-    public abstract class DurationSpell : Spell
+    public class DurationSpell : Spell
     {
         protected bool isActive;
 
@@ -23,6 +24,14 @@ namespace WizardTesting
         {
             isActive = false;
             activeTimer = new MTimer(duration);
+            SpellType = SpellType.Duration;
+        }
+
+        public DurationSpell(Creature owner, XElement spellData) : base(owner, spellData)
+        {
+            SpellTypeParameters = spellData.Element("SpellTypeParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
+            activeTimer = new MTimer(Convert.ToInt32(SpellTypeParameters["duration"]));
+            isActive = false;
             SpellType = SpellType.Duration;
         }
 

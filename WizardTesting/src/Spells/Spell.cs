@@ -121,6 +121,10 @@ namespace WizardTesting
                     {
                         owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
                     }
+                    else if (spellType == SpellType.Duration && spellCastEffectType == SpellCastEffectType.ModifyStat)
+                    {
+                        owner.Spells.Add(new DurationSpell(owner, spell[i]));
+                    }
                     else
                     {
                         object[] parameters = { owner,
