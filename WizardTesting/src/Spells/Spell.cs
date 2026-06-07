@@ -125,6 +125,10 @@ namespace WizardTesting
                     {
                         owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
                     }
+                    else if (spellType == SpellType.Instant && spellCastEffectType == SpellCastEffectType.Heal)
+                    {
+                        owner.Spells.Add(new InstantSpell(owner, spell[i]));
+                    }
                     else if (spellType == SpellType.Duration)
                     {
                         owner.Spells.Add(new DurationSpell(owner, spell[i]));
