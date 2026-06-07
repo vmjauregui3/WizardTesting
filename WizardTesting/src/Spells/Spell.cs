@@ -97,6 +97,7 @@ namespace WizardTesting
         public Spell(Creature owner, XElement spellData) : this()
         {
             this.owner = owner;
+            name = spellData.Element("name").Value;
             manaCost = new Stat(Convert.ToInt32(spellData.Element("manaCost").Value));
             cooldownTimer = new MTimer(Convert.ToInt32(spellData.Element("cooldown").Value));
             castingTimer = new MTimer(Convert.ToInt32(spellData.Element("castTime").Value));
@@ -118,14 +119,7 @@ namespace WizardTesting
                 {
                     if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.ModifyStat)
                     {
-                        Dictionary<string, string> spellTypeParameters = spell[i].Element("SpellTypeParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
-                        Dictionary<string, string> spellParameters = spell[i].Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
-
-                        object[] parameters = { owner,
-                            spell[i]
-                        };
-
-                        owner.Spells.Add((Spell)Activator.CreateInstance(type, parameters));
+                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
                     }
                     else
                     {
@@ -181,6 +175,7 @@ namespace WizardTesting
                     spellParams.Add(new XElement(param.Key, param.Value));
                 }
                 spells.Add(new XElement(spellList[i].GetType().Name,
+                        new XElement("name", spellList[i].Name),
                         new XElement("level", spellList[i].Level),
                         new XElement("exp", spellList[i].Exp),
                         new XElement("manaCost", spellList[i].manaCost.BaseValue),

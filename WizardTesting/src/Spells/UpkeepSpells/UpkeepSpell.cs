@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace WizardTesting
 {
-    public abstract class UpkeepSpell : Spell
+    public class UpkeepSpell : Spell
     {
         protected Stat upkeepCost;
         public int UpkeepCost
