@@ -12,7 +12,6 @@ namespace WizardTesting
             targetDestructible = owner;
             castEffect = HealTargetDestructible;
             upkeepEffect = HealTargetDestructible;
-            SpellCastEffectType = SpellCastEffectType.Heal;
         }
 
         public Regeneration(Creature owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
@@ -21,7 +20,6 @@ namespace WizardTesting
             targetDestructible = owner;
             castEffect = HealTargetDestructible;
             upkeepEffect = HealTargetDestructible;
-            SpellCastEffectType = SpellCastEffectType.Heal;
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",

@@ -56,7 +56,6 @@ namespace WizardTesting
         protected MTimer castingTimer;
 
         public SpellType SpellType;
-        public SpellCastEffectType SpellCastEffectType;
 
         protected Action castEffect;
         protected Action upkeepEffect;
@@ -113,61 +112,25 @@ namespace WizardTesting
             List<XElement> spell = (from t in spellData.Elements() select t).ToList<XElement>();
             for (int i = 0; i < spell.Count; i++)
             {
-                SpellType spellType = (SpellType)Enum.Parse(typeof(SpellType), spell[i].Element("SpellType").Value);
-                SpellCastEffectType spellCastEffectType = (SpellCastEffectType)Enum.Parse(typeof(SpellCastEffectType), spell[i].Element("SpellCastEffectType").Value);
-                string WT = "WizardTesting.";
-                Type type = Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture));
-                if (type.IsSubclassOf(typeof(Spell)))
+                switch ((SpellType)Enum.Parse(typeof(SpellType), spell[i].Element("SpellType").Value))
                 {
-                    if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.ModifyStat)
-                    {
-                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.Heal)
-                    {
-                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Upkeep && spellCastEffectType == SpellCastEffectType.UI)
-                    {
-                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Instant && spellCastEffectType == SpellCastEffectType.Heal)
-                    {
+                    case SpellType.Instant:
                         owner.Spells.Add(new InstantSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Instant && spellCastEffectType == SpellCastEffectType.Translate)
-                    {
-                        owner.Spells.Add(new InstantSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Duration)
-                    {
+                        break;
+                    case SpellType.Duration:
                         owner.Spells.Add(new DurationSpell(owner, spell[i]));
-                    }
-                    else if (spellType == SpellType.Projectile)
-                    {
+                        break;
+                    case SpellType.Upkeep:
+                        owner.Spells.Add(new UpkeepSpell(owner, spell[i]));
+                        break;
+                    case SpellType.Projectile:
                         owner.Spells.Add(new InstantProjectileSpell(owner, spell[i]));
-                    }
-                    else
-                    {
-                        object[] parameters = { owner,
-                        Convert.ToInt32(spell[i].Element("level").Value),
-                        Convert.ToInt32(spell[i].Element("exp").Value)
-                        };
-                        owner.Spells.Add((Spell)Activator.CreateInstance(type, parameters));
-                    }
+                        break;
                 }
-            }
 
-            /*
-            //string spellName = spellData.Name.LocalName;
-            //Type type = Type.GetType($"WizardTesting.{spellName}");
-            Dictionary<string, string> spellParams = new Dictionary<string, string>();
-            foreach (XElement param in spellData.Element("SpellParameters").Elements())
-            {
-                spellParams[param.Name.LocalName] = param.Value;
+                //string WT = "WizardTesting.";
+                //Type type = Type.GetType(Convert.ToString(WT + spell[i].Name, WizardTesting.Culture));
             }
-            return (Spell)Activator.CreateInstance(type, owner, int.Parse(spellData.Element("level").Value), int.Parse(spellData.Element("exp").Value), spellParams);
-            */
         }
 
         public static XElement SaveSpellData(List<Spell> spellList)
@@ -176,25 +139,6 @@ namespace WizardTesting
             for (int i = 0; i < spellList.Count; i++)
             {
                 XElement spellTypeParams = spellList[i].GetSpellTypeParameters();
-                if (spellList[i].SpellType == SpellType.Instant)
-                {
-
-                }
-                else if (spellList[i].SpellType == SpellType.Duration)
-                {
-
-                }
-                else if (spellList[i].SpellType == SpellType.Upkeep)
-                {
-                    if (spellList[i].SpellCastEffectType == SpellCastEffectType.ModifyStat)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
                 XElement spellParams = new XElement("SpellParameters");
                 foreach (KeyValuePair<string, string> param in spellList[i].SpellParameters)
                 {
@@ -208,7 +152,6 @@ namespace WizardTesting
                         new XElement("cooldown", spellList[i].cooldownTimer.MSec),
                         new XElement("castTime", spellList[i].castingTimer.MSec),
                         new XElement("SpellType", spellList[i].SpellType),
-                        new XElement("SpellCastEffectType", spellList[i].SpellCastEffectType),
                         new XElement("SpellCastEffect", spellList[i].castEffect.Method.Name),
                         new XElement("SpellUpkeepEffect", spellList[i].upkeepEffect.Method.Name),
                         new XElement("SpellEndEffect", spellList[i].endEffect.Method.Name),
@@ -321,7 +264,7 @@ namespace WizardTesting
 
         protected virtual void CreateProjectile()
         {
-
+            // Currently used for inheritance. Unsure if this is the best way to implement projectile spells, but it works for now.
         }
 
         protected void LoadCastEffects(XElement spellData)
@@ -349,8 +292,6 @@ namespace WizardTesting
             {
                 statModifierType = (StatModifierType)Enum.Parse(typeof(StatModifierType), SpellParameters["statModifierType"]);
             }
-
-            SpellCastEffectType = (SpellCastEffectType)Enum.Parse(typeof(SpellCastEffectType), spellData.Element("SpellCastEffectType").Value);
 
             switch (spellData.Element("SpellCastEffect").Value)
             {

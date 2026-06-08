@@ -11,7 +11,6 @@ namespace WizardTesting
             spellValuePrimary = new Stat(50f);
             targetDestructible = owner;
             castEffect = HealTargetDestructible;
-            SpellCastEffectType = SpellCastEffectType.Heal;
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",
@@ -24,7 +23,6 @@ namespace WizardTesting
             spellValuePrimary = new Stat(50f);
             targetDestructible = owner;
             castEffect = HealTargetDestructible;
-            SpellCastEffectType = SpellCastEffectType.Heal;
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",

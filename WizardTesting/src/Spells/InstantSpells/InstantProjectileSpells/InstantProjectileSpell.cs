@@ -38,7 +38,6 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
-            SpellCastEffectType = SpellCastEffectType.Projectile;
             SpellType = SpellType.Projectile;
             castEffect = CreateProjectile;
             SpellParameters = new Dictionary<string, string>
@@ -58,7 +57,6 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
-            SpellCastEffectType = SpellCastEffectType.Projectile;
             SpellType = SpellType.Projectile;
             castEffect = CreateProjectile;
             SpellParameters = new Dictionary<string, string>

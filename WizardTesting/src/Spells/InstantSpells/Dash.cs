@@ -11,7 +11,6 @@ namespace WizardTesting
         {
             spellValuePrimary = new Stat(150f);
             targetDestructible = owner;
-            SpellCastEffectType = SpellCastEffectType.Translate;
             castEffect = TranslateTargetDestructible;
             SpellParameters = new Dictionary<string, string>
             {
@@ -24,7 +23,6 @@ namespace WizardTesting
         {
             spellValuePrimary = new Stat(150f);
             targetDestructible = owner;
-            SpellCastEffectType = SpellCastEffectType.Translate;
             castEffect = TranslateTargetDestructible;
             SpellParameters = new Dictionary<string, string>
             {

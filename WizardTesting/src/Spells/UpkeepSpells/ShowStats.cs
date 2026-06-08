@@ -10,14 +10,12 @@ namespace WizardTesting
         {
             castEffect = owner.User.UI.ToggleStatBars;
             endEffect = owner.User.UI.ToggleStatBars;
-            SpellCastEffectType = SpellCastEffectType.UI;
         }
 
         public ShowStats(Wizard owner, int level, int exp) : base(owner, 200, 5000, 100, 50, level, exp)
         {
             castEffect = owner.User.UI.ToggleStatBars;
             endEffect = owner.User.UI.ToggleStatBars;
-            SpellCastEffectType = SpellCastEffectType.UI;
         }
     }
 }

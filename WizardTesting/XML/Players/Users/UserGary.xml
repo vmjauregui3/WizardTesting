@@ -8,19 +8,18 @@
 		<Scale>1.5</Scale>
 		<MoveSpeed>200</MoveSpeed>
 		<Position>
-			<x>60</x>
-			<y>124</y>
+			<x>81</x>
+			<y>167</y>
 		</Position>
 		<Spells>
 			<InstantProjectileSpell>
 				<name>FireBolt</name>
 				<level>1</level>
-				<exp>21</exp>
+				<exp>25</exp>
 				<manaCost>50</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
 				<SpellType>Projectile</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -36,12 +35,11 @@
 			<InstantProjectileSpell>
 				<name>EarthShard</name>
 				<level>1</level>
-				<exp>1</exp>
+				<exp>2</exp>
 				<manaCost>40</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
 				<SpellType>Projectile</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -62,7 +60,6 @@
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
 				<SpellType>Projectile</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -78,12 +75,11 @@
 			<InstantProjectileSpell>
 				<name>WindSlash</name>
 				<level>1</level>
-				<exp>0</exp>
+				<exp>1</exp>
 				<manaCost>30</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
 				<SpellType>Projectile</SpellType>
-				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -104,7 +100,6 @@
 				<cooldown>1000</cooldown>
 				<castTime>1000</castTime>
 				<SpellType>Instant</SpellType>
-				<SpellCastEffectType>Heal</SpellCastEffectType>
 				<SpellCastEffect>HealTargetDestructible</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -122,7 +117,6 @@
 				<cooldown>1000</cooldown>
 				<castTime>50</castTime>
 				<SpellType>Duration</SpellType>
-				<SpellCastEffectType>ModifyStat</SpellCastEffectType>
 				<SpellCastEffect>AddStatModifier</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>RemoveStatModifier</SpellEndEffect>
@@ -144,7 +138,6 @@
 				<cooldown>5000</cooldown>
 				<castTime>10</castTime>
 				<SpellType>Instant</SpellType>
-				<SpellCastEffectType>Translate</SpellCastEffectType>
 				<SpellCastEffect>TranslateTargetDestructible</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -162,7 +155,6 @@
 				<cooldown>5000</cooldown>
 				<castTime>100</castTime>
 				<SpellType>Upkeep</SpellType>
-				<SpellCastEffectType>ModifyStat</SpellCastEffectType>
 				<SpellCastEffect>AddStatModifier</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>RemoveStatModifier</SpellEndEffect>
@@ -185,7 +177,6 @@
 				<cooldown>5000</cooldown>
 				<castTime>100</castTime>
 				<SpellType>Upkeep</SpellType>
-				<SpellCastEffectType>Heal</SpellCastEffectType>
 				<SpellCastEffect>HealTargetDestructible</SpellCastEffect>
 				<SpellUpkeepEffect>HealTargetDestructible</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
@@ -206,7 +197,6 @@
 				<cooldown>5000</cooldown>
 				<castTime>100</castTime>
 				<SpellType>Upkeep</SpellType>
-				<SpellCastEffectType>UI</SpellCastEffectType>
 				<SpellCastEffect>ToggleStatBars</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>ToggleStatBars</SpellEndEffect>

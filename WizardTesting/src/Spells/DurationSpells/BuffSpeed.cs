@@ -13,7 +13,6 @@ namespace WizardTesting
             statModifierType = StatModifierType.PercentMultiply;
             castEffect = AddStatModifier;
             endEffect = RemoveStatModifier;
-            SpellCastEffectType = SpellCastEffectType.ModifyStat;
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",
@@ -30,7 +29,6 @@ namespace WizardTesting
             statModifierType = StatModifierType.PercentMultiply;
             castEffect = AddStatModifier;
             endEffect = RemoveStatModifier;
-            SpellCastEffectType = SpellCastEffectType.ModifyStat;
             SpellParameters = new Dictionary<string, string>
             {
                 ["target"] = "owner",
