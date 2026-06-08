@@ -8,6 +8,7 @@ namespace WizardTesting
     {
         Instant,
         Duration,
-        Upkeep
+        Upkeep,
+        Projectile
     }
 }

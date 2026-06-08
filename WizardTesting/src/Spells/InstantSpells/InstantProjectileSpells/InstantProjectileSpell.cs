@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace WizardTesting
 {
@@ -36,7 +38,17 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
+            SpellCastEffectType = SpellCastEffectType.Projectile;
+            SpellType = SpellType.Projectile;
             castEffect = CreateProjectile;
+            SpellParameters = new Dictionary<string, string>
+            {
+                ["path"] = path,
+                ["spriteScale"] = spriteScale.ToString(),
+                ["duration"] = this.duration.Value.ToString(),
+                ["speed"] = this.speed.Value.ToString(),
+                ["damage"] = this.damage.Value.ToString()
+            };
         }
 
         public InstantProjectileSpell(Creature owner, int manaCost, string path, float spriteScale, int duration, float speed, int damage, int level, int exp) : base(owner, manaCost, 50, 50, level, exp)
@@ -46,10 +58,42 @@ namespace WizardTesting
             this.duration = new Stat(duration);
             this.speed = new Stat(speed);
             this.damage = new Stat(damage);
+            SpellCastEffectType = SpellCastEffectType.Projectile;
+            SpellType = SpellType.Projectile;
             castEffect = CreateProjectile;
+            SpellParameters = new Dictionary<string, string>
+            {
+                ["path"] = path,
+                ["spriteScale"] = spriteScale.ToString(),
+                ["duration"] = this.duration.Value.ToString(),
+                ["speed"] = this.speed.Value.ToString(),
+                ["damage"] = this.damage.Value.ToString()
+            };
         }
 
-        protected void CreateProjectile()
+        public InstantProjectileSpell(Creature owner, XElement spellData) : base(owner, spellData)
+        {
+            SpellTypeParameters = spellData.Element("SpellTypeParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
+            path = SpellTypeParameters["path"];
+            spriteScale = Convert.ToSingle(SpellTypeParameters["spriteScale"]);
+            this.duration = new Stat(Convert.ToInt32(SpellTypeParameters["duration"]));
+            this.speed = new Stat(Convert.ToSingle(SpellTypeParameters["speed"]));
+            this.damage = new Stat(Convert.ToInt32(SpellTypeParameters["damage"]));
+            SpellType = SpellType.Projectile;
+        }
+
+        protected override XElement GetSpellTypeParameters()
+        {
+            XElement spellTypeParams = new XElement("SpellTypeParameters",
+                new XElement("path", path),
+                new XElement("spriteScale", spriteScale),
+                new XElement("duration", duration.Value),
+                new XElement("speed", speed.Value),
+                new XElement("damage", damage.Value)
+            );
+            return spellTypeParams;
+        }
+        protected override void CreateProjectile()
         {
             Vector2 position = new Vector2(owner.Sprite.Position.X, owner.Sprite.Position.Y);
             Vector2 direction = Vector2.Normalize(owner.SpellTarget - position);

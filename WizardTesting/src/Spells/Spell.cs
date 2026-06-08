@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WizardTesting
@@ -140,6 +142,10 @@ namespace WizardTesting
                     else if (spellType == SpellType.Duration)
                     {
                         owner.Spells.Add(new DurationSpell(owner, spell[i]));
+                    }
+                    else if (spellType == SpellType.Projectile)
+                    {
+                        owner.Spells.Add(new InstantProjectileSpell(owner, spell[i]));
                     }
                     else
                     {
@@ -313,6 +319,11 @@ namespace WizardTesting
             targetDestructible.TranslatePosition(spellValuePrimary.Value * direction);
         }
 
+        protected virtual void CreateProjectile()
+        {
+
+        }
+
         protected void LoadCastEffects(XElement spellData)
         {
             SpellParameters = spellData.Element("SpellParameters").Elements().ToDictionary(x => x.Name.LocalName, x => x.Value);
@@ -343,6 +354,9 @@ namespace WizardTesting
 
             switch (spellData.Element("SpellCastEffect").Value)
             {
+                case "CreateProjectile":
+                    castEffect = CreateProjectile;
+                    break;
                 case "AddStatModifier":
                     castEffect = AddStatModifier;
                     break;

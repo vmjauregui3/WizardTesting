@@ -8,70 +8,94 @@
 		<Scale>1.5</Scale>
 		<MoveSpeed>200</MoveSpeed>
 		<Position>
-			<x>91</x>
-			<y>148</y>
+			<x>60</x>
+			<y>124</y>
 		</Position>
 		<Spells>
-			<FireBolt>
-				<name />
+			<InstantProjectileSpell>
+				<name>FireBolt</name>
 				<level>1</level>
-				<exp>18</exp>
+				<exp>21</exp>
 				<manaCost>50</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
-				<SpellType>Instant</SpellType>
+				<SpellType>Projectile</SpellType>
 				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
-				<SpellTypeParameters />
+				<SpellTypeParameters>
+					<path>Sprites/Projectiles/FireBolt</path>
+					<spriteScale>3</spriteScale>
+					<duration>10000</duration>
+					<speed>600</speed>
+					<damage>10</damage>
+				</SpellTypeParameters>
 				<SpellParameters />
-			</FireBolt>
-			<EarthShard>
-				<name />
+			</InstantProjectileSpell>
+			<InstantProjectileSpell>
+				<name>EarthShard</name>
 				<level>1</level>
-				<exp>0</exp>
+				<exp>1</exp>
 				<manaCost>40</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
-				<SpellType>Instant</SpellType>
+				<SpellType>Projectile</SpellType>
 				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
-				<SpellTypeParameters />
+				<SpellTypeParameters>
+					<path>Sprites/Projectiles/EarthShard</path>
+					<spriteScale>3</spriteScale>
+					<duration>10000</duration>
+					<speed>400</speed>
+					<damage>10</damage>
+				</SpellTypeParameters>
 				<SpellParameters />
-			</EarthShard>
-			<IceSpike>
-				<name />
+			</InstantProjectileSpell>
+			<InstantProjectileSpell>
+				<name>IceSpike</name>
 				<level>1</level>
-				<exp>0</exp>
+				<exp>2</exp>
 				<manaCost>60</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
-				<SpellType>Instant</SpellType>
+				<SpellType>Projectile</SpellType>
 				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
-				<SpellTypeParameters />
+				<SpellTypeParameters>
+					<path>Sprites/Projectiles/IceSpike</path>
+					<spriteScale>3</spriteScale>
+					<duration>10000</duration>
+					<speed>800</speed>
+					<damage>10</damage>
+				</SpellTypeParameters>
 				<SpellParameters />
-			</IceSpike>
-			<WindSlash>
-				<name />
+			</InstantProjectileSpell>
+			<InstantProjectileSpell>
+				<name>WindSlash</name>
 				<level>1</level>
 				<exp>0</exp>
 				<manaCost>30</manaCost>
 				<cooldown>50</cooldown>
 				<castTime>50</castTime>
-				<SpellType>Instant</SpellType>
+				<SpellType>Projectile</SpellType>
 				<SpellCastEffectType>Projectile</SpellCastEffectType>
 				<SpellCastEffect>CreateProjectile</SpellCastEffect>
 				<SpellUpkeepEffect>DoNothing</SpellUpkeepEffect>
 				<SpellEndEffect>DoNothing</SpellEndEffect>
-				<SpellTypeParameters />
+				<SpellTypeParameters>
+					<path>Sprites/Projectiles/WindSlash</path>
+					<spriteScale>3</spriteScale>
+					<duration>10000</duration>
+					<speed>800</speed>
+					<damage>5</damage>
+				</SpellTypeParameters>
 				<SpellParameters />
-			</WindSlash>
+			</InstantProjectileSpell>
 			<InstantSpell>
 				<name>HealLesser</name>
 				<level>1</level>
@@ -131,7 +155,7 @@
 				</SpellParameters>
 			</InstantSpell>
 			<UpkeepSpell>
-				<name>BuffSpeed</name>
+				<name>SpeedBoost</name>
 				<level>1</level>
 				<exp>0</exp>
 				<manaCost>200</manaCost>

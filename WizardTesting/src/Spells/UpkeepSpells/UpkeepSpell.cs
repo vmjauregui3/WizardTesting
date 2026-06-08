@@ -63,7 +63,6 @@ namespace WizardTesting
                 new XElement("upkeepCost", upkeepCost.Value),
                 new XElement("upkeepTimer", upkeepTimer.MSec)
             );
-
             return spellTypeParams;
         }
 
